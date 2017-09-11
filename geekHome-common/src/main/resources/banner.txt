@@ -1,0 +1,9 @@
+${AnsiColor.BRIGHT_GREEN}
+	(´థ౪థ)σ
+	(´థ౪థ)σ	    ~~~~~~~~~    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	(´థ౪థ)σ    [Pinky Lam]->[https://github.com/handexing]
+	(´థ౪థ)σ     ~~~~~~~~~    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	(´థ౪థ)σ
+${AnsiColor.BLACK}
+Application Version: ${application.version}${application.formatted-version}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
