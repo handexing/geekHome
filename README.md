@@ -10,6 +10,8 @@
 
 ## 静态网页
 
+[geekhome](https://github.com/handexing/geek_page),采用动静分离，需安装nginx，[nginx配置](https://github.com/handexing/geekHome/tree/master/config)
+
 
 ## 项目预览
 
