@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>菜单管理</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/h-ui/css/H-ui.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/css/H-ui.admin.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/lib/Hui-iconfont/1.0.8/iconfont.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/skin/default/skin.css}" id="skin" />
+<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/css/style.css}" />
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" />
+<link rel="stylesheet" href="//cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" />
+
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 
+		<span class="c-gray en">&gt;</span> 系统管理
+		<span class="c-gray en">&gt;</span> 菜单列表 
+	</nav>
+	<div style="padding: 15px;">
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l"> 
+				<a class="btn btn-primary radius" data-title="添加菜单" id="addProcess" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加菜单</a>
+			</span> 
+		</div>
+		<table class="table table-border table-bordered table-bg table-hover table-sort" id="dataGrid">
+	        <tr>
+	            <th>菜单名称</th>
+	            <th>权限标识</th>
+	            <th>菜单URL</th>
+	            <th>菜单类型</th>
+	            <th>排序</th>
+	            <th>创建时间</th>
+	            <th>操作</th>
+	        </tr>
+	        <tr th:id="${menu.id}" th:each="menu,menuStat:${menus}" th:class="${#strings.equals(menu.parentId,'0')?'treegrid-'+menu.id : 'treegrid-'+menu.id+' treegrid-parent-'+menu.parentId} ">
+	            <td th:text="${menu.name}"></td>
+	            <td th:text="${menu.code}"></td>
+	            <td th:text="${menu.url}"></td>
+	            <td th:text="${menu.type}"></td>
+	            <td><input class="input-text" type="text" th:attr="data-id=${menu.id}" name="sort" th:value="${menu.sort}" /></td>
+	            <td th:text="${menu.createTime}"></td>
+	            <td>
+	            	<input class="btn btn-primary-outline radius" type="button" value="添加子菜单">
+	            	<input class="btn btn-secondary-outline radius" type="button" value="修改">
+	            	<input class="btn btn-success-outline radius" type="button" value="删除">
+	           </td>
+	        </tr>
+	    </table>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script> 
+	<script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
+	<script type="text/javascript" th:src="@{/h-ui/js/H-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+	
+	<script type="text/javascript" th:src="@{/js/menuConfig.js}"></script>
+	
+
+	<script type="text/javascript">
+	    $(function () {
+	    	new menuConfig();
+	    });
+	</script>
+</body>
+</html>

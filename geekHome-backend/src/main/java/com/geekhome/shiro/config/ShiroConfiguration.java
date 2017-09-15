@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2017 <l_iupeiyu@qq.com> All rights reserved.
- */
-
 package com.geekhome.shiro.config;
 
 import java.util.ArrayList;
@@ -34,10 +30,6 @@ import org.springframework.context.annotation.DependsOn;
 
 /**
  * Shiro 配置
- *
- * Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。 既然是使用
- * Filter 一般也就能猜到，是通过URL规则来进行过滤和权限校验，所以我们需要定义一系列关于URL的规则和访问权限。
- *
  */
 @Configuration
 public class ShiroConfiguration {
@@ -90,11 +82,8 @@ public class ShiroConfiguration {
 	public DefaultWebSessionManager defaultWebSessionManager() {
 		System.out.println("ShiroConfiguration.defaultWebSessionManager()");
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-		// sessionManager.setSessionDAO(new CustomSessionDAO());
 		sessionManager.setCacheManager(ehCacheManager());
-		// 单位为毫秒（1秒=1000毫秒） 3600000毫秒为1个小时
 		sessionManager.setSessionValidationInterval(3600000 * 12);
-		// 3600000 milliseconds = 1 hour
 		sessionManager.setGlobalSessionTimeout(3600000 * 12);
 		sessionManager.setDeleteInvalidSessions(true);
 		sessionManager.setSessionValidationSchedulerEnabled(true);
@@ -127,11 +116,8 @@ public class ShiroConfiguration {
         ModularRealmAuthorizer customModularRealmAuthorizer = new ModularRealmAuthorizer();
         customModularRealmAuthorizer.setRealms(shiroAuthorizerRealms);
         securityManager.setAuthorizer(customModularRealmAuthorizer);
-        //设置realm.
-        //securityManager.setRealm(adminShiroRealm());
-        //securityManager.setRealm(customShiroRealm());
         //注入缓存管理器;
-        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
+        securityManager.setCacheManager(ehCacheManager());
         securityManager.setSessionManager(defaultWebSessionManager());
         return securityManager;
     }
@@ -152,9 +138,7 @@ public class ShiroConfiguration {
 	}
 
 	/**
-	 * ShiroFilterFactoryBean 处理拦截资源文件问题。 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
-	 * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager Filter Chain定义说明
-	 * 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过 3、部分过滤器可指定参数，如perms，roles
+	 * ShiroFilterFactoryBean 处理拦截资源文件问题。
 	 */
 	@Bean(name = "shirFilter")
 	public ShiroFilterFactoryBean shirFilter(DefaultWebSecurityManager securityManager) {
@@ -186,18 +170,11 @@ public class ShiroConfiguration {
 		 * 表示用户不一定已通过认证,只要曾被Shiro记住过登录状态的用户就可以正常发起请求,比如rememberMe
 		 */
 
-		// <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**/login", "anon");
-		filterChainDefinitionMap.put("/**/logout", "logout");
-		/* filterChainDefinitionMap.put("/member/reg", "anon"); */
+		filterChainDefinitionMap.put("/**/logout", "anon");
 		// 配置记住我或认证通过可以访问的地址
 		filterChainDefinitionMap.put("/admin/**", "admin");
-		/* filterChainDefinitionMap.put("/member/**", "custom"); */
-		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		// shiroFilterFactoryBean.setLoginUrl("/member/login");
-		// 登录成功后要跳转的链接
-		// shiroFilterFactoryBean.setSuccessUrl("/member/index");
 		// 未授权界面;
 		// shiroFilterFactoryBean.setUnauthorizedUrl("/console/403");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

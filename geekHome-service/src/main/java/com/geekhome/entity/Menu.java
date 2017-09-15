@@ -32,13 +32,13 @@ public class Menu implements Serializable {
 	@Column(name = "CODE")
 	private String code;
 	@Column(name = "PARENT_ID")
-	private String parentId;
+	private Long parentId;
 	@Column(name = "PARENT_IDS")
 	private String parentIds;
-	@Column(name = "CHILD_NUM")
-	private Integer childNum;
-	@Column(name = "LISTORDER")
-	private Integer listorder;
+	@Column(name = "CHILD_CNT")
+	private Integer childCnt;
+	@Column(name = "SORT")
+	private Integer sort;
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
@@ -86,11 +86,11 @@ public class Menu implements Serializable {
 		this.code = code;
 	}
 
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
@@ -102,20 +102,20 @@ public class Menu implements Serializable {
 		this.parentIds = parentIds;
 	}
 
-	public Integer getChildNum() {
-		return childNum;
+	public Integer getChildCnt() {
+		return childCnt;
 	}
 
-	public void setChildNum(Integer childNum) {
-		this.childNum = childNum;
+	public void setChildCnt(Integer childCnt) {
+		this.childCnt = childCnt;
 	}
 
-	public Integer getListorder() {
-		return listorder;
+	public Integer getSort() {
+		return sort;
 	}
 
-	public void setListorder(Integer listorder) {
-		this.listorder = listorder;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 	public Date getCreateTime() {
@@ -136,11 +136,10 @@ public class Menu implements Serializable {
 
 	public Menu() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Menu(Long id, String name, String type, String url, String code, String parentId, String parentIds,
-			Integer childNum, Integer listorder, Date createTime, Date updateTime) {
+	public Menu(Long id, String name, String type, String url, String code, Long parentId, String parentIds,
+			Integer childCnt, Integer sort, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -149,8 +148,8 @@ public class Menu implements Serializable {
 		this.code = code;
 		this.parentId = parentId;
 		this.parentIds = parentIds;
-		this.childNum = childNum;
-		this.listorder = listorder;
+		this.childCnt = childCnt;
+		this.sort = sort;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
@@ -158,8 +157,8 @@ public class Menu implements Serializable {
 	@Override
 	public String toString() {
 		return "Menu [id=" + id + ", name=" + name + ", type=" + type + ", url=" + url + ", code=" + code
-				+ ", parentId=" + parentId + ", parentIds=" + parentIds + ", childNum=" + childNum + ", listorder="
-				+ listorder + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ ", parentId=" + parentId + ", parentIds=" + parentIds + ", childCnt=" + childCnt + ", sort=" + sort
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 
 }
