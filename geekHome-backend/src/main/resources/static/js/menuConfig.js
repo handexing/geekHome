@@ -29,6 +29,12 @@ function menuConfig(){
 		    }
 		});
         
+        $('#addMenuBtn').bind('click',function(){
+        	$("addMenuDialog").modal("show");
+		});
+        
+        
+        
         
 		
 	}
