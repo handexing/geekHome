@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/lib/Hui-iconfont/1.0.8/iconfont.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/skin/default/skin.css}" id="skin" />
 <link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/css/style.css}" />
+
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" />
 <link rel="stylesheet" href="//cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" />
 
@@ -26,7 +27,8 @@
 				<i class="Hui-iconfont">&#xe600;</i> 添加菜单</a>
 			</span> 
 		</div>
-		<table class="table table-border table-bordered table-bg table-hover table-sort" id="dataGrid">
+		
+		<table class="table table-border table-bordered table-bg table-hover table-sort" id="menuGrid">
 	        <tr>
 	            <th>菜单名称</th>
 	            <th>权限标识</th>
@@ -36,7 +38,7 @@
 	            <th>创建时间</th>
 	            <th>操作</th>
 	        </tr>
-	        <tr th:id="${menu.id}" th:each="menu,menuStat:${menus}" th:class="${#strings.equals(menu.parentId,'0')?'treegrid-'+menu.id : 'treegrid-'+menu.id+' treegrid-parent-'+menu.parentId} ">
+	         <tr th:id="${menu.id}" th:each="menu,menuStat:${menus}" th:class="${#strings.equals(menu.parentId,'0')?'treegrid-'+menu.id : 'treegrid-'+menu.id+' treegrid-parent-'+menu.parentId} ">
 	            <td th:text="${menu.name}"></td>
 	            <td th:text="${menu.code}"></td>
 	            <td th:text="${menu.url}"></td>
@@ -44,11 +46,11 @@
 	            <td><input class="input-text" type="text" th:attr="data-id=${menu.id}" name="sort" th:value="${menu.sort}" /></td>
 	            <td th:text="${menu.createTime}"></td>
 	            <td>
-	            	<input class="btn btn-primary-outline radius" type="button" value="添加子菜单">
-	            	<input class="btn btn-secondary-outline radius" type="button" value="修改">
-	            	<input class="btn btn-success-outline radius" type="button" value="删除">
+	            	<input class="btn btn-primary-outline radius" th:attr="data-id=${menu.id}" type="button" value="添加子菜单">
+	            	<input class="btn btn-secondary-outline radius updateMenuBtn" type="button" th:attr="data-id=${menu.id}" value="修改">
+	            	<input class="btn btn-success-outline radius" type="button" th:attr="data-id=${menu.id}" value="删除">
 	           </td>
-	        </tr>
+	        </tr> 
 	    </table>
     </div>
     
@@ -56,14 +58,47 @@
 		<div class="modal-dialog">
 			<div class="modal-content radius">
 				<div class="modal-header">
-					<h3 class="modal-title">对话框标题</h3>
+					<h3 class="modal-title" id="menu_title">添加菜单</h3>
 					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
 				</div>
 				<div class="modal-body">
-					<p>对话框内容…</p>
+					<input type="hidden" id="menuId"/>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">资源类型：</label>
+						<div class="formControls col-xs-8 col-sm-9"> 
+							<span class="select-box">
+								<select class="select" size="1" id="type">
+									<option value="menu">仅菜单</option>
+									<option value="auth">菜单权限</option>
+									<option value="button">按钮权限</option>
+								</select>
+							</span> 
+						</div>
+					</div>
+					<br/>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">资源名称：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" id="name" class="input-text" autocomplete="off" placeholder="资源名称">
+						</div>
+					</div>
+					<br/>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">权限标识：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" id="code" class="input-text" autocomplete="off" placeholder="权限标识">
+						</div>
+					</div>
+					<br/>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">资源URL：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" id="url" class="input-text" autocomplete="off" placeholder="资源URL">
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary">确定</button>
+					<button class="btn btn-primary" id="saveMenuBtn">确定</button>
 					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 				</div>
 			</div>
@@ -74,6 +109,7 @@
 	<script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
 	<script type="text/javascript" th:src="@{/h-ui/js/H-ui.min.js}"></script>
 	<script type="text/javascript" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script>
+	<script type="text/javascript" th:src="@{/h-ui/js/H-ui.js}"></script>
 	<script type="text/javascript" src="//cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
 	<script type="text/javascript" src="//cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 	

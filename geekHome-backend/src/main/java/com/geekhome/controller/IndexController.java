@@ -5,9 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.geekhome.entity.Admin;
-import com.geekhome.shiro.config.AdminShiroUtil;
-
 /**
  * @Description: 后台首页
  * @author handx  
@@ -23,7 +20,7 @@ public class IndexController {
 	
 	@RequestMapping("indexPage")
 	public String indexPage() {
-		Admin admin = AdminShiroUtil.getUserInfo();
+//		Admin admin = AdminShiroUtil.getUserInfo();
 		
 		System.out.println("==================");
 		return "index";
