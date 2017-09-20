@@ -1,8 +1,27 @@
 package com.geekhome.entity;
 
-public class RoleMenu {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ROLE_MENU")
+public class RoleMenu implements Serializable{
+
+	private static final long serialVersionUID = 3730511224512174863L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private Long id;
+	@Column(name = "ROLE_ID")
 	private Long roleId;
+	@Column(name = "MENU_ID")
 	private Long menuId;
 
 	public Long getRoleId() {
@@ -23,7 +42,6 @@ public class RoleMenu {
 
 	public RoleMenu() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RoleMenu(Long roleId, Long menuId) {
@@ -32,9 +50,20 @@ public class RoleMenu {
 		this.menuId = menuId;
 	}
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "RoleMenu [roleId=" + roleId + ", menuId=" + menuId + "]";
+		return "RoleMenu [id=" + id + ", roleId=" + roleId + ", menuId=" + menuId + "]";
 	}
+
+	
 
 }

@@ -3,13 +3,10 @@ package com.geekhome.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,20 +33,25 @@ public class MenuController {
 	@RequiresPermissions("menu:index")
 	@RequestMapping(value = "/menuPage")
 	public ModelAndView menuPage() {
-		ArrayList<Menu> menuLists = new ArrayList<>();
-		List<Menu> menus = menuService.getChildMenuList(menuLists, 0L);
-		ModelAndView view = new ModelAndView("/view/system/menuPage");
-		view.addObject("menus", menus);
-		return view;
+		return new ModelAndView("/view/system/menuPage");
 	}
-	
 	
 	@RequiresPermissions("menu:allMenu")
 	@RequestMapping(value = "/menuList")
-	public void menuList(HttpServletRequest request) {
-		ArrayList<Menu> menuLists = new ArrayList<>();
-		List<Menu> menus = menuService.getChildMenuList(menuLists, 0L);
-		request.setAttribute("menus", menus);
+	public ExecuteResult<List<Menu>> menuList() {
+		final ExecuteResult<List<Menu>> result = new ExecuteResult<>();
+		try {
+			ArrayList<Menu> menuLists = new ArrayList<>();
+			List<Menu> menus = menuService.getChildMenuList(menuLists, 0L);
+			result.setData(menus);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
 	}
 	
 
@@ -75,6 +77,22 @@ public class MenuController {
 		final ExecuteResult<Boolean> result = new ExecuteResult<>();
 		try {
 			menuService.saveMenu(menu);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequiresPermissions("menu:delete")
+	@RequestMapping("delMenu")
+	public ExecuteResult<Boolean> delMenu(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			menuService.delMenu(id);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

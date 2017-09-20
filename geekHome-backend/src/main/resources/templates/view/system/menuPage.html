@@ -29,28 +29,6 @@
 		</div>
 		
 		<table class="table table-border table-bordered table-bg table-hover table-sort" id="menuGrid">
-	        <tr>
-	            <th>菜单名称</th>
-	            <th>权限标识</th>
-	            <th>菜单URL</th>
-	            <th>菜单类型</th>
-	            <th>排序</th>
-	            <th>创建时间</th>
-	            <th>操作</th>
-	        </tr>
-	         <tr th:id="${menu.id}" th:each="menu,menuStat:${menus}" th:class="${#strings.equals(menu.parentId,'0')?'treegrid-'+menu.id : 'treegrid-'+menu.id+' treegrid-parent-'+menu.parentId} ">
-	            <td th:text="${menu.name}"></td>
-	            <td th:text="${menu.code}"></td>
-	            <td th:text="${menu.url}"></td>
-	            <td th:text="${menu.type}"></td>
-	            <td><input class="input-text" type="text" th:attr="data-id=${menu.id}" name="sort" th:value="${menu.sort}" /></td>
-	            <td th:text="${menu.createTime}"></td>
-	            <td>
-	            	<input class="btn btn-primary-outline radius" th:attr="data-id=${menu.id}" type="button" value="添加子菜单">
-	            	<input class="btn btn-secondary-outline radius updateMenuBtn" type="button" th:attr="data-id=${menu.id}" value="修改">
-	            	<input class="btn btn-success-outline radius" type="button" th:attr="data-id=${menu.id}" value="删除">
-	           </td>
-	        </tr> 
 	    </table>
     </div>
     
@@ -63,6 +41,7 @@
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="menuId"/>
+					<input type="hidden" id="parentId" value="0" />
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3">资源类型：</label>
 						<div class="formControls col-xs-8 col-sm-9"> 
@@ -117,8 +96,11 @@
 	
 
 	<script type="text/javascript">
+	
+		var menu_config;
+		
 	    $(function () {
-	    	new menuConfig();
+	    	menu_config = new menuConfig();
 	    });
 	</script>
 </body>

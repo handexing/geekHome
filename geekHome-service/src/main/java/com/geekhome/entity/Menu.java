@@ -35,8 +35,6 @@ public class Menu implements Serializable {
 	private Long parentId;
 	@Column(name = "PARENT_IDS")
 	private String parentIds;
-	@Column(name = "CHILD_CNT")
-	private Integer childCnt;
 	@Column(name = "SORT")
 	private Integer sort;
 	@JsonSerialize(using = CustomDateSerializer.class)
@@ -45,6 +43,18 @@ public class Menu implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
+
+//	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//	@JoinColumn(name="MENU_ID")
+//	private List<RoleMenu> roleMenuList;
+
+//	public List<RoleMenu> getRoleMenuList() {
+//		return roleMenuList;
+//	}
+//
+//	public void setRoleMenuList(List<RoleMenu> roleMenuList) {
+//		this.roleMenuList = roleMenuList;
+//	}
 
 	public Long getId() {
 		return id;
@@ -102,14 +112,6 @@ public class Menu implements Serializable {
 		this.parentIds = parentIds;
 	}
 
-	public Integer getChildCnt() {
-		return childCnt;
-	}
-
-	public void setChildCnt(Integer childCnt) {
-		this.childCnt = childCnt;
-	}
-
 	public Integer getSort() {
 		return sort;
 	}
@@ -139,7 +141,7 @@ public class Menu implements Serializable {
 	}
 
 	public Menu(Long id, String name, String type, String url, String code, Long parentId, String parentIds,
-			Integer childCnt, Integer sort, Date createTime, Date updateTime) {
+			Integer sort, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -148,7 +150,6 @@ public class Menu implements Serializable {
 		this.code = code;
 		this.parentId = parentId;
 		this.parentIds = parentIds;
-		this.childCnt = childCnt;
 		this.sort = sort;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
@@ -157,8 +158,8 @@ public class Menu implements Serializable {
 	@Override
 	public String toString() {
 		return "Menu [id=" + id + ", name=" + name + ", type=" + type + ", url=" + url + ", code=" + code
-				+ ", parentId=" + parentId + ", parentIds=" + parentIds + ", childCnt=" + childCnt + ", sort=" + sort
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+				+ ", parentId=" + parentId + ", parentIds=" + parentIds + ", sort=" + sort + ", createTime="
+				+ createTime + ", updateTime=" + updateTime + "]";
 	}
 
 }

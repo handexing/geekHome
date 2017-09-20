@@ -11,12 +11,15 @@ import org.springframework.stereotype.Service;
 
 import com.geekhome.entity.Menu;
 import com.geekhome.entity.dao.MenuDao;
+import com.geekhome.entity.dao.RoleMenuDao;
 
 @Service
 public class MenuService {
 
 	@Autowired
 	private MenuDao menuDao;
+	@Autowired
+	RoleMenuDao roleMenuDao;
 
 	public List<Menu> getChildMenuList(ArrayList<Menu> menuLists, Long parentId) {
 
@@ -39,13 +42,23 @@ public class MenuService {
 			m.setType(menu.getType());
 			menuDao.save(m);
 		} else {
-			menu.setChildCnt(0);
 			menu.setCreateTime(new Date());
 			menu.setSort(1);
-			menu.setParentId(0L);
-			menu.setChildCnt(0);
 			menuDao.save(menu);
 		}
+
+		if (menu.getParentId() != 0) {
+			menu = menuDao.findOne(menu.getParentId());
+			menu.setUpdateTime(new Date());
+			menuDao.save(menu);
+		}
+
+	}
+	
+	@Transactional
+	public void delMenu(Long id) {
+		menuDao.delete(id);
+		roleMenuDao.delete(id);
 	}
 
 }

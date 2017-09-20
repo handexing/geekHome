@@ -12,13 +12,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.geekhome.entity.Menu;
 
-/**
- * @Description: 菜单	
- * @author handx  
- * @date 2017年9月14日 下午5:14:07 
- * @version V1.0
- */
-
 public interface MenuDao extends JpaRepository<Menu, Long>{
 
 	@Query(nativeQuery = true, value = "SELECT CODE FROM MENU")
@@ -36,4 +29,11 @@ public interface MenuDao extends JpaRepository<Menu, Long>{
 	@Query(nativeQuery = true, value = "UPDATE MENU SET SORT=:sort WHERE ID =:id")
 	int updateOrder(@Param("id") Long id, @Param("sort") Integer sort);
 	
+	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM MENU WHERE ID=:parentId")
+	int getMenuByParentIdCnt(@Param("parentId") Long parentId);
+
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(nativeQuery = true, value = "DELETE FROM MENU WHERE ID=:parentId OR PARENT_ID=:parentId")
+	public void delete(@Param("parentId") Long parentId);
 }
