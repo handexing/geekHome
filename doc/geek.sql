@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50711
  Source Host           : localhost:3306
- Source Schema         : 
+ Source Schema         : geek
 
  Target Server Type    : MySQL
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 20/09/2017 17:32:41
+ Date: 21/09/2017 17:30:54
 */
 
 SET NAMES utf8mb4;
@@ -68,7 +68,7 @@ CREATE TABLE `menu`  (
   `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
   `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -84,6 +84,8 @@ INSERT INTO `menu` VALUES (26, '角色管理', 'auth', '/role/rolePage', 'role:i
 INSERT INTO `menu` VALUES (27, '角色列表', 'auth', '/role/roleList', 'role:list', 26, NULL, 1, '2017-09-20 16:35:42', NULL);
 INSERT INTO `menu` VALUES (28, '角色添加', 'auth', '/role/savaRole', 'role:save', 26, NULL, 2, '2017-09-20 17:16:47', NULL);
 INSERT INTO `menu` VALUES (29, '删除角色', 'auth', '/role/delRole', 'role:delete', 26, NULL, 3, '2017-09-20 17:28:57', NULL);
+INSERT INTO `menu` VALUES (30, '菜单列表', 'auth', '/role/menuTree', 'role:menutree', 26, NULL, 4, '2017-09-21 15:39:22', NULL);
+INSERT INTO `menu` VALUES (31, '角色菜单对话框', 'anth', '/role/roleDialogPage', 'role:roleDialog', 26, NULL, 5, '2017-09-21 17:18:58', NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -97,13 +99,13 @@ CREATE TABLE `role`  (
   `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
   `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
 INSERT INTO `role` VALUES (1, '超级管理员', '超级管理员', 1, '2017-09-15 14:59:17', NULL);
-INSERT INTO `role` VALUES (2, '普通管理员', '普通管理员', 1, '2017-09-15 14:59:33', NULL);
+INSERT INTO `role` VALUES (2, '普通管理员', '普通管理员', 1, '2017-09-21 15:08:36', '2017-09-21 14:14:07');
 
 -- ----------------------------
 -- Table structure for role_menu
@@ -114,7 +116,7 @@ CREATE TABLE `role_menu`  (
   `ROLE_ID` bigint(20) NULL DEFAULT NULL,
   `MENU_ID` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
@@ -130,5 +132,7 @@ INSERT INTO `role_menu` VALUES (8, 1, 26);
 INSERT INTO `role_menu` VALUES (9, 1, 27);
 INSERT INTO `role_menu` VALUES (10, 1, 28);
 INSERT INTO `role_menu` VALUES (11, 1, 29);
+INSERT INTO `role_menu` VALUES (12, 1, 30);
+INSERT INTO `role_menu` VALUES (13, 1, 31);
 
 SET FOREIGN_KEY_CHECKS = 1;

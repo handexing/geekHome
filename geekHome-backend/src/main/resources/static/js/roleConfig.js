@@ -10,6 +10,7 @@ function roleConfig(){
 	this.init=function(){
 		
         $('#addRoleBtn').bind('click',function(){
+        	self.clearFrom();
         	$("#role_title").text("添加角色");
         	$("#addRoleDialog").modal("show");
 		});
@@ -23,12 +24,19 @@ function roleConfig(){
 	
 	this.saveRole=function(){
 
+		var id = $("#roleId").val();
 		var state = $("#state").val();
 		var name = $.trim($("#name").val());
 		var roleDesc = $.trim($("#roleDesc").val());
+		var oldName = $.trim($("#oldName").val());
 		
 		if(name==null || name==""){
 			layer.msg('角色名称不能为空！', {icon: 7});
+			return;
+		}
+		
+		if(name == oldName){
+			layer.msg('请修改之后再提交！', {icon: 7});
 			return;
 		}
 		
@@ -38,6 +46,7 @@ function roleConfig(){
 		}
 		
 		var role={};
+		role.id = id;
 		role.state = state;
 		role.name = name;
 		role.roleDesc = roleDesc;
@@ -55,10 +64,12 @@ function roleConfig(){
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(role),
 			success:function(responseData, status){
-				if(responseData.success){
+				if(responseData.data==1){
 					roleTable.ajax.reload();
 					$("#addRoleDialog").modal("hide");
 					layer.msg('操作成功！', {icon: 1});
+				}else if(responseData.data==-1){
+					layer.msg('不能有相同角色名称,请修改！', {icon: 7});
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
@@ -90,12 +101,25 @@ function roleConfig(){
 			                }},
 		                 {"data": "createTime"},
 		                 {"data": "b","render":function( data, type, row ) {
-			                	return '<input class="btn btn-primary-outline radius" type="button" value="授权">&nbsp;&nbsp;'+
-					                   '<input class="btn btn-secondary-outline radius" type="button" value="修改">&nbsp;&nbsp;'+
+			                	return '<input class="btn btn-primary-outline radius" type="button" onClick="role_config.authRole(\''+row.id+'\')" value="授权">&nbsp;&nbsp;'+
+					                   '<input class="btn btn-secondary-outline radius" type="button" onClick="role_config.updateRole(\''+row.id+'\',\''+row.name+'\',\''+row.roleDesc+'\',\''+row.state+'\')" value="修改">&nbsp;&nbsp;'+
 					                   '<input class="btn btn-success-outline radius" type="button" onClick="role_config.deleteRole(\''+row.id+'\')" value="删除">';
 		                 }},
 		              ]
 		});
+	}
+	
+	this.authRole=function(id){
+		
+		layer.open({
+            type: 2,
+            title: '角色授权',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['500px', '600px'],
+            content: '/role/roleDialogPage?id=' + id
+        });
 	}
 	
 	this.deleteRole=function(id){
@@ -113,6 +137,24 @@ function roleConfig(){
 			}, function(){
 			  
 		});
+	}
+	
+	this.updateRole=function(id,name,desc,state){
+		self.clearFrom();
+		$("#role_title").text("修改角色");
+    	$("#addRoleDialog").modal("show");
+    	$("#roleId").val(id);
+    	$("#state").val(state);
+		$("#name").val(name);
+		$("#oldName").val(name);
+		$("#roleDesc").val(desc);
+	}
+	
+	this.clearFrom=function(){
+    	$("#roleId").val("");
+    	$("#state").val("");
+		$("#name").val("");
+		$("#roleDesc").val("");
 	}
 	
 	self.init();

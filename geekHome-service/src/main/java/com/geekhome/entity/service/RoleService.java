@@ -1,6 +1,7 @@
 package com.geekhome.entity.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -17,12 +18,27 @@ public class RoleService {
 	RoleDao roleDao;
 
 	@Transactional
-	public void saveRole(Role role) {
+	public Integer saveRole(Role role) {
 		if (role.getId() != null) {
-			
+			List<Role> list = roleDao.findRoleByIdNotAndName(role.getId(),role.getName());
+			if(list.isEmpty()) {
+				Role r = roleDao.findOne(role.getId());
+				role.setCreateTime(r.getCreateTime());
+				role.setUpdateTime(new Date());
+				roleDao.save(role);
+				return 1;
+			}else {
+				return -1;//已存在相同名称
+			}
 		} else {
-			role.setCreateTime(new Date());
-			roleDao.save(role);
+			List<Role> list = roleDao.findRoleByName(role.getName());
+			if(list.isEmpty()) {
+				role.setCreateTime(new Date());
+				roleDao.save(role);
+				return 1;
+			}else {
+				return -1;//已存在相同名称
+			}
 		}
 	}
 	

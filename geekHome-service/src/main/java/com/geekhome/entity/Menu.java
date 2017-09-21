@@ -2,6 +2,7 @@ package com.geekhome.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geekhome.common.utils.CustomDateSerializer;
@@ -44,17 +46,28 @@ public class Menu implements Serializable {
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
 
-//	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//	@JoinColumn(name="MENU_ID")
-//	private List<RoleMenu> roleMenuList;
+	// @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	// @JoinColumn(name="MENU_ID")
+	// private List<RoleMenu> roleMenuList;
 
-//	public List<RoleMenu> getRoleMenuList() {
-//		return roleMenuList;
-//	}
-//
-//	public void setRoleMenuList(List<RoleMenu> roleMenuList) {
-//		this.roleMenuList = roleMenuList;
-//	}
+	// public List<RoleMenu> getRoleMenuList() {
+	// return roleMenuList;
+	// }
+	//
+	// public void setRoleMenuList(List<RoleMenu> roleMenuList) {
+	// this.roleMenuList = roleMenuList;
+	// }
+
+	@Transient
+	private List<Menu> children;
+
+	public List<Menu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Menu> children) {
+		this.children = children;
+	}
 
 	public Long getId() {
 		return id;
