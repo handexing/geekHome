@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 21/09/2017 17:30:54
+ Date: 25/09/2017 14:24:23
 */
 
 SET NAMES utf8mb4;
@@ -23,13 +23,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `PASSWORD` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STATE` int(1) NULL DEFAULT NULL,
-  `IS_SYSTEM` int(1) NULL DEFAULT 0,
-  `SALT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
+  `USER_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `PASSWORD` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `STATE` int(1) DEFAULT NULL,
+  `IS_SYSTEM` int(1) DEFAULT 0,
+  `SALT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
@@ -43,8 +43,8 @@ INSERT INTO `admin` VALUES (1, 'admin', 'c5941c5f3bc693a75e6e863bd2c55ce3', 1, 0
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_role`;
 CREATE TABLE `admin_role`  (
-  `ADMIN_ID` bigint(20) NULL DEFAULT NULL,
-  `ROLE_ID` bigint(20) NULL DEFAULT NULL
+  `ADMIN_ID` bigint(20) DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理員角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -58,17 +58,17 @@ INSERT INTO `admin_role` VALUES (1, 1);
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `TYPE` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型',
-  `URL` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求路径',
-  `CODE` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限标识',
-  `PARENT_ID` bigint(20) NULL DEFAULT NULL COMMENT '父ID',
-  `PARENT_IDS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父IDS',
-  `SORT` int(11) NULL DEFAULT 0 COMMENT '顺序',
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
+  `NAME` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '名称',
+  `TYPE` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '类型',
+  `URL` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求路径',
+  `CODE` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限标识',
+  `PARENT_ID` bigint(20) DEFAULT NULL COMMENT '父ID',
+  `PARENT_IDS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '父IDS',
+  `SORT` int(11) DEFAULT 0 COMMENT '顺序',
+  `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -85,7 +85,8 @@ INSERT INTO `menu` VALUES (27, '角色列表', 'auth', '/role/roleList', 'role:l
 INSERT INTO `menu` VALUES (28, '角色添加', 'auth', '/role/savaRole', 'role:save', 26, NULL, 2, '2017-09-20 17:16:47', NULL);
 INSERT INTO `menu` VALUES (29, '删除角色', 'auth', '/role/delRole', 'role:delete', 26, NULL, 3, '2017-09-20 17:28:57', NULL);
 INSERT INTO `menu` VALUES (30, '菜单列表', 'auth', '/role/menuTree', 'role:menutree', 26, NULL, 4, '2017-09-21 15:39:22', NULL);
-INSERT INTO `menu` VALUES (31, '角色菜单对话框', 'anth', '/role/roleDialogPage', 'role:roleDialog', 26, NULL, 5, '2017-09-21 17:18:58', NULL);
+INSERT INTO `menu` VALUES (31, '角色授权列表', 'auth', '/role/roleDialogPage', 'role:roleDialog', 26, NULL, 5, '2017-09-21 17:18:58', NULL);
+INSERT INTO `menu` VALUES (32, '角色授权', 'auth', '/role/grant', 'role:grant', 26, NULL, 6, '2017-09-25 13:39:37', NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -93,13 +94,13 @@ INSERT INTO `menu` VALUES (31, '角色菜单对话框', 'anth', '/role/roleDialo
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `ROLE_DESC` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `STATE` int(11) NULL DEFAULT 1,
-  `CREATE_TIME` datetime(0) NULL DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) NULL DEFAULT NULL,
+  `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `ROLE_DESC` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `STATE` int(11) DEFAULT 1,
+  `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role
@@ -113,10 +114,10 @@ INSERT INTO `role` VALUES (2, '普通管理员', '普通管理员', 1, '2017-09-
 DROP TABLE IF EXISTS `role_menu`;
 CREATE TABLE `role_menu`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ROLE_ID` bigint(20) NULL DEFAULT NULL,
-  `MENU_ID` bigint(20) NULL DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL,
+  `MENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
@@ -134,5 +135,9 @@ INSERT INTO `role_menu` VALUES (10, 1, 28);
 INSERT INTO `role_menu` VALUES (11, 1, 29);
 INSERT INTO `role_menu` VALUES (12, 1, 30);
 INSERT INTO `role_menu` VALUES (13, 1, 31);
+INSERT INTO `role_menu` VALUES (14, 1, 32);
+INSERT INTO `role_menu` VALUES (19, 2, 1);
+INSERT INTO `role_menu` VALUES (20, 2, 26);
+INSERT INTO `role_menu` VALUES (21, 2, 29);
 
 SET FOREIGN_KEY_CHECKS = 1;

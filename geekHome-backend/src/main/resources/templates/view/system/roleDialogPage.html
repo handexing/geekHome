@@ -12,7 +12,7 @@
 	<div style="padding: 15px;">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l"> 
-				<a class="btn btn-primary radius" data-title="保存" id="addRoleBtn" href="javascript:;">保存</a>
+				<a class="btn btn-primary radius" data-title="保存" id="addRoleMenuBtn" href="javascript:;">保存</a>
 			</span> 
 		</div>
 		<br/>
@@ -20,6 +20,7 @@
 	</div>
 	
     <script type="text/javascript" th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script> 
+    <script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
 	<script type="text/javascript" th:src="@{/lib/bootstrap-treeview/bootstrap-treeview.js}"></script> 
 	<script type="text/javascript" th:src="@{/lib/bootstrap-treeview/treeview.js}"></script>
 	
@@ -41,6 +42,23 @@
 		            });
 		        }
 		    });
+	    	
+	    	$("#addRoleMenuBtn").on('click', function () {
+	    		
+	            var checkNodes = $('ul.list-group>li.node-checked').map(function () {
+	                return $('#menuTree').treeview('getNode',[$(this).data('nodeid')]).id;
+	            }).get().join(",");
+	            
+	            $.post('/role/grant',{roleId: id , menuIds: checkNodes},function (data) {
+	                if(data.success){
+	                	layer.msg('操作成功！', {icon: 1});
+	                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭
+	                }else{
+	                	layer.msg('操作失败！', {icon: 5});
+	                }
+	            });
+	        });
 	    });
 	</script>
 </body>

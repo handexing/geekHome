@@ -19,4 +19,9 @@ public interface RoleMenuDao extends JpaRepository<RoleMenu, Long>{
 	public void delete(@Param("id") Long id);
 
 	public List<RoleMenu> findRoleMenuByroleId(Long id);
+
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(nativeQuery = true, value = "DELETE FROM ROLE_MENU WHERE ROLE_ID =:roleId")
+	public void deleteRoleId(@Param("roleId") Long roleId);
 }

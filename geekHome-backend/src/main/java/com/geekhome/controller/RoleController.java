@@ -3,6 +3,7 @@ package com.geekhome.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,6 +77,36 @@ public class RoleController {
 			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
 			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
 		}
+		return result;
+	}
+
+	@RequiresPermissions("role:grant")
+	@RequestMapping("grant")
+	@ResponseBody
+	public ExecuteResult<Boolean> grant(Long roleId, Long[] menuIds) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			if (menuIds != null && roleId != 0) {
+				if (StringUtils.isNotEmpty(menuIds.toString())) {
+					roleMenuDao.deleteRoleId(roleId);
+					for (Long menuId : menuIds) {
+						RoleMenu roleMenu = new RoleMenu();
+						roleMenu.setMenuId(menuId);
+						roleMenu.setRoleId(roleId);
+						roleMenuDao.save(roleMenu);
+					}
+				}
+			} else if (menuIds == null && roleId != 0) {
+				roleMenuDao.deleteRoleId(roleId);
+			}
+			result.setSuccess(true);
+		} catch (Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+
 		return result;
 	}
 
