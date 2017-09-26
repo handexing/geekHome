@@ -36,4 +36,7 @@ public interface MenuDao extends JpaRepository<Menu, Long>{
 	@Transactional
 	@Query(nativeQuery = true, value = "DELETE FROM MENU WHERE ID=:parentId OR PARENT_ID=:parentId")
 	public void delete(@Param("parentId") Long parentId);
+
+	@Query(nativeQuery = true, value = "SELECT * FROM menu WHERE ID in(SELECT MENU_ID FROM role_menu WHERE ROLE_ID = (SELECT ROLE_ID FROM admin_role WHERE ADMIN_ID=:id))")
+	public List<Menu> findMenuById(@Param("id") Long id);
 }

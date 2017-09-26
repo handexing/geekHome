@@ -53,7 +53,16 @@
 </header>
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
-		<dl id="menu-system">
+		<!-- <dl id='menu-1'>
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href='/menu/menuPage' data-title='菜单管理' href="javascript:void(0)">菜单管理</a></li>
+					<li><a data-href='/role/rolePage' data-title='角色管理' href="javascript:void(0)">角色管理</a></li>
+				</ul>
+			</dd>
+		</dl> -->
+		<!-- <dl id="menu-system">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
@@ -93,7 +102,7 @@
 					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
 				</ul>
 			</dd>
-		</dl>
+		</dl> -->
 	</div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
@@ -126,16 +135,13 @@
 <script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
 <script type="text/javascript" th:src="@{/h-ui/js/H-ui.min.js}"></script>
 <script type="text/javascript" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script>
-
-<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" th:src="@{/lib/jquery.contextmenu/jquery.contextmenu.r2.js}"></script>
-
 <script type="text/javascript" th:src="@{/js/indexConfig.js}"></script>
 
 <script type="text/javascript">
-$(function(){
-	new indexConfig();
-});
+	$(function(){
+		new indexConfig();
+	});
 </script> 
 
 </body>
