@@ -7,22 +7,33 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.geekhome.common.vo.RetJson;
 import com.geekhome.entity.Admin;
+import com.geekhome.entity.dao.AdminDao;
+import com.geekhome.entity.service.AdminService;
 
 @RestController
 @RequestMapping("admin")
 public class AdminController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	AdminDao adminDao;
+	@Autowired
+	AdminService adminService;
 
 	@RequestMapping("loginPage")
 	public ModelAndView loginPage() {
@@ -76,5 +87,32 @@ public class AdminController {
 	public ModelAndView logout() {
 		SecurityUtils.getSubject().logout();
 		return new ModelAndView("login");
+	}
+	
+	@RequiresPermissions("admin:index")
+	@RequestMapping("adminPage")
+	public ModelAndView adminPage() {
+		return new ModelAndView("/view/system/adminPage");
+	}
+	
+	@RequiresPermissions("admin:list")
+	@RequestMapping(value = "/adminList")
+	public RetJson adminList(Integer draw, Integer length, Integer start) {
+		RetJson retJson = new RetJson();
+		try {
+			retJson.setStatus(1);
+			retJson.setMessage("加载成功");
+			Page<Admin> list = adminService.getAdminList(start,length);
+			retJson.setData(list.getContent());
+			retJson.setRecordsTotal(list.getTotalElements());
+			retJson.setRecordsFiltered(list.getTotalElements());
+			retJson.setDraw(draw == null ? 0 : draw);
+		} catch (Exception e) {
+			logger.error("", e);
+			retJson.setStatus(-1);
+			retJson.setMessage("程序出错");
+		}
+
+		return retJson;
 	}
 }
