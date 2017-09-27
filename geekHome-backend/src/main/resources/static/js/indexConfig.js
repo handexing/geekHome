@@ -11,7 +11,6 @@ function indexConfig(){
 		$("#min_title_list li").contextMenu('Huiadminmenu', {
 			bindings: {
 				'closethis': function(t) {
-					console.log(t);
 					if(t.find("i")){
 						t.find("i").trigger("click");
 					}		
@@ -36,12 +35,16 @@ function indexConfig(){
 					var children = result[index].children;  
 					
 					htmlContent += "<dl id='menu-"+id+"'>";
-						htmlContent += "<dt class=\"selected\"><i class=\"Hui-iconfont\">&#xe62e;</i> "+name+"<i class=\"Hui-iconfont menu_dropdown-arrow\">&#xe6d5;</i></dt>";
+						htmlContent += "<dt><i class=\"Hui-iconfont\">&#xe62e;</i> "+name+"<i class=\"Hui-iconfont menu_dropdown-arrow\">&#xe6d5;</i></dt>";
 						htmlContent += self.getMenu(children);
 					htmlContent += "</dl>";
 					
 				});
 				$(".menu_dropdown").html(htmlContent);
+				$(".Hui-aside").Huifold({
+					titCell:'.menu_dropdown dl dt',
+					mainCell:'.menu_dropdown dl dd',
+				});
 			} 
 		});
 	}
@@ -50,7 +53,7 @@ function indexConfig(){
 		if(children.length > 0){
 			
 			var htmlContent="";
-				htmlContent += "<dd style=\"display: block;\">";
+				htmlContent += "<dd>";
 				htmlContent += "<ul>";
 			
 			$.each(children, function(i, itemobj) {

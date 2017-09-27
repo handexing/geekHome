@@ -24,10 +24,11 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">极客屋后台管理</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">极客屋</a> 
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v0.1</span> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs" id="top_time" style="margin-left:15px;">v0.1</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
+				<li th:text="${session.admin.userName}">超级管理员</li>
 				<li class="dropDown dropDown_hover">
 					<a href="#" class="dropDown_A" th:text="${session.admin.userName}">admin1 </a><i class="Hui-iconfont">&#xe6d5;</i>
 					<ul class="dropDown-menu menu radius box-shadow">
@@ -53,6 +54,7 @@
 </header>
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
+	
 		<!-- <dl id='menu-1'>
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>

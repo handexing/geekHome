@@ -36,6 +36,55 @@ function Huiasidedisplay(){
 		$(".Hui-aside").show();
 	} 
 }
+
+//动态初始化菜单
+function initMenu(){
+	$.post("/index/menuList",{},function(data){
+		if(data.success){
+			
+			var result = data.data;
+			var htmlContent="";
+			
+			$.each(result, function(index, itemobj) {
+				
+				var id = result[index].id;  
+				var name = result[index].name;  
+				var url = result[index].url;  
+				var children = result[index].children;  
+				
+				htmlContent += "<dl id='menu-"+id+"'>";
+					htmlContent += "<dt><i class=\"Hui-iconfont\">&#xe62e;</i> "+name+"<i class=\"Hui-iconfont menu_dropdown-arrow\">&#xe6d5;</i></dt>";
+					htmlContent += getChildMenu(children);
+				htmlContent += "</dl>";
+				
+			});
+			$(".menu_dropdown").html(htmlContent);
+		} 
+	});
+}
+
+//获取子菜单
+function getChildMenu(children){
+	if(children.length > 0){
+		
+		var htmlContent="";
+			htmlContent += "<dd>";
+			htmlContent += "<ul>";
+		
+		$.each(children, function(i, itemobj) {
+			id = children[i].id;  
+			name = children[i].name;  
+			url = children[i].url;  
+			childrens = children[i].children;  
+			htmlContent += "<li><a data-href='"+url+"' data-title='"+name+"' href=\"javascript:void(0)\">"+name+"</a></li>";
+		});
+		htmlContent += "</ul>";
+		htmlContent += "</dd>";
+		
+		return htmlContent;
+	}
+}
+
 /*获取皮肤cookie*/
 function getskincookie(){
 	var v = $.cookie("Huiskin");
