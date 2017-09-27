@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <title>管理员管理</title>
 
-<link rel="stylesheet" type="text/css" th:href="@{/h-ui/css/H-ui.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/css/H-ui.admin.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/lib/Hui-iconfont/1.0.8/iconfont.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/skin/default/skin.css}" id="skin" />
-<link rel="stylesheet" type="text/css" th:href="@{/h-ui.admin/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui/css/H-ui.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/css/H-ui.admin.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/lib/Hui-iconfont/1.0.8/iconfont.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/skin/default/skin.css}" id="skin" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/plugin/plugin/icheck/icheck.css}" />
 
 </head>
 <body>
@@ -20,7 +21,7 @@
 	<div style="padding: 15px;">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l"> 
-				<a class="btn btn-primary radius" data-title="添加管理员" id="addRoleBtn" href="javascript:;">
+				<a class="btn btn-primary radius" data-title="添加管理员" id="addAdminBtn" href="javascript:;">
 				<i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
 			</span> 
 		</div>
@@ -39,27 +40,27 @@
 
     </div>
     
-    <div id="addRoleDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="addAdminDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content radius">
 				<div class="modal-header">
-					<h3 class="modal-title" id="role_title">添加角色</h3>
+					<h3 class="modal-title" id="role_title">添加管理员</h3>
 					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" id="roleId"/>
 					<input type="hidden" id="oldName"/>
 					<div class="row cl">
-						<label class="form-label col-xs-4 col-sm-3">角色名称：</label>
+						<label class="form-label col-xs-4 col-sm-3">用户名：</label>
 						<div class="formControls col-xs-8 col-sm-9">
-							<input type="text" id="name" class="input-text" autocomplete="off" placeholder="角色名称">
+							<input type="text" id="name" class="input-text" autocomplete="off" placeholder="用户名">
 						</div>
 					</div>
 					<br/>
 					<div class="row cl">
-						<label class="form-label col-xs-4 col-sm-3">角色描述：</label>
+						<label class="form-label col-xs-4 col-sm-3">密码：</label>
 						<div class="formControls col-xs-8 col-sm-9">
-							<input type="text" id="roleDesc" class="input-text" autocomplete="off" placeholder="角色描述">
+							<input type="text" id="roleDesc" class="input-text" autocomplete="off" placeholder="密码">
 						</div>
 					</div>
 					<br/>
@@ -74,6 +75,20 @@
 							</span> 
 						</div>
 					</div>
+					<br/>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">角色：</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal"> 
+							<div class="check-box">
+							    <input type="checkbox" id="checkbox-1">
+							    <label for="checkbox-1">超级管理员</label>
+							</div>
+							<div class="check-box">
+							    <input type="checkbox" id="checkbox-1">
+							    <label for="checkbox-1">普通管理员</label>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" id="saveRoleBtn">确定</button>
@@ -83,12 +98,13 @@
 		</div>
 	</div>
 	
-    <script type="text/javascript" th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script> 
-	<script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
-	<script type="text/javascript" th:src="@{/h-ui/js/H-ui.min.js}"></script>
-	<script type="text/javascript" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script>
-	<script type="text/javascript" th:src="@{/h-ui/js/H-ui.js}"></script>
-	<script type="text/javascript" th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script> 
+    <script type="text/javascript" th:src="@{/plugin/lib/jquery/1.9.1/jquery.min.js}"></script> 
+	<script type="text/javascript" th:src="@{/plugin/lib/layer/2.4/layer.js}"></script>
+	<script type="text/javascript" th:src="@{/plugin/h-ui/js/H-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/plugin/h-ui.admin/js/H-ui.admin.js}"></script>
+	<script type="text/javascript" th:src="@{/plugin/h-ui/js/H-ui.js}"></script>
+	<script type="text/javascript" th:src="@{/plugin/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script> 
+	<script type="text/javascript" th:src="@{/plugin/plugin/icheck/jquery.icheck.min.js}"></script> 
 	<script type="text/javascript" th:src="@{/js/adminConfig.js}"></script>
 	
 
@@ -98,6 +114,12 @@
 		
 	    $(function () {
 	    	admin_config = new adminConfig();
+	    	
+	    	$('.skin-minimal input').iCheck({
+	    		checkboxClass: 'icheckbox-blue',
+	    		radioClass: 'iradio-blue',
+	    		increaseArea: '20%'
+	    	})
 	    });
 	</script>
 </body>

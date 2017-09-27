@@ -9,15 +9,15 @@ function adminConfig(){
 	
 	this.init=function(){
 		
-      /*  $('#addRoleBtn').bind('click',function(){
+      $('#addAdminBtn').bind('click',function(){
         	self.clearFrom();
-        	$("#role_title").text("添加角色");
-        	$("#addRoleDialog").modal("show");
+        	$("#role_title").text("添加管理员");
+        	$("#addAdminDialog").modal("show");
 		});
         
         $('#saveRoleBtn').bind('click',function(){
         	self.saveRole();
-        });*/
+        });
         
         self.listAdmin();
 	}
