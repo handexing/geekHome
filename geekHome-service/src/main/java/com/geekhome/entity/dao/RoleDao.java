@@ -12,4 +12,6 @@ public interface RoleDao extends JpaRepository<Role, Long> {
 
 	public List<Role> findRoleByIdNotAndName(Long id,String name );
 
+	public List<Role> findRoleByStateNot(Integer state);
+
 }

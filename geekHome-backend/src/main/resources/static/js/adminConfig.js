@@ -10,7 +10,8 @@ function adminConfig(){
 	this.init=function(){
 		
       $('#addAdminBtn').bind('click',function(){
-        	self.clearFrom();
+//        	self.clearFrom();
+        	self.listRole();
         	$("#role_title").text("添加管理员");
         	$("#addAdminDialog").modal("show");
 		});
@@ -105,6 +106,34 @@ function adminConfig(){
 					                   '<input class="btn btn-success-outline radius" type="button" onClick="role_config.deleteRole(\''+row.id+'\')" value="删除">';
 		                 }},
 		              ]
+		});
+	}
+	
+	this.listRole=function(){
+		$.post("/admin/roleList",{},function(data){
+		
+			if(data.success){
+				console.log(data);
+				var result = data.data;
+				var htmlContent="";
+				
+				$.each(result, function(index, itemobj) {
+					
+					var id=result[index].id;  
+					var name=result[index].name;
+					
+					htmlContent += "<div class=\"check-box\">";
+						htmlContent += "<input type=\"checkbox\" id='checkbox-"+id+"'>";
+						htmlContent += "<label for='checkbox-"+id+"'>"+name+"</label>";
+					htmlContent += "</div>";
+					
+				});
+				console.log(htmlContent);
+				$(".skin-minimal").html(htmlContent);
+				
+			} else{
+				layer.msg('程序异常！', {icon: 5});
+			}
 		});
 	}
 	
