@@ -24,6 +24,15 @@ import com.geekhome.common.utils.CustomDateSerializer;
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = -2337967383981152117L;
+	
+	/**
+	 * 默认开启
+	 */
+	public static final Integer ROLE_STATE_DEFAULT = 1;
+	/**
+	 * 关闭
+	 */
+	public static final Integer ROLE_STATE_CLOSE = 0;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

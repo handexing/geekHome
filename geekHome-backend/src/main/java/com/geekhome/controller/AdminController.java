@@ -1,5 +1,7 @@
 package com.geekhome.controller;
 
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -19,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.geekhome.common.vo.ErrorCode;
+import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.RetJson;
 import com.geekhome.entity.Admin;
+import com.geekhome.entity.Role;
 import com.geekhome.entity.dao.AdminDao;
+import com.geekhome.entity.dao.RoleDao;
 import com.geekhome.entity.service.AdminService;
 
 @RestController
@@ -34,6 +40,8 @@ public class AdminController {
 	AdminDao adminDao;
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	RoleDao roleDao;
 
 	@RequestMapping("loginPage")
 	public ModelAndView loginPage() {
@@ -114,5 +122,21 @@ public class AdminController {
 		}
 
 		return retJson;
+	}
+	
+	@RequestMapping("roleList")
+	public ExecuteResult<List<Role>> roleList() {
+		final ExecuteResult<List<Role>> result = new ExecuteResult<>();
+		try {
+			List<Role> list = roleDao.findRoleByStateNot(Role.ROLE_STATE_CLOSE);
+			result.setData(list);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
 	}
 }

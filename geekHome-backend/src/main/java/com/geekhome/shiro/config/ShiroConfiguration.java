@@ -113,6 +113,7 @@ public class ShiroConfiguration {
         customModularRealmAuthenticator.setDefinedRealms(shiroAuthenticatorRealms);
         customModularRealmAuthenticator.setAuthenticationStrategy(authenticationStrategy());
         securityManager.setAuthenticator(customModularRealmAuthenticator);
+        
         ModularRealmAuthorizer customModularRealmAuthorizer = new ModularRealmAuthorizer();
         customModularRealmAuthorizer.setRealms(shiroAuthorizerRealms);
         securityManager.setAuthorizer(customModularRealmAuthorizer);
