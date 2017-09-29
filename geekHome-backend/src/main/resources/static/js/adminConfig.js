@@ -11,49 +11,54 @@ function adminConfig(){
 		
       $('#addAdminBtn').bind('click',function(){
 //        	self.clearFrom();
-        	self.listRole();
+        	self.listRole(0);
         	$("#role_title").text("添加管理员");
         	$("#addAdminDialog").modal("show");
 		});
         
-        $('#saveRoleBtn').bind('click',function(){
-        	self.saveRole();
+        $('#saveAdminBtn').bind('click',function(){
+        	self.saveAdmin();
         });
         
         self.listAdmin();
 	}
 	
-	this.saveRole=function(){
+	this.saveAdmin=function(){
 
-		var id = $("#roleId").val();
+		var adminId = $("#adminId").val();
 		var state = $("#state").val();
 		var name = $.trim($("#name").val());
-		var roleDesc = $.trim($("#roleDesc").val());
-		var oldName = $.trim($("#oldName").val());
+		var password = $.trim($("#password").val());
 		
 		if(name==null || name==""){
-			layer.msg('角色名称不能为空！', {icon: 7});
+			layer.msg('名称不能为空！', {icon: 7});
 			return;
 		}
 		
-		if(name == oldName){
-			layer.msg('请修改之后再提交！', {icon: 7});
+		var roles=new Array()
+		
+		$.each($(".icheckbox-blue"), function(index, itemobj) {
+			var size = $(this).attr("class").length;
+			if(size == 22){
+				 var id = $(this).parent().attr("data-id");
+				 roles.push(id);
+			}
+		});
+		
+		if(roles.length == 0){
+			layer.msg('角色不能为空！', {icon: 7});
 			return;
 		}
 		
-		if(roleDesc==null || roleDesc==""){
-			layer.msg('角色描述不能为空！', {icon: 7});
-			return;
-		}
-		
-		var role={};
-		role.id = id;
-		role.state = state;
-		role.name = name;
-		role.roleDesc = roleDesc;
+		var admin={};
+		admin.id = adminId;
+		admin.state = state;
+		admin.userName = name;
+		admin.password = password;
+		admin.roles = roles;
 		
 		$.ajax({
-			url:'/role/saveRole',
+			url:'/admin/saveAdmin',
             type: "POST",
             dataType: "json",//跨域ajax请求,返回数据格式为json
             cache: false,
@@ -63,14 +68,14 @@ function adminConfig(){
             scriptCharset: 'UTF-8',
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
-			data:JSON.stringify(role),
+			data:JSON.stringify(admin),
 			success:function(responseData, status){
 				if(responseData.data==1){
-					roleTable.ajax.reload();
-					$("#addRoleDialog").modal("hide");
+					adminTable.ajax.reload();
+					$("#addAdminDialog").modal("hide");
 					layer.msg('操作成功！', {icon: 1});
 				}else if(responseData.data==-1){
-					layer.msg('不能有相同角色名称,请修改！', {icon: 7});
+					layer.msg('不能有相同名称,请修改！', {icon: 7});
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
@@ -102,34 +107,40 @@ function adminConfig(){
 			                }},
 		                 {"data": "createTime"},
 		                 {"data": "b","render":function( data, type, row ) {
-			                	return '<input class="btn btn-secondary-outline radius" type="button" onClick="role_config.updateRole(\''+row.id+'\',\''+row.name+'\',\''+row.roleDesc+'\',\''+row.state+'\')" value="修改">&nbsp;&nbsp;'+
-					                   '<input class="btn btn-success-outline radius" type="button" onClick="role_config.deleteRole(\''+row.id+'\')" value="删除">';
+			                	return '<input class="btn btn-secondary-outline radius" type="button" onClick="admin_config.updateAdmin(\''+row.id+'\',\''+row.userName+'\',\''+row.state+'\')" value="修改">&nbsp;&nbsp;'+
+					                   '<input class="btn btn-success-outline radius" type="button" onClick="admin_config.deleteAdmin(\''+row.id+'\')" value="删除">';
 		                 }},
 		              ]
 		});
 	}
 	
-	this.listRole=function(){
+	this.listRole=function(id){
 		$.post("/admin/roleList",{},function(data){
 		
 			if(data.success){
-				console.log(data);
 				var result = data.data;
 				var htmlContent="";
-				
 				$.each(result, function(index, itemobj) {
 					
 					var id=result[index].id;  
 					var name=result[index].name;
 					
-					htmlContent += "<div class=\"check-box\">";
+					htmlContent += "<div class=\"check-box\" data-id="+id+">";
 						htmlContent += "<input type=\"checkbox\" id='checkbox-"+id+"'>";
 						htmlContent += "<label for='checkbox-"+id+"'>"+name+"</label>";
 					htmlContent += "</div>";
 					
 				});
-				console.log(htmlContent);
 				$(".skin-minimal").html(htmlContent);
+				$('.skin-minimal input').iCheck({
+		    		checkboxClass: 'icheckbox-blue',
+		    		radioClass: 'iradio-blue',
+		    		increaseArea: '20%'
+		    	});
+				
+				if(id!=0){
+					self.listAdminRole(id);
+				}
 				
 			} else{
 				layer.msg('程序异常！', {icon: 5});
@@ -137,13 +148,32 @@ function adminConfig(){
 		});
 	}
 	
-	this.deleteRole=function(id){
+	this.listAdminRole=function(id){
+		$.post("/admin/adminRoleList",{"id":id},function(data){
+			if(data.success){
+				var result = data.data;
+				$.each(result, function(index, itemobj) {
+					var roleId=result[index].roleId;  
+					$("#checkbox-"+roleId).attr("checked", true);
+				});
+				$('.skin-minimal input').iCheck({
+		    		checkboxClass: 'icheckbox-blue',
+		    		radioClass: 'iradio-blue',
+		    		increaseArea: '20%'
+		    	});
+			} else{
+				layer.msg('程序异常！', {icon: 5});
+			}
+		});
+	}
+	
+	this.deleteAdmin=function(id){
 		layer.confirm('确定删除吗？', {
 			  btn: ['确认','取消'] //按钮
 			}, function(){
-				$.post("/role/delRole",{"id":id},function(data){
+				$.post("/admin/delAdmin",{"id":id},function(data){
 					if(data.success){
-						roleTable.ajax.reload();
+						adminTable.ajax.reload();
 						layer.msg('操作成功！', {icon: 1});
 					} else{
 						layer.msg('操作失败！', {icon: 5});
@@ -154,19 +184,17 @@ function adminConfig(){
 		});
 	}
 	
-	this.updateRole=function(id,name,desc,state){
-		self.clearFrom();
-		$("#role_title").text("修改角色");
-    	$("#addRoleDialog").modal("show");
-    	$("#roleId").val(id);
+	this.updateAdmin=function(id,name,state){
+		$("#role_title").text("修改管理员");
+    	$("#addAdminDialog").modal("show");
+    	$("#adminId").val(id);
     	$("#state").val(state);
 		$("#name").val(name);
-		$("#oldName").val(name);
-		$("#roleDesc").val(desc);
+		self.listRole(id);
 	}
 	
 	this.clearFrom=function(){
-    	$("#roleId").val("");
+    	$("#adminId").val("");
     	$("#state").val("");
 		$("#name").val("");
 		$("#roleDesc").val("");
