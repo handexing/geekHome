@@ -1,7 +1,9 @@
 package com.geekhome.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
@@ -27,12 +29,10 @@ import com.geekhome.common.utils.CustomDateSerializer;
 
 @SqlResultSetMappings({
 
-	@SqlResultSetMapping(name = "getAdminList",
-		classes = @ConstructorResult(targetClass = Admin.class,
-			columns = { @ColumnResult(name = "id", type = Long.class),
-				@ColumnResult(name = "userName", type = String.class), 
+		@SqlResultSetMapping(name = "getAdminList", classes = @ConstructorResult(targetClass = Admin.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "userName", type = String.class),
 				@ColumnResult(name = "password", type = String.class),
-				@ColumnResult(name = "state", type = Integer.class), 
+				@ColumnResult(name = "state", type = Integer.class),
 				@ColumnResult(name = "isSystem", type = Integer.class),
 				@ColumnResult(name = "salt", type = String.class),
 				@ColumnResult(name = "createTime", type = Date.class),
@@ -67,7 +67,9 @@ public class Admin implements Serializable {
 
 	@Transient
 	private String roleName;
-	
+	@Transient
+	private List<Long> roles = new ArrayList<>();
+
 	public Admin(Long id, String userName, String password, Integer state, Integer isSystem, String salt,
 			Date createTime, Date updateTime, String roleName) {
 		super();
@@ -80,6 +82,14 @@ public class Admin implements Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.roleName = roleName;
+	}
+
+	public List<Long> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Long> roles) {
+		this.roles = roles;
 	}
 
 	public String getRoleName() {
@@ -161,7 +171,7 @@ public class Admin implements Serializable {
 	public Admin() {
 		super();
 	}
-
+	
 	public Admin(Long id, String userName, String password, Integer state, String salt, Date createTime,
 			Date updateTime) {
 		super();
@@ -178,8 +188,7 @@ public class Admin implements Serializable {
 	public String toString() {
 		return "Admin [id=" + id + ", userName=" + userName + ", password=" + password + ", state=" + state
 				+ ", isSystem=" + isSystem + ", salt=" + salt + ", createTime=" + createTime + ", updateTime="
-				+ updateTime + ", roleName=" + roleName + "]";
+				+ updateTime + ", roleName=" + roleName + ", roles=" + roles + "]";
 	}
-
 
 }

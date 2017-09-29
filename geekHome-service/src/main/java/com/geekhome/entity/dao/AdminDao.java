@@ -1,5 +1,7 @@
 package com.geekhome.entity.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,12 +18,9 @@ public interface AdminDao extends JpaRepository<Admin, Long>{
 
 	Admin findAdminByUserName(String userName);
 
-//	@Query(nativeQuery = true, value = "SELECT a.ID id ,a.USER_NAME userName,a.`PASSWORD` password,a.STATE state,a.IS_SYSTEM isSystem,a.SALT salt,a.CREATE_TIME createTime,a.UPDATE_TIME updateTime,r.NAME roleName FROM admin a" + 
-//			" LEFT JOIN admin_role ar ON a.ID=ar.ADMIN_ID" + 
-//			" LEFT JOIN role r ON ar.ROLE_ID=r.ID LIMIT ?,?")
-//	List<Admin> getAdminList(@Param("start") Integer start,@Param("length") Integer length);
-//
 	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM ADMIN")
 	int getAdminListCnt();
+
+	List<Admin> findAdminByIdNotAndUserName(Long id, String userName);
 
 }

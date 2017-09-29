@@ -48,7 +48,7 @@
 					<a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" id="roleId"/>
+					<input type="hidden" id="adminId"/>
 					<input type="hidden" id="oldName"/>
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3">用户名：</label>
@@ -60,7 +60,7 @@
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3">密码：</label>
 						<div class="formControls col-xs-8 col-sm-9">
-							<input type="text" id="roleDesc" class="input-text" autocomplete="off" placeholder="密码">
+							<input type="text" id="password" class="input-text" autocomplete="off" placeholder="密码">
 						</div>
 					</div>
 					<br/>
@@ -79,19 +79,11 @@
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3">角色：</label>
 						<div class="formControls col-xs-8 col-sm-9 skin-minimal"> 
-							<!-- <div class="check-box">
-							    <input type="checkbox" id="checkbox-1">
-							    <label for="checkbox-1">超级管理员</label>
-							</div>
-							<div class="check-box">
-							    <input type="checkbox" id="checkbox-1">
-							    <label for="checkbox-1">普通管理员</label>
-							</div> -->
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" id="saveRoleBtn">确定</button>
+					<button class="btn btn-primary" id="saveAdminBtn">确定</button>
 					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 				</div>
 			</div>
@@ -114,12 +106,6 @@
 		
 	    $(function () {
 	    	admin_config = new adminConfig();
-	    	
-	    	$('.skin-minimal input').iCheck({
-	    		checkboxClass: 'icheckbox-blue',
-	    		radioClass: 'iradio-blue',
-	    		increaseArea: '20%'
-	    	})
 	    });
 	</script>
 </body>

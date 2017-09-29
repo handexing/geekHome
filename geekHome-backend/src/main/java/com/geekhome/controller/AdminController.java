@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,10 @@ import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.RetJson;
 import com.geekhome.entity.Admin;
+import com.geekhome.entity.AdminRole;
 import com.geekhome.entity.Role;
 import com.geekhome.entity.dao.AdminDao;
+import com.geekhome.entity.dao.AdminRoleDao;
 import com.geekhome.entity.dao.RoleDao;
 import com.geekhome.entity.service.AdminService;
 
@@ -42,6 +45,8 @@ public class AdminController {
 	AdminService adminService;
 	@Autowired
 	RoleDao roleDao;
+	@Autowired
+	AdminRoleDao adminRoleDao;
 
 	@RequestMapping("loginPage")
 	public ModelAndView loginPage() {
@@ -130,6 +135,57 @@ public class AdminController {
 		try {
 			List<Role> list = roleDao.findRoleByStateNot(Role.ROLE_STATE_CLOSE);
 			result.setData(list);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("adminRoleList")
+	public ExecuteResult<List<AdminRole>> adminRoleList(Long id) {
+		final ExecuteResult<List<AdminRole>> result = new ExecuteResult<>();
+		try {
+			List<AdminRole> list = adminRoleDao.findAdminRoleByAdminId(id);
+			result.setData(list);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	
+	@RequiresPermissions("admin:save")
+	@RequestMapping("saveAdmin")
+	public ExecuteResult<Integer> saveAdmin(@RequestBody Admin admin) {
+		final ExecuteResult<Integer> result = new ExecuteResult<>();
+		try {
+			Integer flag = adminService.saveAdmin(admin);
+			result.setData(flag);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequiresPermissions("admin:delete")
+	@RequestMapping("delAdmin")
+	public ExecuteResult<Boolean> delAdmin(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			adminDao.delete(id);
+			adminRoleDao.deleteAdmin(id);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
