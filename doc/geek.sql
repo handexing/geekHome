@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 29/09/2017 15:18:23
+ Date: 01/10/2017 21:39:15
 */
 
 SET NAMES utf8mb4;
@@ -31,13 +31,14 @@ CREATE TABLE `admin`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES (1, 'admin', 'c5941c5f3bc693a75e6e863bd2c55ce3', 1, 0, '1ab6d62faa91ae7deec76d6f13ef1600', '2017-09-14 18:06:21', NULL);
 INSERT INTO `admin` VALUES (2, 'handx', 'c5941c5f3bc693a75e6e863bd2c55ce3', 1, 0, '1ab6d62faa91ae7deec76d6f13ef1600', '2017-09-25 17:00:01', NULL);
+INSERT INTO `admin` VALUES (7, 'rose', '211d20069e92801a33bca60109a7f5f3', 1, 0, 'f6076aa00f49933a82b1685e3b180afc', '2017-09-29 15:42:16', NULL);
 
 -- ----------------------------
 -- Table structure for admin_role
@@ -48,13 +49,14 @@ CREATE TABLE `admin_role`  (
   `ADMIN_ID` bigint(20) DEFAULT NULL,
   `ROLE_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理員角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理員角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin_role
 -- ----------------------------
 INSERT INTO `admin_role` VALUES (1, 1, 1);
 INSERT INTO `admin_role` VALUES (2, 2, 2);
+INSERT INTO `admin_role` VALUES (9, 7, 2);
 
 -- ----------------------------
 -- Table structure for menu
@@ -72,12 +74,12 @@ CREATE TABLE `menu`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜單表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, '系统管理', 'menu', '/system/systemPage', 'system:admin', 0, '', 1, '2017-09-15 10:20:26', '2017-09-27 14:03:11');
+INSERT INTO `menu` VALUES (1, '系统管理', 'menu', '/system/systemPage', 'system:manage', 0, '', 1, '2017-09-15 10:20:26', '2017-09-27 14:03:11');
 INSERT INTO `menu` VALUES (2, '菜单管理', 'menu', '/menu/menuPage', 'menu:index', 1, NULL, 3, '2017-09-15 11:14:01', NULL);
 INSERT INTO `menu` VALUES (3, '修改排序', 'auth', '/menu/updateOrder', 'menu:sort', 2, NULL, 2, '2017-09-15 14:56:28', NULL);
 INSERT INTO `menu` VALUES (4, '保存资源菜单', 'auth', '/menu/saveMenu', 'menu:save', 2, NULL, 3, '2017-09-19 15:43:09', NULL);
@@ -95,6 +97,8 @@ INSERT INTO `menu` VALUES (33, '管理员管理', 'menu', '/admin/adminPage', 'a
 INSERT INTO `menu` VALUES (34, '管理员列表', 'auth', '/admin/adminList', 'admin:list', 33, NULL, 1, '2017-09-27 15:19:40', NULL);
 INSERT INTO `menu` VALUES (35, '添加管理员', 'auth', '/admin/saveAdmin', 'admin:save', 33, NULL, 2, '2017-09-29 10:41:59', NULL);
 INSERT INTO `menu` VALUES (36, '删除管理员', 'auth', '/admin/delAdmin', 'admin:delete', 33, NULL, 3, '2017-09-29 15:15:23', NULL);
+INSERT INTO `menu` VALUES (37, '开源管理', 'menu', 'openSource/opensourcePage', 'openSource:manage', 0, NULL, 1, '2017-09-29 15:48:09', '2017-09-29 15:49:13');
+INSERT INTO `menu` VALUES (38, '资源列表', 'menu', '/openSource/openSourcePage', 'openSource:index', 37, NULL, 1, '2017-09-29 15:49:13', NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -125,31 +129,33 @@ CREATE TABLE `role_menu`  (
   `ROLE_ID` bigint(20) DEFAULT NULL,
   `MENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
-INSERT INTO `role_menu` VALUES (19, 2, 1);
-INSERT INTO `role_menu` VALUES (20, 2, 26);
-INSERT INTO `role_menu` VALUES (21, 2, 29);
-INSERT INTO `role_menu` VALUES (22, 1, 1);
-INSERT INTO `role_menu` VALUES (23, 1, 2);
-INSERT INTO `role_menu` VALUES (24, 1, 3);
-INSERT INTO `role_menu` VALUES (25, 1, 4);
-INSERT INTO `role_menu` VALUES (26, 1, 6);
-INSERT INTO `role_menu` VALUES (27, 1, 7);
-INSERT INTO `role_menu` VALUES (28, 1, 14);
-INSERT INTO `role_menu` VALUES (29, 1, 26);
-INSERT INTO `role_menu` VALUES (30, 1, 27);
-INSERT INTO `role_menu` VALUES (31, 1, 28);
-INSERT INTO `role_menu` VALUES (32, 1, 29);
-INSERT INTO `role_menu` VALUES (33, 1, 30);
-INSERT INTO `role_menu` VALUES (34, 1, 31);
-INSERT INTO `role_menu` VALUES (35, 1, 32);
-INSERT INTO `role_menu` VALUES (36, 1, 33);
-INSERT INTO `role_menu` VALUES (37, 1, 34);
-INSERT INTO `role_menu` VALUES (38, 1, 35);
-INSERT INTO `role_menu` VALUES (39, 1, 36);
+INSERT INTO `role_menu` VALUES (40, 2, 1);
+INSERT INTO `role_menu` VALUES (41, 2, 33);
+INSERT INTO `role_menu` VALUES (42, 2, 34);
+INSERT INTO `role_menu` VALUES (43, 1, 1);
+INSERT INTO `role_menu` VALUES (44, 1, 2);
+INSERT INTO `role_menu` VALUES (45, 1, 3);
+INSERT INTO `role_menu` VALUES (46, 1, 4);
+INSERT INTO `role_menu` VALUES (47, 1, 6);
+INSERT INTO `role_menu` VALUES (48, 1, 7);
+INSERT INTO `role_menu` VALUES (49, 1, 14);
+INSERT INTO `role_menu` VALUES (50, 1, 26);
+INSERT INTO `role_menu` VALUES (51, 1, 27);
+INSERT INTO `role_menu` VALUES (52, 1, 28);
+INSERT INTO `role_menu` VALUES (53, 1, 29);
+INSERT INTO `role_menu` VALUES (54, 1, 30);
+INSERT INTO `role_menu` VALUES (55, 1, 31);
+INSERT INTO `role_menu` VALUES (56, 1, 32);
+INSERT INTO `role_menu` VALUES (57, 1, 33);
+INSERT INTO `role_menu` VALUES (58, 1, 34);
+INSERT INTO `role_menu` VALUES (59, 1, 35);
+INSERT INTO `role_menu` VALUES (60, 1, 36);
+INSERT INTO `role_menu` VALUES (61, 1, 37);
+INSERT INTO `role_menu` VALUES (62, 1, 38);
 
 SET FOREIGN_KEY_CHECKS = 1;
