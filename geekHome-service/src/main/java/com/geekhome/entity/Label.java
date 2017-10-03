@@ -23,6 +23,9 @@ import com.geekhome.common.utils.CustomDateSerializer;
 @Table(name = "LABEL")
 public class Label implements Serializable {
 
+	public static final Integer LABLE = 1;
+	public static final Integer OPEN_SOURCE = 2;
+
 	/**
 	 * 
 	 */
