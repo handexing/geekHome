@@ -21,12 +21,18 @@
     - geekHome-common		(公用工具)
     - geekHome-web-ui		(极客屋前台)
   
-
 ## 项目功能清单
 - 1.系统管理
     - 1.1 角色管理	(:ok_hand:)
     - 1.2 菜单管理	(:ok_hand:)
-    - 1.3 会员管理 	(:point_left:)
+    - 1.3 会员管理 	(:ok_hand:)
+
+- 2.标签管理
+    - 1.1 标签管理	(:ok_hand:)
+    
+- 3.开源管理管理
+    - 1.1 开源管理	(:point_left:)
+	
 
 ## 项目预览
 
