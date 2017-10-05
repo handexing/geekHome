@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 05/10/2017 14:00:53
+ Date: 05/10/2017 14:33:32
 */
 
 SET NAMES utf8mb4;
@@ -129,7 +129,7 @@ CREATE TABLE `menu`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -161,6 +161,8 @@ INSERT INTO `menu` VALUES (42, '保存标签', 'auth', '/label/saveLabel', 'labe
 INSERT INTO `menu` VALUES (43, '获取标签', 'auth', '/label/getLabel', 'menu:getLabel', 39, NULL, 4, '2017-10-03 15:31:27', NULL);
 INSERT INTO `menu` VALUES (44, '排序标签', 'auth', '/label/updateOrder', 'label:sort', 39, NULL, 5, '2017-10-03 15:34:44', NULL);
 INSERT INTO `menu` VALUES (45, '删除标签', 'auth', '/label/delLabel', 'label:delete', 39, NULL, 6, '2017-10-03 15:36:53', NULL);
+INSERT INTO `menu` VALUES (46, '用户管理', 'menu', '/user/userPage', 'user:manage', 0, NULL, 1, '2017-10-05 14:29:20', NULL);
+INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'user:index', 46, NULL, 1, '2017-10-05 14:30:17', NULL);
 
 -- ----------------------------
 -- Table structure for reply
@@ -204,7 +206,7 @@ CREATE TABLE `role_menu`  (
   `ROLE_ID` bigint(20) DEFAULT NULL,
   `MENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
@@ -239,6 +241,8 @@ INSERT INTO `role_menu` VALUES (66, 1, 42);
 INSERT INTO `role_menu` VALUES (67, 1, 43);
 INSERT INTO `role_menu` VALUES (68, 1, 44);
 INSERT INTO `role_menu` VALUES (69, 1, 45);
+INSERT INTO `role_menu` VALUES (70, 1, 46);
+INSERT INTO `role_menu` VALUES (71, 1, 47);
 
 -- ----------------------------
 -- Table structure for user
