@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 05/10/2017 14:33:32
+ Date: 09/10/2017 16:22:18
 */
 
 SET NAMES utf8mb4;
@@ -251,7 +251,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `SEX` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `SEX` int(1) DEFAULT NULL,
   `BIRTHDAY` date DEFAULT NULL,
   `EMAIL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `PHONE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -262,6 +262,11 @@ CREATE TABLE `user`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', '../img/logo.png', 1, '2017-10-09 15:23:40', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
