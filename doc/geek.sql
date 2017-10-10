@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 05/10/2017 14:00:53
+ Date: 10/10/2017 15:49:18
 */
 
 SET NAMES utf8mb4;
@@ -103,7 +103,7 @@ CREATE TABLE `label`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of label
@@ -112,6 +112,8 @@ INSERT INTO `label` VALUES (1, 'JAVA', 0, 0, 1, '2017-10-03 14:44:03', NULL);
 INSERT INTO `label` VALUES (2, '多线程', 1, 1, 1, '2017-10-03 14:44:07', NULL);
 INSERT INTO `label` VALUES (3, 'spring', 0, 0, 1, '2017-10-03 15:42:46', '2017-10-03 15:43:22');
 INSERT INTO `label` VALUES (5, 'springboot', 3, 1, 1, '2017-10-03 15:43:22', NULL);
+INSERT INTO `label` VALUES (6, 'springmvc', 3, 2, 1, '2017-10-10 15:47:48', NULL);
+INSERT INTO `label` VALUES (7, 'springdata', 3, 3, 1, '2017-10-10 15:48:12', NULL);
 
 -- ----------------------------
 -- Table structure for menu
@@ -129,7 +131,7 @@ CREATE TABLE `menu`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
@@ -161,6 +163,8 @@ INSERT INTO `menu` VALUES (42, '保存标签', 'auth', '/label/saveLabel', 'labe
 INSERT INTO `menu` VALUES (43, '获取标签', 'auth', '/label/getLabel', 'menu:getLabel', 39, NULL, 4, '2017-10-03 15:31:27', NULL);
 INSERT INTO `menu` VALUES (44, '排序标签', 'auth', '/label/updateOrder', 'label:sort', 39, NULL, 5, '2017-10-03 15:34:44', NULL);
 INSERT INTO `menu` VALUES (45, '删除标签', 'auth', '/label/delLabel', 'label:delete', 39, NULL, 6, '2017-10-03 15:36:53', NULL);
+INSERT INTO `menu` VALUES (46, '用户管理', 'menu', '/user/userPage', 'user:manage', 0, NULL, 1, '2017-10-05 14:29:20', NULL);
+INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'user:index', 46, NULL, 1, '2017-10-05 14:30:17', NULL);
 
 -- ----------------------------
 -- Table structure for reply
@@ -204,7 +208,7 @@ CREATE TABLE `role_menu`  (
   `ROLE_ID` bigint(20) DEFAULT NULL,
   `MENU_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色菜单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu
@@ -239,6 +243,8 @@ INSERT INTO `role_menu` VALUES (66, 1, 42);
 INSERT INTO `role_menu` VALUES (67, 1, 43);
 INSERT INTO `role_menu` VALUES (68, 1, 44);
 INSERT INTO `role_menu` VALUES (69, 1, 45);
+INSERT INTO `role_menu` VALUES (70, 1, 46);
+INSERT INTO `role_menu` VALUES (71, 1, 47);
 
 -- ----------------------------
 -- Table structure for user
@@ -247,7 +253,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `SEX` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `SEX` int(1) DEFAULT NULL,
   `BIRTHDAY` date DEFAULT NULL,
   `EMAIL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `PHONE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -258,6 +264,11 @@ CREATE TABLE `user`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/headImg.png', 1, '2017-10-09 15:23:40', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

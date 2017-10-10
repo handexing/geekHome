@@ -2,35 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>管理员管理</title>
+<title>用户管理</title>
 
 <link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui/css/H-ui.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/css/H-ui.admin.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/plugin/lib/Hui-iconfont/1.0.8/iconfont.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/skin/default/skin.css}" id="skin" />
 <link rel="stylesheet" type="text/css" th:href="@{/plugin/h-ui.admin/css/style.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/plugin/icheck/icheck.css}" />
 
 </head>
 <body>
 	<nav class="breadcrumb">
 		<i class="Hui-iconfont">&#xe67f;</i> 首页 
-		<span class="c-gray en">&gt;</span> 系统管理
-		<span class="c-gray en">&gt;</span> 管理员列表 
+		<span class="c-gray en">&gt;</span> 用户管理
+		<span class="c-gray en">&gt;</span> 用户列表 
 	</nav>
 	<div style="padding: 15px;">
 		<div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l"> 
-				<a class="btn btn-primary radius" data-title="添加管理员" id="addAdminBtn" href="javascript:;">
-				<i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+				<a class="btn btn-primary radius" data-title="添加用户" id="addAdminBtn" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i> 添加用户</a>
 			</span> 
 		</div>
 		
-		<table class="table table-border table-bordered table-bg table-hover table-sort" id="adminList">
+		<table class="table table-border table-bordered table-bg table-hover table-sort" id="userList">
 			<thead>
 				<tr class="text-c">
-					<th width="100">名称</th>
-					<th width="100">角色</th>
+					<th width="100">用户名</th>
+					<th width="200">性别</th>
+					<th width="100">email</th>
+					<th width="200">手机号</th>
 					<th width="200">状态</th>
 					<th width="100">创建时间</th>
 					<th width="300">操作</th>
@@ -39,7 +40,7 @@
 		</table>
 
     </div>
-    
+   <!--  
     <div id="addAdminDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content radius">
@@ -88,7 +89,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	
     <script type="text/javascript" th:src="@{/plugin/lib/jquery/1.9.1/jquery.min.js}"></script> 
 	<script type="text/javascript" th:src="@{/plugin/lib/layer/2.4/layer.js}"></script>
@@ -96,16 +97,15 @@
 	<script type="text/javascript" th:src="@{/plugin/h-ui.admin/js/H-ui.admin.js}"></script>
 	<script type="text/javascript" th:src="@{/plugin/h-ui/js/H-ui.js}"></script>
 	<script type="text/javascript" th:src="@{/plugin/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script> 
-	<script type="text/javascript" th:src="@{/plugin/icheck/jquery.icheck.min.js}"></script> 
-	<script type="text/javascript" th:src="@{/js/adminConfig.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userConfig.js}"></script>
 	
 
 	<script type="text/javascript">
 	
-		var admin_config;
+		var user_config;
 		
 	    $(function () {
-	    	admin_config = new adminConfig();
+	    	user_config = new userConfig();
 	    });
 	</script>
 </body>

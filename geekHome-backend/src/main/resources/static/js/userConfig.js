@@ -1,15 +1,15 @@
 /**
- * 管理员管理
+ * 用户管理
  */
 
-function adminConfig(){
+function userConfig(){
 	
 	var self=this;
 	var adminTable;
 	
 	this.init=function(){
 		
-       $('#addAdminBtn').bind('click',function(){
+      $('#addAdminBtn').bind('click',function(){
 //        	self.clearFrom();
         	self.listRole(0);
         	$("#role_title").text("添加管理员");
@@ -20,7 +20,7 @@ function adminConfig(){
         	self.saveAdmin();
         });
         
-        self.listAdmin();
+        //self.listAdmin();
 	}
 	
 	this.saveAdmin=function(){
