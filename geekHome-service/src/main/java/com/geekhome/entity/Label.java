@@ -2,6 +2,7 @@ package com.geekhome.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geekhome.common.utils.CustomDateSerializer;
@@ -26,9 +28,6 @@ public class Label implements Serializable {
 	public static final Integer LABLE = 1;
 	public static final Integer OPEN_SOURCE = 2;
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2159291991132749505L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,6 +47,17 @@ public class Label implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
+
+	@Transient
+	private List<Label> childs;
+
+	public List<Label> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<Label> childs) {
+		this.childs = childs;
+	}
 
 	public Long getId() {
 		return id;

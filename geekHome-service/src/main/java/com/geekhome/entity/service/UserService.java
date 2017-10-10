@@ -36,7 +36,7 @@ public class UserService {
 				String password = PasswordUtil.createCustomPwd(user.getPassword(),user.getUserName() + User.SALT);
 				user.setPassword(password);
 				user.setCreateTime(new Date());
-				user.setHeadImgUrl("../img/logo.png");
+				user.setHeadImgUrl("img/headImg.png");
 				user.setState(User.USER_STATE_DEFAULT);
 				user.setBrief("用户很懒，什么都没说明....");
 				user.setSex(User.USER_SEX_DEFAULT);
