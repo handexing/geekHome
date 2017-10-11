@@ -20,4 +20,6 @@ public interface LabelDao extends JpaRepository<Label, Long>{
 	@Transactional
 	@Query(nativeQuery = true, value = "UPDATE LABEL SET SORT=:sort WHERE ID =:id")
 	int updateOrder(@Param("id") Long id, @Param("sort") Integer sort);
+
+	public List<Label> findLabelByStatusAndType(Integer status, Integer type);
 }

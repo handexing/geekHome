@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.entity.Label;
+import com.geekhome.entity.dao.LabelDao;
 import com.geekhome.entity.service.LabelService;
 
 @RestController
@@ -23,15 +24,15 @@ public class LabelController {
 
 	@Autowired
 	LabelService labelService;
+	@Autowired
+	LabelDao labelDao;
 
 	@RequestMapping(value = "/labelList")
 	@CrossOrigin
-	public ExecuteResult<List<Label>> labelList() {
+	public ExecuteResult<List<Label>> labelList(Integer type) {
 		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
-			ArrayList<Label> labelLists = new ArrayList<>();
-			List<Label> labels = labelService.getChildLabelList(labelLists, 0L);
-			
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT,type);
 			List<Label> childs = null;
 			for (int i = 0; i < labels.size(); i++) {
 				Long id = labels.get(i).getId();
