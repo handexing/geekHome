@@ -26,7 +26,6 @@ import com.geekhome.common.utils.CustomDateSerializer;
  * @date 2017年9月14日 下午5:02:45
  * @version V1.0
  */
-
 @SqlResultSetMappings({
 
 		@SqlResultSetMapping(name = "getAdminList", classes = @ConstructorResult(targetClass = Admin.class, columns = {

@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 11/10/2017 16:26:54
+ Date: 12/10/2017 17:21:21
 */
 
 SET NAMES utf8mb4;
@@ -64,31 +64,25 @@ INSERT INTO `admin_role` VALUES (9, 7, 2);
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) DEFAULT NULL,
   `THEME_ID` bigint(20) DEFAULT NULL COMMENT '主题ID，问与答，开源，博客',
   `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `USER_ID` bigint(20) DEFAULT NULL,
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for discuss
+-- Table structure for comment_reply
 -- ----------------------------
-DROP TABLE IF EXISTS `discuss`;
-CREATE TABLE `discuss`  (
+DROP TABLE IF EXISTS `comment_reply`;
+CREATE TABLE `comment_reply`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
-  `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
-  `LABLE_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
-  `COLLECT_COUNT` int(255) DEFAULT NULL COMMENT '收藏数量',
-  `BROWSE_COUNT` int(255) DEFAULT NULL COMMENT '浏览数量',
-  `TYPE` int(1) DEFAULT NULL COMMENT '类型：1-问与答 2-博客 3-开源',
-  `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
-  `COMMENT_ID` bigint(20) DEFAULT NULL COMMENT '评论ID',
+  `REPLY_IDS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '@回复得人们',
+  `USER_ID` bigint(255) DEFAULT NULL COMMENT '用户id',
+  `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `CREATE_TIME` datetime(0) DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '问与答表Q & A' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for label
@@ -104,7 +98,7 @@ CREATE TABLE `label`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of label
@@ -203,17 +197,22 @@ INSERT INTO `menu` VALUES (46, '用户管理', 'menu', '/user/userPage', 'user:m
 INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'user:index', 46, NULL, 1, '2017-10-05 14:30:17', NULL);
 
 -- ----------------------------
--- Table structure for reply
+-- Table structure for question_answers
 -- ----------------------------
-DROP TABLE IF EXISTS `reply`;
-CREATE TABLE `reply`  (
+DROP TABLE IF EXISTS `question_answers`;
+CREATE TABLE `question_answers`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `REPLY_ID` bigint(255) DEFAULT NULL COMMENT '回复人ID',
-  `USER_IDS` varchar(0) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '@回复得人们',
-  `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
+  `LABLE_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
+  `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
+  `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
+  `STATUS` int(1) DEFAULT NULL COMMENT '状态',
+  `COLLECT_COUNT` int(255) DEFAULT NULL COMMENT '收藏数量',
+  `BROWSE_COUNT` int(255) DEFAULT NULL COMMENT '浏览数量',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '问与答表Q & A' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for role
