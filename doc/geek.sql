@@ -11,7 +11,7 @@
  Target Server Version : 50711
  File Encoding         : 65001
 
- Date: 10/10/2017 15:49:18
+ Date: 12/10/2017 17:21:21
 */
 
 SET NAMES utf8mb4;
@@ -64,31 +64,25 @@ INSERT INTO `admin_role` VALUES (9, 7, 2);
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) DEFAULT NULL,
   `THEME_ID` bigint(20) DEFAULT NULL COMMENT '主题ID，问与答，开源，博客',
   `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `USER_ID` bigint(20) DEFAULT NULL,
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for discuss
+-- Table structure for comment_reply
 -- ----------------------------
-DROP TABLE IF EXISTS `discuss`;
-CREATE TABLE `discuss`  (
+DROP TABLE IF EXISTS `comment_reply`;
+CREATE TABLE `comment_reply`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
-  `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
-  `LABLE_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
-  `COLLECT_COUNT` int(255) DEFAULT NULL COMMENT '收藏数量',
-  `BROWSE_COUNT` int(255) DEFAULT NULL COMMENT '浏览数量',
-  `TYPE` int(1) DEFAULT NULL COMMENT '类型：1-问与答 2-博客 3-开源',
-  `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
-  `COMMENT_ID` bigint(20) DEFAULT NULL COMMENT '评论ID',
+  `REPLY_IDS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '@回复得人们',
+  `USER_ID` bigint(255) DEFAULT NULL COMMENT '用户id',
+  `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `CREATE_TIME` datetime(0) DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '问与答表Q & A' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for label
@@ -99,21 +93,57 @@ CREATE TABLE `label`  (
   `LABLE_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `PARENT_ID` bigint(20) DEFAULT 0,
   `SORT` int(255) DEFAULT NULL,
+  `STATUS` int(1) DEFAULT 1,
   `TYPE` int(1) DEFAULT NULL,
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of label
 -- ----------------------------
-INSERT INTO `label` VALUES (1, 'JAVA', 0, 0, 1, '2017-10-03 14:44:03', NULL);
-INSERT INTO `label` VALUES (2, '多线程', 1, 1, 1, '2017-10-03 14:44:07', NULL);
-INSERT INTO `label` VALUES (3, 'spring', 0, 0, 1, '2017-10-03 15:42:46', '2017-10-03 15:43:22');
-INSERT INTO `label` VALUES (5, 'springboot', 3, 1, 1, '2017-10-03 15:43:22', NULL);
-INSERT INTO `label` VALUES (6, 'springmvc', 3, 2, 1, '2017-10-10 15:47:48', NULL);
-INSERT INTO `label` VALUES (7, 'springdata', 3, 3, 1, '2017-10-10 15:48:12', NULL);
+INSERT INTO `label` VALUES (1, 'JAVA', 0, 0, 1, 1, '2017-10-03 14:44:03', NULL);
+INSERT INTO `label` VALUES (2, '多线程', 1, 1, 1, 1, '2017-10-03 14:44:07', NULL);
+INSERT INTO `label` VALUES (3, 'spring', 0, 0, 1, 1, '2017-10-03 15:42:46', '2017-10-03 15:43:22');
+INSERT INTO `label` VALUES (5, 'springboot', 3, 1, 1, 1, '2017-10-03 15:43:22', NULL);
+INSERT INTO `label` VALUES (6, 'springmvc', 3, 2, 1, 1, '2017-10-10 15:47:48', NULL);
+INSERT INTO `label` VALUES (7, 'springdata', 3, 3, 1, 1, '2017-10-10 15:48:12', NULL);
+INSERT INTO `label` VALUES (8, '创意', 0, 0, 1, 3, '2017-10-11 10:39:16', NULL);
+INSERT INTO `label` VALUES (9, '分享创造', 8, 1, 1, 3, '2017-10-11 10:39:49', NULL);
+INSERT INTO `label` VALUES (10, '设计', 8, 1, 1, 3, '2017-10-11 10:40:19', NULL);
+INSERT INTO `label` VALUES (11, '奇思妙想', 8, 1, 1, 3, '2017-10-11 10:40:23', NULL);
+INSERT INTO `label` VALUES (12, '问与答', 0, 0, 1, 3, '2017-10-11 10:43:15', NULL);
+INSERT INTO `label` VALUES (13, '技术', 0, 0, 1, 3, '2017-10-11 10:43:18', NULL);
+INSERT INTO `label` VALUES (14, '好玩', 0, 0, 1, 3, '2017-10-11 10:43:21', NULL);
+INSERT INTO `label` VALUES (15, '吐槽', 0, 0, 1, 3, '2017-10-11 10:43:23', NULL);
+INSERT INTO `label` VALUES (16, '酷工作', 0, 0, 1, 3, '2017-10-11 10:43:25', NULL);
+INSERT INTO `label` VALUES (17, '城市', 0, 0, 1, 3, '2017-10-11 10:43:28', NULL);
+INSERT INTO `label` VALUES (18, '交易', 0, 0, 1, 3, '2017-10-11 10:43:30', NULL);
+INSERT INTO `label` VALUES (19, '最热', 0, 0, 1, 3, '2017-10-11 10:43:32', NULL);
+INSERT INTO `label` VALUES (20, '问与答', 12, 1, 1, 3, '2017-10-11 10:49:52', NULL);
+INSERT INTO `label` VALUES (21, '程序员', 13, 1, 1, 3, '2017-10-11 10:49:54', NULL);
+INSERT INTO `label` VALUES (22, 'python', 13, 2, 1, 3, '2017-10-11 10:49:59', NULL);
+INSERT INTO `label` VALUES (23, 'android', 13, 3, 1, 3, '2017-10-11 10:50:15', NULL);
+INSERT INTO `label` VALUES (24, 'Linux', 13, 4, 1, 3, '2017-10-11 10:50:18', NULL);
+INSERT INTO `label` VALUES (25, '分享发现', 14, 1, 1, 3, '2017-10-11 10:50:20', NULL);
+INSERT INTO `label` VALUES (26, '电子游戏', 14, 2, 1, 3, '2017-10-11 10:50:23', NULL);
+INSERT INTO `label` VALUES (27, '电影', 14, 3, 1, 3, '2017-10-11 10:50:25', NULL);
+INSERT INTO `label` VALUES (28, '旅游', 14, 4, 1, 3, '2017-10-11 10:50:30', NULL);
+INSERT INTO `label` VALUES (29, '吐槽', 15, 1, 1, 3, '2017-10-11 10:50:33', NULL);
+INSERT INTO `label` VALUES (30, '酷工作', 16, 1, 1, 3, '2017-10-11 10:50:35', NULL);
+INSERT INTO `label` VALUES (31, '求职', 16, 2, 1, 3, '2017-10-11 10:50:38', NULL);
+INSERT INTO `label` VALUES (32, '职场话题', 16, 3, 1, 3, '2017-10-11 10:50:41', NULL);
+INSERT INTO `label` VALUES (33, '外包', 16, 4, 1, 3, '2017-10-11 10:50:43', NULL);
+INSERT INTO `label` VALUES (34, '上海', 17, 1, 1, 3, '2017-10-11 10:50:46', NULL);
+INSERT INTO `label` VALUES (35, '北京', 17, 2, 1, 3, '2017-10-11 10:50:50', NULL);
+INSERT INTO `label` VALUES (36, '深圳', 17, 3, 1, 3, '2017-10-11 10:50:53', NULL);
+INSERT INTO `label` VALUES (37, '成都', 17, 4, 1, 3, '2017-10-11 10:50:57', NULL);
+INSERT INTO `label` VALUES (38, '杭州', 17, 5, 1, 3, '2017-10-11 10:51:00', NULL);
+INSERT INTO `label` VALUES (39, '二手交易', 18, 1, 1, 3, '2017-10-11 10:51:03', NULL);
+INSERT INTO `label` VALUES (40, '物换物', 18, 2, 1, 3, '2017-10-11 10:51:06', NULL);
+INSERT INTO `label` VALUES (41, '免费赠送', 18, 3, 1, 3, '2017-10-11 10:51:09', NULL);
+INSERT INTO `label` VALUES (42, '团购', 18, 4, 1, 3, '2017-10-11 10:51:12', NULL);
 
 -- ----------------------------
 -- Table structure for menu
@@ -167,17 +197,22 @@ INSERT INTO `menu` VALUES (46, '用户管理', 'menu', '/user/userPage', 'user:m
 INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'user:index', 46, NULL, 1, '2017-10-05 14:30:17', NULL);
 
 -- ----------------------------
--- Table structure for reply
+-- Table structure for question_answers
 -- ----------------------------
-DROP TABLE IF EXISTS `reply`;
-CREATE TABLE `reply`  (
+DROP TABLE IF EXISTS `question_answers`;
+CREATE TABLE `question_answers`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `REPLY_ID` bigint(255) DEFAULT NULL COMMENT '回复人ID',
-  `USER_IDS` varchar(0) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '@回复得人们',
-  `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
+  `LABLE_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
+  `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
+  `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
+  `STATUS` int(1) DEFAULT NULL COMMENT '状态',
+  `COLLECT_COUNT` int(255) DEFAULT NULL COMMENT '收藏数量',
+  `BROWSE_COUNT` int(255) DEFAULT NULL COMMENT '浏览数量',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '问与答表Q & A' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for role

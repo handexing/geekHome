@@ -13,7 +13,6 @@ import com.geekhome.entity.Admin;
  * @date 2017年9月14日 下午5:14:07 
  * @version V1.0
  */
-
 public interface AdminDao extends JpaRepository<Admin, Long>{
 
 	Admin findAdminByUserName(String userName);

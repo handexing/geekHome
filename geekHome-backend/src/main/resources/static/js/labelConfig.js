@@ -28,7 +28,7 @@ function labelConfig(){
 				var result =  data.data;
 				var htmlContent="";
 				
-				htmlContent+="<tr><th>名称</th><th>类型</th><th>排序</th><th>创建时间</th><th>操作</th></tr>";
+				htmlContent+="<tr><th>名称</th><th>类型</th><th>排序</th><th>状态</th><th>创建时间</th><th>操作</th></tr>";
 				
 				$.each(result, function(index, itemobj) {
 					var id=result[index].id;  
@@ -37,6 +37,7 @@ function labelConfig(){
 					var createTime=result[index].createTime;
 					var parentId=result[index].parentId;
 					var sort=result[index].sort;
+					var status=result[index].status;
 					
 					if(parentId == 0){
 						htmlContent += "<tr class=\"treegrid-"+id+"\" id="+id+">";
@@ -46,9 +47,14 @@ function labelConfig(){
 							} else if(type == 2){
 								htmlContent += "<td><span class=\"label label-secondary radius\">开源</span></td>";
 							} else if(type == 3){
-								htmlContent += "<td><span class=\"label label-success radius\">暂无</span></td>";
+								htmlContent += "<td><span class=\"label label-success radius\">问与答</span></td>";
 							}
 							htmlContent += "<td><input class=\"input-text\" type=\"text\" onclick=\"label_config.updateSort()\" data-id="+id+" name=\"sort\" value="+sort+" /></td>";
+							if(status == 1){
+								htmlContent += "<td><span class=\"label label-primary radius\">正常</span></td>";
+							} else if(status == 0){
+								htmlContent += "<td><span class=\"label label-warning radius\">冻结</span></td>";
+							}
 							htmlContent += "<td>"+createTime+"</td>";
 							htmlContent +="<td>" +
 											"<input class=\"btn btn-primary-outline radius\" type=\"button\" onclick=\"label_config.addChildLabel("+id+")\" value=\"添加子标签\">&nbsp;&nbsp;" +
@@ -64,9 +70,14 @@ function labelConfig(){
 							} else if(type == 2){
 								htmlContent += "<td><span class=\"label label-secondary radius\">开源</span></td>";
 							} else if(type == 3){
-								htmlContent += "<td><span class=\"label label-success radius\">暂无</span></td>";
+								htmlContent += "<td><span class=\"label label-success radius\">问与答</span></td>";
 							}
 							htmlContent += "<td><input class=\"input-text\" type=\"text\" onclick=\"label_config.updateSort()\" data-id="+id+" name=\"sort\" value="+sort+" /></td>";
+							if(status == 1){
+								htmlContent += "<td><span class=\"label label-primary radius\">正常</span></td>";
+							} else if(status == 0){
+								htmlContent += "<td><span class=\"label label-warning radius\">冻结</span></td>";
+							}
 							htmlContent += "<td>"+createTime+"</td>";
 							htmlContent +="<td>" +
 											"<input class=\"btn btn-primary-outline radius\" type=\"button\" onclick=\"label_config.addChildLabel("+id+")\" value=\"添加子标签\">&nbsp;&nbsp;" +

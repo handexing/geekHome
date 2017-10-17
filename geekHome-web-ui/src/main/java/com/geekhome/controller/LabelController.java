@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
+import com.geekhome.common.vo.TreeView;
 import com.geekhome.entity.Label;
+import com.geekhome.entity.dao.LabelDao;
 import com.geekhome.entity.service.LabelService;
 
 @RestController
@@ -23,31 +25,85 @@ public class LabelController {
 
 	@Autowired
 	LabelService labelService;
+	@Autowired
+	LabelDao labelDao;
 
 	@RequestMapping(value = "/labelList")
 	@CrossOrigin
-	public ExecuteResult<List<Label>> labelList() {
+	public ExecuteResult<List<Label>> labelList(Integer type) {
 		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
-			ArrayList<Label> labelLists = new ArrayList<>();
-			List<Label> labels = labelService.getChildLabelList(labelLists, 0L);
-			
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, type);
 			List<Label> childs = null;
 			for (int i = 0; i < labels.size(); i++) {
 				Long id = labels.get(i).getId();
-				if(labels.get(i).getParentId()==0) {
+				if (labels.get(i).getParentId() == 0) {
 					childs = new ArrayList<>();
 					for (int j = 0; j < labels.size(); j++) {
 						Long parentId = labels.get(j).getParentId();
-						if(id == parentId) {
+						if (id == parentId) {
 							childs.add(labels.get(j));
 						}
 					}
 					labels.get(i).setChilds(childs);
 				}
 			}
-			
+
 			result.setData(labels);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/labelTree")
+	@CrossOrigin
+	public ExecuteResult<List<TreeView>> labelTree(Integer type) {
+		final ExecuteResult<List<TreeView>> result = new ExecuteResult<>();
+		try {
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, type);
+			List<TreeView> treeList = new ArrayList<>();
+			List<TreeView> nodes = null;
+//			List<TreeView> nodes = null;
+
+			for (int i = 0; i < labels.size(); i++) {
+				
+				TreeView tree = new TreeView();
+				Long id = labels.get(i).getId();
+				String lableName = labels.get(i).getLableName();
+				
+				if (labels.get(i).getParentId() == 0) {
+					nodes = new ArrayList<>();
+					tree.setText(lableName);
+					tree.setLabelId(id);
+					tree.setSelectedIcon("");
+					tree.setIcon("");
+					
+					for (int j = 0; j < labels.size(); j++) {
+						
+						TreeView childsTree = new TreeView();
+						Long childId = labels.get(j).getParentId();
+						Long parentId = labels.get(j).getParentId();
+						String name = labels.get(j).getLableName();
+						
+						if (id == parentId) {
+							childsTree.setText(name);
+							childsTree.setLabelId(childId);
+							childsTree.setSelectedIcon("");
+							childsTree.setIcon("");
+							nodes.add(childsTree);
+						}
+					}
+					tree.setNodes(nodes);
+					treeList.add(tree);
+				}
+			}
+
+			result.setData(treeList);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

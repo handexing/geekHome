@@ -25,8 +25,27 @@ import com.geekhome.common.utils.CustomDateSerializer;
 @Table(name = "LABEL")
 public class Label implements Serializable {
 
+	/**
+	 * 标签
+	 */
 	public static final Integer LABLE = 1;
+	/**
+	 * 开源
+	 */
 	public static final Integer OPEN_SOURCE = 2;
+	/**
+	 * 问与答
+	 */
+	public static final Integer Q_A = 3;
+	
+	/**
+	 * 默认开启
+	 */
+	public static final Integer LABEL_STATE_DEFAULT = 1;
+	/**
+	 * 关闭
+	 */
+	public static final Integer LABEL_STATE_CLOSE = 0;
 
 	private static final long serialVersionUID = 2159291991132749505L;
 	@Id
@@ -41,6 +60,8 @@ public class Label implements Serializable {
 	private Integer sort;
 	@Column(name = "TYPE")
 	private Integer type;
+	@Column(name = "STATUS")
+	private Integer status;
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
@@ -50,6 +71,14 @@ public class Label implements Serializable {
 
 	@Transient
 	private List<Label> childs;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public List<Label> getChilds() {
 		return childs;
