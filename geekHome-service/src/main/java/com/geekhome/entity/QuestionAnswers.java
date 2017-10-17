@@ -24,7 +24,7 @@ import com.geekhome.common.utils.CustomDateSerializer;
 public class QuestionAnswers implements Serializable {
 
 	private static final long serialVersionUID = 562199224417013272L;
-	
+
 	/**
 	 * 默认开启
 	 */
@@ -34,14 +34,24 @@ public class QuestionAnswers implements Serializable {
 	 */
 	public static final Integer QUESTION_ANSWERS_STATE_CLOSE = 0;
 
+	/**
+	 * 草稿
+	 */
+	public static final Integer QUESTION_ANSWERS_STATE_DRAFT = 2;
+
+	/**
+	 * 发布
+	 */
+	public static final Integer QUESTION_ANSWERS_STATE_RELEASE = 3;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
 	@Column(name = "USER_ID")
 	private Long userId;
-	@Column(name = "LABLE_ID")
-	private Long lableId;
+	@Column(name = "LABEL_ID")
+	private Long labelId;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "CONTENT")
@@ -73,14 +83,6 @@ public class QuestionAnswers implements Serializable {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
-	}
-
-	public Long getLableId() {
-		return lableId;
-	}
-
-	public void setLableId(Long lableId) {
-		this.lableId = lableId;
 	}
 
 	public String getTitle() {
@@ -143,12 +145,20 @@ public class QuestionAnswers implements Serializable {
 		this.status = status;
 	}
 
-	public QuestionAnswers(Long id, Long userId, Long lableId, String title, String content, Integer status,
+	public Long getLabelId() {
+		return labelId;
+	}
+
+	public void setLabelId(Long labelId) {
+		this.labelId = labelId;
+	}
+
+	public QuestionAnswers(Long id, Long userId, Long labelId, String title, String content, Integer status,
 			Integer collectCount, Integer browseCount, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
 		this.userId = userId;
-		this.lableId = lableId;
+		this.labelId = labelId;
 		this.title = title;
 		this.content = content;
 		this.status = status;
@@ -160,7 +170,7 @@ public class QuestionAnswers implements Serializable {
 
 	@Override
 	public String toString() {
-		return "QuestionAnswers [id=" + id + ", userId=" + userId + ", lableId=" + lableId + ", title=" + title
+		return "QuestionAnswers [id=" + id + ", userId=" + userId + ", labelId=" + labelId + ", title=" + title
 				+ ", content=" + content + ", status=" + status + ", collectCount=" + collectCount + ", browseCount="
 				+ browseCount + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
