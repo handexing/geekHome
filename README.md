@@ -38,6 +38,10 @@
 
 ## 项目预览
 
+```
+http://39.106.56.107/
+```
+
 ![后台界面](https://github.com/handexing/geekHome/raw/master/doc/ht.png)
 
 
