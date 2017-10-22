@@ -2,7 +2,7 @@
 
 ## 项目介绍
 
-极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。
+极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。项目预览[极客屋](http://www.geekuser.cn/)
 
 ## 项目涉及
 - springboot
@@ -40,7 +40,13 @@
 
 ![后台界面](https://github.com/handexing/geekHome/raw/master/doc/ht.png)
 
+## 鸣谢
 
+## 关于
+- 本项目完全开源
+- 欢迎打赏，以资鼓励
+
+![打赏](https://github.com/handexing/geek_page/raw/master/img/pay.png)
 
 > 讨论群：49422384
 > 觉得不错的朋友可以点下star,watch,fork也算是对我的鼓励了。

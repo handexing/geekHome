@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geekhome.common.utils.CustomDateSerializer;
@@ -19,6 +24,18 @@ import com.geekhome.common.utils.CustomDateSerializer;
  * @date 2017年10月12日 下午2:44:24
  * @version V1.0
  */
+@SqlResultSetMappings({
+
+		@SqlResultSetMapping(name = "getQuestionAnswersList", classes = @ConstructorResult(targetClass = QuestionAnswers.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "userId", type = Long.class),
+				@ColumnResult(name = "labelId", type = Long.class), @ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class),
+				@ColumnResult(name = "labelName", type = String.class),
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class) })) })
 @Entity
 @Table(name = "QUESTION_ANSWERS")
 public class QuestionAnswers implements Serializable {
@@ -68,6 +85,29 @@ public class QuestionAnswers implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
+
+	@Transient
+	private String labelName;
+	@Transient
+	private String userName;
+	@Transient
+	private String headImgUrl;
+
+	public QuestionAnswers(Long id, Long userId, Long labelId, String title, Integer collectCount, Integer browseCount,
+			Date createTime, Date updateTime, String labelName, String userName, String headImgUrl) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.labelId = labelId;
+		this.title = title;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.labelName = labelName;
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+	}
 
 	public Long getId() {
 		return id;
@@ -151,6 +191,30 @@ public class QuestionAnswers implements Serializable {
 
 	public void setLabelId(Long labelId) {
 		this.labelId = labelId;
+	}
+
+	public String getLabelName() {
+		return labelName;
+	}
+
+	public void setLabelName(String labelName) {
+		this.labelName = labelName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
 	}
 
 	public QuestionAnswers(Long id, Long userId, Long labelId, String title, String content, Integer status,
