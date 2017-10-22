@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.MarkdownUploadImage;
+import com.geekhome.common.vo.PageableResultJson;
 import com.geekhome.entity.QuestionAnswers;
+import com.geekhome.entity.dao.QuestionAnswersDao;
 import com.geekhome.entity.service.QuestionAnswersService;
 
 @RestController
@@ -34,6 +37,8 @@ public class QuestionAnswersController {
 
 	@Autowired
 	QuestionAnswersService questionAnswersService;
+	@Autowired
+	QuestionAnswersDao questionAnswersDao;
 
 	@RequestMapping(value = "/uploadImage")
 	@CrossOrigin
@@ -68,6 +73,19 @@ public class QuestionAnswersController {
 			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
 		}
 		return result;
+	}
+	
+
+	@RequestMapping("questionAnswersList")
+	@CrossOrigin
+	public PageableResultJson questionAnswersList(@RequestParam(value = "page") Integer page, Long labelId) {
+		PageableResultJson tableJson = new PageableResultJson();
+		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersDaoLabelId(labelId, page,10);
+		tableJson.setData(pageData.getContent());
+		tableJson.setPageSize(10);
+		System.out.println(pageData.getTotalPages());
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
+		return tableJson;
 	}
 
 }
