@@ -8,6 +8,6 @@ public class PageUtil {
 	 * @return 返回页码
 	 */
 	public static int calcPage(int page) {
-		return page <= 1 ? 0 : page - 1;
+		return page < 1 ? 0 : page;
 	}
 }

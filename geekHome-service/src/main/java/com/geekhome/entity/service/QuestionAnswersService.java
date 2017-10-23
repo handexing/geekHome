@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.geekhome.common.utils.PageUtil;
@@ -39,9 +38,9 @@ public class QuestionAnswersService {
 	@SuppressWarnings("unchecked")
 	public Page<QuestionAnswers> findQuestionAnswersDaoLabelId(Long labelId, Integer page, int rows) {
 		final String sql = "SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,"
-				+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl"
+				+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID) as commentCnt"
 				+ " FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID"
-				+ " LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE LABEL_ID =:labelId ORDER BY q.CREATE_TIME DESC";
+				+ " LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE LABEL_ID IN(SELECT ID FROM LABEL WHERE PARENT_ID=:labelId UNION SELECT "+labelId+") ORDER BY q.CREATE_TIME DESC";
 
 		final int firstRecord = PageUtil.calcPage(page) * rows;
 		final List<QuestionAnswers> list = entityManager.createNativeQuery(sql, "getQuestionAnswersList")

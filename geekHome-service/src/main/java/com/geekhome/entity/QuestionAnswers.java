@@ -35,7 +35,8 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "updateTime", type = Date.class),
 				@ColumnResult(name = "labelName", type = String.class),
 				@ColumnResult(name = "userName", type = String.class),
-				@ColumnResult(name = "headImgUrl", type = String.class) })) })
+				@ColumnResult(name = "headImgUrl", type = String.class),
+				@ColumnResult(name = "commentCnt", type = Integer.class)})) })
 @Entity
 @Table(name = "QUESTION_ANSWERS")
 public class QuestionAnswers implements Serializable {
@@ -92,9 +93,11 @@ public class QuestionAnswers implements Serializable {
 	private String userName;
 	@Transient
 	private String headImgUrl;
+	@Transient
+	private Integer commentCnt;
 
 	public QuestionAnswers(Long id, Long userId, Long labelId, String title, Integer collectCount, Integer browseCount,
-			Date createTime, Date updateTime, String labelName, String userName, String headImgUrl) {
+			Date createTime, Date updateTime, String labelName, String userName, String headImgUrl,Integer commentCnt) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -107,6 +110,15 @@ public class QuestionAnswers implements Serializable {
 		this.labelName = labelName;
 		this.userName = userName;
 		this.headImgUrl = headImgUrl;
+		this.commentCnt = commentCnt;
+	}
+	
+	public Integer getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(Integer commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 
 	public Long getId() {
