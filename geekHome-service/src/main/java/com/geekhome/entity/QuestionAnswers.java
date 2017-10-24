@@ -36,7 +36,21 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "labelName", type = String.class),
 				@ColumnResult(name = "userName", type = String.class),
 				@ColumnResult(name = "headImgUrl", type = String.class),
-				@ColumnResult(name = "commentCnt", type = Integer.class)})) })
+				@ColumnResult(name = "commentCnt", type = Integer.class)})), 
+		
+		@SqlResultSetMapping(name = "getQuestionAnswersById", classes = @ConstructorResult(targetClass = QuestionAnswers.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), 
+				@ColumnResult(name = "userId", type = Long.class),
+				@ColumnResult(name = "labelId", type = Long.class), 
+				@ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "content", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class),
+				@ColumnResult(name = "labelName", type = String.class),
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class)}))})
 @Entity
 @Table(name = "QUESTION_ANSWERS")
 public class QuestionAnswers implements Serializable {
@@ -113,6 +127,23 @@ public class QuestionAnswers implements Serializable {
 		this.commentCnt = commentCnt;
 	}
 	
+	public QuestionAnswers(Long id, Long userId, Long labelId, String title, String content, Integer collectCount,
+			Integer browseCount, Date createTime, Date updateTime, String labelName, String userName, String headImgUrl) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.labelId = labelId;
+		this.title = title;
+		this.content = content;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.labelName = labelName;
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+	}
+
 	public Integer getCommentCnt() {
 		return commentCnt;
 	}

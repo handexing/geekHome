@@ -75,6 +75,40 @@ public class QuestionAnswersController {
 		return result;
 	}
 	
+	@RequestMapping("getQuestionAnswersById")
+	@CrossOrigin
+	public ExecuteResult<QuestionAnswers> getQuestionAnswersById(Long id) {
+		final ExecuteResult<QuestionAnswers> result = new ExecuteResult<>();
+		try {
+			QuestionAnswers questionAnswers = questionAnswersService.getQuestionAnswersById(id);
+			result.setData(questionAnswers);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("addQuestionAnswersBrowseCnt")
+	@CrossOrigin
+	public ExecuteResult<Boolean> addQuestionAnswersBrowseCnt(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			QuestionAnswers answers = questionAnswersDao.findOne(id);
+			answers.setBrowseCount(answers.getBrowseCount()+1);
+			questionAnswersDao.save(answers);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 
 	@RequestMapping("questionAnswersList")
 	@CrossOrigin
@@ -83,7 +117,6 @@ public class QuestionAnswersController {
 		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersDaoLabelId(labelId, page,10);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
-		System.out.println(pageData.getTotalPages());
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
