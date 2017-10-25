@@ -86,7 +86,7 @@ public class LabelController {
 					for (int j = 0; j < labels.size(); j++) {
 						
 						TreeView childsTree = new TreeView();
-						Long childId = labels.get(j).getParentId();
+						Long childId = labels.get(j).getId();
 						Long parentId = labels.get(j).getParentId();
 						String name = labels.get(j).getLableName();
 						
