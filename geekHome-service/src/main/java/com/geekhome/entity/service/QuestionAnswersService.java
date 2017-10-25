@@ -36,7 +36,7 @@ public class QuestionAnswersService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Page<QuestionAnswers> findQuestionAnswersDaoLabelId(Long labelId, Integer page, int rows) {
+	public Page<QuestionAnswers> findQuestionAnswersByLabelIdList(Long labelId, Integer page, int rows) {
 		final String sql = "SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,"
 				+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID) as commentCnt"
 				+ " FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID"
@@ -46,7 +46,7 @@ public class QuestionAnswersService {
 		final int firstRecord = PageUtil.calcPage(page) * rows;
 		final List<QuestionAnswers> list = entityManager.createNativeQuery(sql, "getQuestionAnswersList")
 				.setParameter("labelId", labelId).setFirstResult(firstRecord).setMaxResults(rows).getResultList();
-		final int total = questionAnswersDao.getQuestionAnswersByLabelCnt(labelId);
+		final int total = questionAnswersDao.getQuestionAnswersByLabelIdCnt(labelId);
 		Pageable pageable = new PageRequest(page, rows);
 		final Page<QuestionAnswers> pages = new PageImpl<>(list, pageable, total);
 
