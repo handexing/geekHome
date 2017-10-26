@@ -2,6 +2,7 @@ package com.geekhome.entity.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public class UserService {
 				String password = PasswordUtil.createCustomPwd(user.getPassword(),user.getUserName() + User.SALT);
 				user.setPassword(password);
 				user.setCreateTime(new Date());
-				user.setHeadImgUrl("img/logo.png");
+				Random random=new Random();
+				int result=random.nextInt(44);
+				user.setHeadImgUrl("img/"+result+".png");
 				user.setState(User.USER_STATE_DEFAULT);
 				user.setBrief("用户很懒，什么都没说明....");
 				user.setSex(User.USER_SEX_DEFAULT);
@@ -47,5 +50,5 @@ public class UserService {
 			}
 		}
 	}
-
+	
 }

@@ -136,9 +136,9 @@ public class QuestionAnswersController {
 
 	@RequestMapping("questionAnswersList")
 	@CrossOrigin
-	public PageableResultJson questionAnswersList(@RequestParam(value = "page") Integer page, Long labelId) {
+	public PageableResultJson questionAnswersList(@RequestParam(value = "page") Integer page,Integer rows, Long labelId) {
 		PageableResultJson tableJson = new PageableResultJson();
-		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersByLabelIdList(labelId, page,10);
+		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersByLabelIdList(labelId, page,rows);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
@@ -147,9 +147,9 @@ public class QuestionAnswersController {
 	
 	@RequestMapping("commentList")
 	@CrossOrigin
-	public PageableResultJson commentList(@RequestParam(value = "page") Integer page, Long id) {
+	public PageableResultJson commentList(@RequestParam(value = "page") Integer page,Integer rows, Long id) {
 		PageableResultJson tableJson = new PageableResultJson();
-		Page<Comment> pageData = commentService.findCommentByLabelIdList(id, page,10);
+		Page<Comment> pageData = commentService.findCommentByLabelIdList(id, page,rows);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
