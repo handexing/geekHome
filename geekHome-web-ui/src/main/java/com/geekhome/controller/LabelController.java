@@ -34,21 +34,7 @@ public class LabelController {
 		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
 			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, type);
-			List<Label> childs = null;
-			for (int i = 0; i < labels.size(); i++) {
-				Long id = labels.get(i).getId();
-				if (labels.get(i).getParentId() == 0) {
-					childs = new ArrayList<>();
-					for (int j = 0; j < labels.size(); j++) {
-						Long parentId = labels.get(j).getParentId();
-						if (id == parentId) {
-							childs.add(labels.get(j));
-						}
-					}
-					labels.get(i).setChilds(childs);
-				}
-			}
-
+			assembleLabel(labels);
 			result.setData(labels);
 			result.setSuccess(true);
 		} catch (final Exception e) {
@@ -58,6 +44,41 @@ public class LabelController {
 			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/getAllLabel")
+	@CrossOrigin
+	public ExecuteResult<List<Label>> getAllLabel() {
+		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
+		try {
+			List<Label> labels = labelDao.findLabelByStatus(Label.LABEL_STATE_DEFAULT);
+			assembleLabel(labels);
+			result.setData(labels);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
+	private void assembleLabel(List<Label> labels) {
+		List<Label> childs = null;
+		for (int i = 0; i < labels.size(); i++) {
+			Long id = labels.get(i).getId();
+			if (labels.get(i).getParentId() == 0) {
+				childs = new ArrayList<>();
+				for (int j = 0; j < labels.size(); j++) {
+					Long parentId = labels.get(j).getParentId();
+					if (id == parentId) {
+						childs.add(labels.get(j));
+					}
+				}
+				labels.get(i).setChilds(childs);
+			}
+		}
 	}
 
 	@RequestMapping(value = "/labelTree")
