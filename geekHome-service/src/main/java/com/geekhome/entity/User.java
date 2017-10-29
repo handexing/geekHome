@@ -45,12 +45,12 @@ public class User implements Serializable {
 	 * 关闭
 	 */
 	public static final Integer USER_STATE_CLOSE = 0;
-	
+
 	/**
 	 * 盐
 	 */
 	public static final String SALT = "geekHome";
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
@@ -79,6 +79,46 @@ public class User implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
+	@Column(name = "COMPANY")
+	private String company;
+	@Column(name = "ADDRESS")
+	private String address;
+	@Column(name = "GIT_HUB_URL")
+	private String gitHubUrl;
+	@Column(name = "WEB_SITE_URL")
+	private String webSiteUrl;
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getGitHubUrl() {
+		return gitHubUrl;
+	}
+
+	public void setGitHubUrl(String gitHubUrl) {
+		this.gitHubUrl = gitHubUrl;
+	}
+
+	public String getWebSiteUrl() {
+		return webSiteUrl;
+	}
+
+	public void setWebSiteUrl(String webSiteUrl) {
+		this.webSiteUrl = webSiteUrl;
+	}
 
 	public String getCredentialsSalt() {
 		return userName + "geekHome";

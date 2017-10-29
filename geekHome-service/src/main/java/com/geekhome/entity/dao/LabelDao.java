@@ -22,4 +22,6 @@ public interface LabelDao extends JpaRepository<Label, Long>{
 	int updateOrder(@Param("id") Long id, @Param("sort") Integer sort);
 
 	public List<Label> findLabelByStatusAndType(Integer status, Integer type);
+
+	public List<Label> findLabelByStatus(Integer labelStateDefault);
 }
