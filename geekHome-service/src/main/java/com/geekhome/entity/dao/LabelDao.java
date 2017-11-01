@@ -29,4 +29,9 @@ public interface LabelDao extends JpaRepository<Label, Long>{
 	public List<Label> findLabelByTypeAndLableName(Integer type, String lableName);
 
 	public List<Label> findLabelByIdNotAndTypeAndLableName(Long id, Integer type, String lableName);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM LABEL WHERE STATUS=:status AND TYPE=:type AND USER_ID=:userId ORDER BY SORT ASC,CREATE_TIME DESC")
+	public List<Label> findLabelByStatusAndTypeAndUserId(@Param("status")Integer status, @Param("type")Integer type,  @Param("userId")Long userId);
+
+
 }

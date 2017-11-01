@@ -63,6 +63,8 @@ public class Comment implements Serializable {
 	private Long themeId;
 	@Column(name = "CONTENT")
 	private String content;
+	@Column(name = "TYPE")
+	private Integer type;
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
@@ -82,6 +84,14 @@ public class Comment implements Serializable {
 		this.createTime = createTime;
 		this.userName = userName;
 		this.headImgUrl = headImgUrl;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	public String getUserName() {

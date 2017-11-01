@@ -32,10 +32,8 @@ public class OpenSourceContent implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name = "USER_ID")
-	private Long userId;
-	@Column(name = "OPEN_SOURCE_LABEL_ID")
-	private Long openSourceLabelId;
+	@Column(name = "LABEL_ID")
+	private Long labelId;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "CONTENT")
@@ -81,20 +79,12 @@ public class OpenSourceContent implements Serializable {
 		this.id = id;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getLabelId() {
+		return labelId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Long getOpenSourceLabelId() {
-		return openSourceLabelId;
-	}
-
-	public void setOpenSourceLabelId(Long openSourceLabelId) {
-		this.openSourceLabelId = openSourceLabelId;
+	public void setLabelId(Long labelId) {
+		this.labelId = labelId;
 	}
 
 	public String getTitle() {
@@ -158,13 +148,11 @@ public class OpenSourceContent implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OpenSourceContent(Long id, Long userId, Long openSourceLabelId, String title, String content,
-			String subtitle, String bannerImg, Integer status, Integer collectCount, Integer browseCount,
-			Date createTime, Date updateTime) {
+	public OpenSourceContent(Long id, Long labelId, String title, String content, String subtitle, String bannerImg,
+			Integer status, Integer collectCount, Integer browseCount, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.openSourceLabelId = openSourceLabelId;
+		this.labelId = labelId;
 		this.title = title;
 		this.content = content;
 		this.subtitle = subtitle;
@@ -178,10 +166,12 @@ public class OpenSourceContent implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OpenSourceContent [id=" + id + ", userId=" + userId + ", openSourceLabelId=" + openSourceLabelId
-				+ ", title=" + title + ", content=" + content + ", subtitle=" + subtitle + ", bannerImg=" + bannerImg
-				+ ", status=" + status + ", collectCount=" + collectCount + ", browseCount=" + browseCount
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+		return "OpenSourceContent [id=" + id + ", labelId=" + labelId + ", title=" + title + ", content=" + content
+				+ ", subtitle=" + subtitle + ", bannerImg=" + bannerImg + ", status=" + status + ", collectCount="
+				+ collectCount + ", browseCount=" + browseCount + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + "]";
 	}
+
+	
 
 }

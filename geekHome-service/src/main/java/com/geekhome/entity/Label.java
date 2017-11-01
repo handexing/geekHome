@@ -37,6 +37,11 @@ public class Label implements Serializable {
 	 * 问与答
 	 */
 	public static final Integer Q_A = 3;
+	
+	/**
+	 * 博客
+	 */
+	public static final Integer BLOG = 4;
 
 	/**
 	 * 默认开启
@@ -62,6 +67,8 @@ public class Label implements Serializable {
 	private Integer type;
 	@Column(name = "STATUS")
 	private Integer status;
+	@Column(name = "USER_ID")
+	private Long userId;
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
@@ -71,6 +78,14 @@ public class Label implements Serializable {
 
 	@Transient
 	private List<Label> childs;
+	
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public Integer getStatus() {
 		return status;

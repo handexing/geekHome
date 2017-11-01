@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 01/11/2017 15:21:23
+ Date: 01/11/2017 17:11:17
 */
 
 SET NAMES utf8mb4;
@@ -84,6 +84,7 @@ CREATE TABLE `comment`  (
   `USER_ID` bigint(20) DEFAULT NULL,
   `THEME_ID` bigint(20) DEFAULT NULL COMMENT '主题ID，问与答，开源，博客',
   `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：2-开源 3-问与答 4-博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
@@ -91,30 +92,30 @@ CREATE TABLE `comment`  (
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES (1, 6, 1, '哇塞这么神奇!', '2017-10-17 14:25:04');
-INSERT INTO `comment` VALUES (2, 6, 23, '哇塞这么神奇!', '2017-10-25 20:42:24');
-INSERT INTO `comment` VALUES (3, 7, 23, ':relieved: :kissing_closed_eyes: :heart_eyes: :smirk: :smiley:', '2017-10-25 20:47:19');
-INSERT INTO `comment` VALUES (4, 8, 23, ':dizzy_face: :mask: :yum: :rage: :tired_face:', '2017-10-25 20:47:22');
-INSERT INTO `comment` VALUES (5, 9, 23, ':dash: :zzz: :yellow_heart: :alien: :cry: :sob:', '2017-10-25 20:47:24');
-INSERT INTO `comment` VALUES (6, 10, 23, ':pray: :shit: :poop: :sparkling_heart: :star2:', '2017-10-25 20:47:26');
-INSERT INTO `comment` VALUES (7, 11, 23, ':bowtie: :smile: :laughing: :blush: :smiley: :relaxed: :smirk:', '2017-10-25 20:47:30');
-INSERT INTO `comment` VALUES (8, 12, 23, ':stuck_out_tongue: :sleeping: :worried: :frowning: :anguished: :open_mouth: :grimacing: :confused: :hushed:', '2017-10-25 20:47:32');
-INSERT INTO `comment` VALUES (9, 13, 23, ':tw-1f170: :tw-1f17e: :tw-1f17f: :tw-1f191: :tw-1f192: :tw-1f0cf: :tw-1f004:', '2017-10-25 20:47:34');
-INSERT INTO `comment` VALUES (10, 14, 23, ':tw-1f30c: :tw-1f236: :tw-1f237: :tw-1f238: :tw-1f23a: :tw-1f250: :tw-1f300: :tw-1f302: :tw-1f305:', '2017-10-25 20:47:37');
-INSERT INTO `comment` VALUES (11, 15, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', '2017-10-25 20:47:40');
-INSERT INTO `comment` VALUES (12, 16, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', '2017-10-25 20:30:15');
-INSERT INTO `comment` VALUES (13, 5, 15, ':satisfied:这是一个测试', '2017-10-25 21:54:29');
-INSERT INTO `comment` VALUES (14, 5, 15, ':tw-1f435:这又是一个测试！！', '2017-10-25 21:55:32');
-INSERT INTO `comment` VALUES (15, 5, 15, ':joy:这还是一个测试。。。', '2017-10-25 21:57:16');
-INSERT INTO `comment` VALUES (16, 5, 7, '测试', '2017-10-26 13:36:04');
-INSERT INTO `comment` VALUES (17, 5, 7, ':flushed:', '2017-10-26 13:40:47');
-INSERT INTO `comment` VALUES (18, 5, 23, ':confused:', '2017-10-26 13:42:13');
-INSERT INTO `comment` VALUES (19, 5, 24, ':laughing:还没开发完', '2017-10-26 14:58:23');
-INSERT INTO `comment` VALUES (20, 5, 12, ':smirk:什么鬼', '2017-10-26 16:52:47');
-INSERT INTO `comment` VALUES (21, 5, 16, ':laughing:', '2017-10-26 17:08:03');
-INSERT INTO `comment` VALUES (22, 5, 11, ':laughing:', '2017-10-26 22:07:28');
-INSERT INTO `comment` VALUES (23, 5, 11, ':sob:', '2017-10-26 22:07:46');
-INSERT INTO `comment` VALUES (24, 5, 25, ':satisfied:老铁，厉害了', '2017-10-30 09:39:30');
+INSERT INTO `comment` VALUES (1, 6, 1, '哇塞这么神奇!', 3, '2017-10-17 14:25:04');
+INSERT INTO `comment` VALUES (2, 6, 23, '哇塞这么神奇!', 3, '2017-10-25 20:42:24');
+INSERT INTO `comment` VALUES (3, 7, 23, ':relieved: :kissing_closed_eyes: :heart_eyes: :smirk: :smiley:', 3, '2017-10-25 20:47:19');
+INSERT INTO `comment` VALUES (4, 8, 23, ':dizzy_face: :mask: :yum: :rage: :tired_face:', 3, '2017-10-25 20:47:22');
+INSERT INTO `comment` VALUES (5, 9, 23, ':dash: :zzz: :yellow_heart: :alien: :cry: :sob:', 3, '2017-10-25 20:47:24');
+INSERT INTO `comment` VALUES (6, 10, 23, ':pray: :shit: :poop: :sparkling_heart: :star2:', 3, '2017-10-25 20:47:26');
+INSERT INTO `comment` VALUES (7, 11, 23, ':bowtie: :smile: :laughing: :blush: :smiley: :relaxed: :smirk:', 3, '2017-10-25 20:47:30');
+INSERT INTO `comment` VALUES (8, 12, 23, ':stuck_out_tongue: :sleeping: :worried: :frowning: :anguished: :open_mouth: :grimacing: :confused: :hushed:', 3, '2017-10-25 20:47:32');
+INSERT INTO `comment` VALUES (9, 13, 23, ':tw-1f170: :tw-1f17e: :tw-1f17f: :tw-1f191: :tw-1f192: :tw-1f0cf: :tw-1f004:', 3, '2017-10-25 20:47:34');
+INSERT INTO `comment` VALUES (10, 14, 23, ':tw-1f30c: :tw-1f236: :tw-1f237: :tw-1f238: :tw-1f23a: :tw-1f250: :tw-1f300: :tw-1f302: :tw-1f305:', 3, '2017-10-25 20:47:37');
+INSERT INTO `comment` VALUES (11, 15, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 3, '2017-10-25 20:47:40');
+INSERT INTO `comment` VALUES (12, 16, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 3, '2017-10-25 20:30:15');
+INSERT INTO `comment` VALUES (13, 5, 15, ':satisfied:这是一个测试', 3, '2017-10-25 21:54:29');
+INSERT INTO `comment` VALUES (14, 5, 15, ':tw-1f435:这又是一个测试！！', 3, '2017-10-25 21:55:32');
+INSERT INTO `comment` VALUES (15, 5, 15, ':joy:这还是一个测试。。。', 3, '2017-10-25 21:57:16');
+INSERT INTO `comment` VALUES (16, 5, 7, '测试', 3, '2017-10-26 13:36:04');
+INSERT INTO `comment` VALUES (17, 5, 7, ':flushed:', 3, '2017-10-26 13:40:47');
+INSERT INTO `comment` VALUES (18, 5, 23, ':confused:', 3, '2017-10-26 13:42:13');
+INSERT INTO `comment` VALUES (19, 5, 24, ':laughing:还没开发完', 3, '2017-10-26 14:58:23');
+INSERT INTO `comment` VALUES (20, 5, 12, ':smirk:什么鬼', 3, '2017-10-26 16:52:47');
+INSERT INTO `comment` VALUES (21, 5, 16, ':laughing:', 3, '2017-10-26 17:08:03');
+INSERT INTO `comment` VALUES (22, 5, 11, ':laughing:', 3, '2017-10-26 22:07:28');
+INSERT INTO `comment` VALUES (23, 5, 11, ':sob:', 3, '2017-10-26 22:07:46');
+INSERT INTO `comment` VALUES (24, 5, 25, ':satisfied:老铁，厉害了', 3, '2017-10-30 09:39:30');
 
 -- ----------------------------
 -- Table structure for comment_reply
@@ -145,61 +146,66 @@ CREATE TABLE `label`  (
   `PARENT_ID` bigint(20) DEFAULT 0,
   `SORT` int(255) DEFAULT NULL,
   `STATUS` int(1) DEFAULT 1,
-  `TYPE` int(1) DEFAULT NULL,
+  `TYPE` int(1) DEFAULT NULL COMMENT '1：标签 2：开源 3：问与答 4：博客',
+  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户ID，主要用于博客类别',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of label
 -- ----------------------------
-INSERT INTO `label` VALUES (8, '创意', 0, 0, 1, 3, '2017-10-11 10:39:16', NULL);
-INSERT INTO `label` VALUES (9, '分享创造', 8, 1, 1, 3, '2017-10-11 10:39:49', NULL);
-INSERT INTO `label` VALUES (10, '设计', 8, 1, 1, 3, '2017-10-11 10:40:19', NULL);
-INSERT INTO `label` VALUES (11, '奇思妙想', 8, 1, 1, 3, '2017-10-11 10:40:23', NULL);
-INSERT INTO `label` VALUES (12, '问与答', 0, 0, 1, 3, '2017-10-11 10:43:15', NULL);
-INSERT INTO `label` VALUES (13, '技术', 0, 0, 1, 3, '2017-10-11 10:43:18', NULL);
-INSERT INTO `label` VALUES (14, '好玩', 0, 0, 1, 3, '2017-10-11 10:43:21', NULL);
-INSERT INTO `label` VALUES (15, '吐槽', 0, 0, 1, 3, '2017-10-11 10:43:23', NULL);
-INSERT INTO `label` VALUES (16, '酷工作', 0, 0, 1, 3, '2017-10-11 10:43:25', NULL);
-INSERT INTO `label` VALUES (17, '城市', 0, 0, 1, 3, '2017-10-11 10:43:28', NULL);
-INSERT INTO `label` VALUES (18, '交易', 0, 0, 1, 3, '2017-10-11 10:43:30', NULL);
-INSERT INTO `label` VALUES (20, '问与答', 12, 1, 1, 3, '2017-10-11 10:49:52', NULL);
-INSERT INTO `label` VALUES (21, '程序员', 13, 1, 1, 3, '2017-10-11 10:49:54', NULL);
-INSERT INTO `label` VALUES (22, 'python', 13, 2, 1, 3, '2017-10-11 10:49:59', NULL);
-INSERT INTO `label` VALUES (23, 'android', 13, 3, 1, 3, '2017-10-11 10:50:15', NULL);
-INSERT INTO `label` VALUES (24, 'Linux', 13, 4, 1, 3, '2017-10-11 10:50:18', NULL);
-INSERT INTO `label` VALUES (25, '分享发现', 14, 1, 1, 3, '2017-10-11 10:50:20', NULL);
-INSERT INTO `label` VALUES (26, '电子游戏', 14, 2, 1, 3, '2017-10-11 10:50:23', NULL);
-INSERT INTO `label` VALUES (27, '电影', 14, 3, 1, 3, '2017-10-11 10:50:25', NULL);
-INSERT INTO `label` VALUES (28, '旅游', 14, 4, 1, 3, '2017-10-11 10:50:30', NULL);
-INSERT INTO `label` VALUES (29, '吐槽', 15, 1, 1, 3, '2017-10-11 10:50:33', NULL);
-INSERT INTO `label` VALUES (30, '酷工作', 16, 1, 1, 3, '2017-10-11 10:50:35', NULL);
-INSERT INTO `label` VALUES (31, '求职', 16, 2, 1, 3, '2017-10-11 10:50:38', NULL);
-INSERT INTO `label` VALUES (32, '职场话题', 16, 3, 1, 3, '2017-10-11 10:50:41', NULL);
-INSERT INTO `label` VALUES (33, '外包', 16, 4, 1, 3, '2017-10-11 10:50:43', NULL);
-INSERT INTO `label` VALUES (34, '上海', 17, 1, 1, 3, '2017-10-11 10:50:46', NULL);
-INSERT INTO `label` VALUES (35, '北京', 17, 2, 1, 3, '2017-10-11 10:50:50', NULL);
-INSERT INTO `label` VALUES (36, '深圳', 17, 3, 1, 3, '2017-10-11 10:50:53', NULL);
-INSERT INTO `label` VALUES (37, '成都', 17, 4, 1, 3, '2017-10-11 10:50:57', NULL);
-INSERT INTO `label` VALUES (38, '杭州', 17, 5, 1, 3, '2017-10-11 10:51:00', NULL);
-INSERT INTO `label` VALUES (39, '二手交易', 18, 1, 1, 3, '2017-10-11 10:51:03', NULL);
-INSERT INTO `label` VALUES (40, '物换物', 18, 2, 1, 3, '2017-10-11 10:51:06', NULL);
-INSERT INTO `label` VALUES (41, '免费赠送', 18, 3, 1, 3, '2017-10-11 10:51:09', NULL);
-INSERT INTO `label` VALUES (42, '团购', 18, 4, 1, 3, '2017-10-11 10:51:12', NULL);
-INSERT INTO `label` VALUES (46, 'Java', 0, 0, 1, 1, '2017-11-01 13:28:44', '2017-11-01 13:29:51');
-INSERT INTO `label` VALUES (47, '线程', 46, 0, 1, 1, '2017-11-01 13:42:21', NULL);
-INSERT INTO `label` VALUES (48, 'java', 0, 0, 1, 2, '2017-11-01 15:03:43', NULL);
-INSERT INTO `label` VALUES (49, 'python', 0, 0, 1, 2, '2017-11-01 15:03:51', NULL);
-INSERT INTO `label` VALUES (50, 'javascript', 0, 0, 1, 2, '2017-11-01 15:04:01', NULL);
-INSERT INTO `label` VALUES (51, 'C#', 0, 0, 1, 2, '2017-11-01 15:04:08', NULL);
-INSERT INTO `label` VALUES (52, 'ruby', 0, 0, 1, 2, '2017-11-01 15:04:15', NULL);
-INSERT INTO `label` VALUES (53, 'go', 0, 0, 1, 2, '2017-11-01 15:04:20', NULL);
-INSERT INTO `label` VALUES (54, 'php', 0, 0, 1, 2, '2017-11-01 15:04:26', NULL);
-INSERT INTO `label` VALUES (55, 'node-js', 0, 0, 1, 2, '2017-11-01 15:04:35', '2017-11-01 15:04:44');
-INSERT INTO `label` VALUES (56, 'angular', 0, 0, 1, 2, '2017-11-01 15:04:56', NULL);
-INSERT INTO `label` VALUES (57, 'shell', 0, 0, 1, 2, '2017-11-01 15:05:01', NULL);
+INSERT INTO `label` VALUES (8, '创意', 0, 0, 1, 3, NULL, '2017-10-11 10:39:16', NULL);
+INSERT INTO `label` VALUES (9, '分享创造', 8, 1, 1, 3, NULL, '2017-10-11 10:39:49', NULL);
+INSERT INTO `label` VALUES (10, '设计', 8, 1, 1, 3, NULL, '2017-10-11 10:40:19', NULL);
+INSERT INTO `label` VALUES (11, '奇思妙想', 8, 1, 1, 3, NULL, '2017-10-11 10:40:23', NULL);
+INSERT INTO `label` VALUES (12, '问与答', 0, 0, 1, 3, NULL, '2017-10-11 10:43:15', NULL);
+INSERT INTO `label` VALUES (13, '技术', 0, 0, 1, 3, NULL, '2017-10-11 10:43:18', NULL);
+INSERT INTO `label` VALUES (14, '好玩', 0, 0, 1, 3, NULL, '2017-10-11 10:43:21', NULL);
+INSERT INTO `label` VALUES (15, '吐槽', 0, 0, 1, 3, NULL, '2017-10-11 10:43:23', NULL);
+INSERT INTO `label` VALUES (16, '酷工作', 0, 0, 1, 3, NULL, '2017-10-11 10:43:25', NULL);
+INSERT INTO `label` VALUES (17, '城市', 0, 0, 1, 3, NULL, '2017-10-11 10:43:28', NULL);
+INSERT INTO `label` VALUES (18, '交易', 0, 0, 1, 3, NULL, '2017-10-11 10:43:30', NULL);
+INSERT INTO `label` VALUES (20, '问与答', 12, 1, 1, 3, NULL, '2017-10-11 10:49:52', NULL);
+INSERT INTO `label` VALUES (21, '程序员', 13, 1, 1, 3, NULL, '2017-10-11 10:49:54', NULL);
+INSERT INTO `label` VALUES (22, 'python', 13, 2, 1, 3, NULL, '2017-10-11 10:49:59', NULL);
+INSERT INTO `label` VALUES (23, 'android', 13, 3, 1, 3, NULL, '2017-10-11 10:50:15', NULL);
+INSERT INTO `label` VALUES (24, 'Linux', 13, 4, 1, 3, NULL, '2017-10-11 10:50:18', NULL);
+INSERT INTO `label` VALUES (25, '分享发现', 14, 1, 1, 3, NULL, '2017-10-11 10:50:20', NULL);
+INSERT INTO `label` VALUES (26, '电子游戏', 14, 2, 1, 3, NULL, '2017-10-11 10:50:23', NULL);
+INSERT INTO `label` VALUES (27, '电影', 14, 3, 1, 3, NULL, '2017-10-11 10:50:25', NULL);
+INSERT INTO `label` VALUES (28, '旅游', 14, 4, 1, 3, NULL, '2017-10-11 10:50:30', NULL);
+INSERT INTO `label` VALUES (29, '吐槽', 15, 1, 1, 3, NULL, '2017-10-11 10:50:33', NULL);
+INSERT INTO `label` VALUES (30, '酷工作', 16, 1, 1, 3, NULL, '2017-10-11 10:50:35', NULL);
+INSERT INTO `label` VALUES (31, '求职', 16, 2, 1, 3, NULL, '2017-10-11 10:50:38', NULL);
+INSERT INTO `label` VALUES (32, '职场话题', 16, 3, 1, 3, NULL, '2017-10-11 10:50:41', NULL);
+INSERT INTO `label` VALUES (33, '外包', 16, 4, 1, 3, NULL, '2017-10-11 10:50:43', NULL);
+INSERT INTO `label` VALUES (34, '上海', 17, 1, 1, 3, NULL, '2017-10-11 10:50:46', NULL);
+INSERT INTO `label` VALUES (35, '北京', 17, 2, 1, 3, NULL, '2017-10-11 10:50:50', NULL);
+INSERT INTO `label` VALUES (36, '深圳', 17, 3, 1, 3, NULL, '2017-10-11 10:50:53', NULL);
+INSERT INTO `label` VALUES (37, '成都', 17, 4, 1, 3, NULL, '2017-10-11 10:50:57', NULL);
+INSERT INTO `label` VALUES (38, '杭州', 17, 5, 1, 3, NULL, '2017-10-11 10:51:00', NULL);
+INSERT INTO `label` VALUES (39, '二手交易', 18, 1, 1, 3, NULL, '2017-10-11 10:51:03', NULL);
+INSERT INTO `label` VALUES (40, '物换物', 18, 2, 1, 3, NULL, '2017-10-11 10:51:06', NULL);
+INSERT INTO `label` VALUES (41, '免费赠送', 18, 3, 1, 3, NULL, '2017-10-11 10:51:09', NULL);
+INSERT INTO `label` VALUES (42, '团购', 18, 4, 1, 3, NULL, '2017-10-11 10:51:12', NULL);
+INSERT INTO `label` VALUES (46, 'Java', 0, 0, 1, 1, NULL, '2017-11-01 13:28:44', '2017-11-01 13:29:51');
+INSERT INTO `label` VALUES (47, '线程', 46, 0, 1, 1, NULL, '2017-11-01 13:42:21', NULL);
+INSERT INTO `label` VALUES (48, 'java', 0, 0, 1, 2, NULL, '2017-11-01 15:03:43', NULL);
+INSERT INTO `label` VALUES (49, 'python', 0, 0, 1, 2, NULL, '2017-11-01 15:03:51', NULL);
+INSERT INTO `label` VALUES (50, 'javascript', 0, 0, 1, 2, NULL, '2017-11-01 15:04:01', NULL);
+INSERT INTO `label` VALUES (51, 'C#', 0, 0, 1, 2, NULL, '2017-11-01 15:04:08', NULL);
+INSERT INTO `label` VALUES (52, 'ruby', 0, 0, 1, 2, NULL, '2017-11-01 15:04:15', NULL);
+INSERT INTO `label` VALUES (53, 'go', 0, 0, 1, 2, NULL, '2017-11-01 15:04:20', NULL);
+INSERT INTO `label` VALUES (54, 'php', 0, 0, 1, 2, NULL, '2017-11-01 15:04:26', NULL);
+INSERT INTO `label` VALUES (55, 'node-js', 0, 0, 1, 2, NULL, '2017-11-01 15:04:35', '2017-11-01 15:04:44');
+INSERT INTO `label` VALUES (56, 'angular', 0, 0, 1, 2, NULL, '2017-11-01 15:04:56', NULL);
+INSERT INTO `label` VALUES (57, 'shell', 0, 0, 1, 2, NULL, '2017-11-01 15:05:01', NULL);
+INSERT INTO `label` VALUES (58, 'spring', 0, 1, 1, 4, 5, '2017-11-01 15:59:08', NULL);
+INSERT INTO `label` VALUES (59, 'java', 0, 2, 1, 4, 5, '2017-11-01 15:59:28', NULL);
+INSERT INTO `label` VALUES (60, '前端', 0, 3, 1, 4, 5, '2017-11-01 16:00:11', NULL);
+INSERT INTO `label` VALUES (61, '数据库', 0, 4, 1, 4, 5, '2017-11-01 16:00:41', NULL);
 
 -- ----------------------------
 -- Table structure for menu
@@ -258,19 +264,25 @@ INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'use
 DROP TABLE IF EXISTS `open_source_content`;
 CREATE TABLE `open_source_content`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
-  `OPEN_SOURCE_LABEL_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
+  `LABEL_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
   `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
   `SUBTITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '副标题',
   `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
-  `STATUS` int(1) DEFAULT NULL COMMENT '状态',
+  `STATUS` int(1) DEFAULT 1 COMMENT '状态',
   `COLLECT_COUNT` int(255) DEFAULT 0 COMMENT '收藏数量',
   `BROWSE_COUNT` int(255) DEFAULT 0 COMMENT '浏览数量',
   `BANNER_IMG` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'banner图片',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of open_source_content
+-- ----------------------------
+INSERT INTO `open_source_content` VALUES (1, 58, 'this is test！！！', 'this is test！！！this is test！！！this is test！！！', 'this is test！！！this is test！！！this is test！！！this is test！！！this is test！！！this is test！！！', 1, 0, 0, NULL, '2017-11-01 16:39:58', NULL);
+INSERT INTO `open_source_content` VALUES (2, 58, '似的发射点发生试试', '是否收到的方式的地方士大夫', '十分士大夫石帆胜丰', 1, 0, 0, NULL, '2017-11-01 16:42:35', NULL);
+INSERT INTO `open_source_content` VALUES (3, 58, '风格化法国看脚后跟范德萨', '破iu一头热我从v许昌许昌v下次v', '是v吁消除v浒墅关和家庭空间和外部v额', 1, 0, 0, NULL, '2017-11-01 16:42:57', NULL);
 
 -- ----------------------------
 -- Table structure for question_answers
@@ -315,7 +327,7 @@ INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
 INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 0, '2017-10-27 14:36:32', NULL);
 INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 0, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 199, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 200, '2017-10-27 20:08:44', NULL);
 INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 13, '2017-10-27 22:35:16', NULL);
 INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 6, '2017-10-27 23:17:56', NULL);
 INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 4, '2017-11-01 10:25:40', NULL);
@@ -401,7 +413,7 @@ CREATE TABLE `user`  (
   `PASSWORD` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `BRIEF` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '简介',
   `HEAD_IMG_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `STATE` int(1) DEFAULT NULL COMMENT '状态',
+  `STATE` int(1) DEFAULT 1 COMMENT '状态',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   `COMPANY` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
