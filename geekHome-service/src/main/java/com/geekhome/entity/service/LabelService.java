@@ -27,25 +27,40 @@ public class LabelService {
 		}
 		return labelLists;
 	}
-	
-	@Transactional
-	public void saveLabel(Label label) {
-		if (label.getId() != null) {
-			Label m = labelDao.findOne(label.getId());
-			m.setUpdateTime(new Date());
-			m.setLableName(label.getLableName());
-			m.setType(label.getType());
-			labelDao.save(m);
-		} else {
-			label.setCreateTime(new Date());
-			label.setSort(0);
-			labelDao.save(label);
-		}
 
-		if (label.getParentId() != 0) {
-			label = labelDao.findOne(label.getParentId());
-			label.setUpdateTime(new Date());
-			labelDao.save(label);
+	@Transactional
+	public Integer saveLabel(Label label) {
+		
+		if (label.getId() != null) {
+			List<Label> list = labelDao.findLabelByIdNotAndTypeAndLableName(label.getId(), label.getType(), label.getLableName());
+			if(list.isEmpty()) {
+				Label m = labelDao.findOne(label.getId());
+				m.setUpdateTime(new Date());
+				m.setLableName(label.getLableName());
+				m.setType(label.getType());
+				labelDao.save(m);
+				
+				if (label.getParentId() != 0) {
+					label = labelDao.findOne(label.getParentId());
+					label.setUpdateTime(new Date());
+					labelDao.save(label);
+				}
+				
+				return 1;
+			}else {
+				return -1;// 相同类型相同名称已存在
+			}
+		} else {
+			List<Label> list = labelDao.findLabelByTypeAndLableName(label.getType(), label.getLableName());
+			if (list.isEmpty()) {
+				label.setCreateTime(new Date());
+				label.setSort(0);
+				label.setStatus(Label.LABEL_STATE_DEFAULT);
+				labelDao.save(label);
+				return 1;
+			} else {
+				return -1;// 相同类型相同名称已存在
+			}
 		}
 
 	}

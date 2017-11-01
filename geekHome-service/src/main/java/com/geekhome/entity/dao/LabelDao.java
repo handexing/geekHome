@@ -21,7 +21,12 @@ public interface LabelDao extends JpaRepository<Label, Long>{
 	@Query(nativeQuery = true, value = "UPDATE LABEL SET SORT=:sort WHERE ID =:id")
 	int updateOrder(@Param("id") Long id, @Param("sort") Integer sort);
 
-	public List<Label> findLabelByStatusAndType(Integer status, Integer type);
+	@Query(nativeQuery = true, value = "SELECT * FROM LABEL WHERE STATUS=:status AND TYPE IN(:types) ORDER BY SORT ASC,CREATE_TIME DESC")
+	public List<Label> findLabelByStatusAndType(@Param("status")Integer status, @Param("types")List<Integer> types);
 
 	public List<Label> findLabelByStatus(Integer labelStateDefault);
+
+	public List<Label> findLabelByTypeAndLableName(Integer type, String lableName);
+
+	public List<Label> findLabelByIdNotAndTypeAndLableName(Long id, Integer type, String lableName);
 }

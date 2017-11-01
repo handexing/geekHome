@@ -7,12 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
-import com.geekhome.entity.OpenSourceLabel;
-import com.geekhome.entity.dao.OpenSourceLabelDao;
+import com.geekhome.entity.Label;
+import com.geekhome.entity.dao.LabelDao;
 
 
 @RestController
@@ -22,15 +23,15 @@ public class OpenSourceController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	OpenSourceLabelDao openSourceLabelDao;
+	LabelDao labelDao;
 	
 	@RequestMapping(value = "/getOpenSourcelabelList")
 	@CrossOrigin
-	public ExecuteResult<List<OpenSourceLabel>> getOpenSourcelabelList(Integer size) {
-		final ExecuteResult<List<OpenSourceLabel>> result = new ExecuteResult<>();
+	public ExecuteResult<List<Label>> getOpenSourcelabelList(@RequestParam(value = "types[]") List<Integer> types) {
+		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
-			List<OpenSourceLabel> openSourceLabels = openSourceLabelDao.getOpenSourcelabelTopTen(OpenSourceLabel.OPEN_SOURCE_LABEL_STATE_DEFAULT, size);
-			result.setData(openSourceLabels);
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT,types);
+			result.setData(labels);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

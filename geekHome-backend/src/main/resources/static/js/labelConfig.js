@@ -110,6 +110,7 @@ function labelConfig(){
 			return;
 		}
 		
+		debugger
 		var label={};
 		label.id = id;
 		label.parentId = parentId;
@@ -129,10 +130,12 @@ function labelConfig(){
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(label),
 			success:function(responseData, status){
-				if(responseData.success){
+				if(responseData.data==1){
+					self.listLabel();
 					$("#addLabelDialog").modal("hide");
 					layer.msg('操作成功！', {icon: 1});
-					self.listLabel();
+				}else if(responseData.data==-1){
+					layer.msg('相同类型下不能有相同名称,请修改！', {icon: 7});
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
@@ -162,7 +165,7 @@ function labelConfig(){
 			if(data.success){
 				var result = data.data;
 				$("#addLabelDialog").modal("show");
-				$("#menu_title").text("【"+result.name+"】添加标签");
+				$("#menu_title").text("【"+result.lableName+"】添加标签");
 				$("#parentId").val(result.id);
 			} 
 		});

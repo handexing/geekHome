@@ -56,10 +56,11 @@ public class LabelController {
 	
 	@RequiresPermissions("label:save")
 	@RequestMapping("saveLabel")
-	public ExecuteResult<Boolean> saveLabel(@RequestBody Label label) {
-		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+	public ExecuteResult<Integer> saveLabel(@RequestBody Label label) {
+		final ExecuteResult<Integer> result = new ExecuteResult<>();
 		try {
-			labelService.saveLabel(label);
+			Integer flag = labelService.saveLabel(label);
+			result.setData(flag);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

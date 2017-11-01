@@ -37,7 +37,7 @@ public class Label implements Serializable {
 	 * 问与答
 	 */
 	public static final Integer Q_A = 3;
-	
+
 	/**
 	 * 默认开启
 	 */

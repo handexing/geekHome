@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.geekhome.common.vo.ErrorCode;
@@ -30,10 +31,10 @@ public class LabelController {
 
 	@RequestMapping(value = "/labelList")
 	@CrossOrigin
-	public ExecuteResult<List<Label>> labelList(Integer type) {
+	public ExecuteResult<List<Label>> labelList(@RequestParam(value = "types[]") List<Integer> types) {
 		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
-			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, type);
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, types);
 			assembleLabel(labels);
 			result.setData(labels);
 			result.setSuccess(true);
@@ -48,10 +49,10 @@ public class LabelController {
 	
 	@RequestMapping(value = "/getAllLabel")
 	@CrossOrigin
-	public ExecuteResult<List<Label>> getAllLabel() {
+	public ExecuteResult<List<Label>> getAllLabel(@RequestParam(value = "types[]") List<Integer> types) {
 		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
 		try {
-			List<Label> labels = labelDao.findLabelByStatus(Label.LABEL_STATE_DEFAULT);
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT,types);
 			assembleLabel(labels);
 			result.setData(labels);
 			result.setSuccess(true);
@@ -83,13 +84,12 @@ public class LabelController {
 
 	@RequestMapping(value = "/labelTree")
 	@CrossOrigin
-	public ExecuteResult<List<TreeView>> labelTree(Integer type) {
+	public ExecuteResult<List<TreeView>> labelTree(@RequestParam(value = "types[]") List<Integer> types) {
 		final ExecuteResult<List<TreeView>> result = new ExecuteResult<>();
 		try {
-			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, type);
+			List<Label> labels = labelDao.findLabelByStatusAndType(Label.LABEL_STATE_DEFAULT, types);
 			List<TreeView> treeList = new ArrayList<>();
 			List<TreeView> nodes = null;
-//			List<TreeView> nodes = null;
 
 			for (int i = 0; i < labels.size(); i++) {
 				
