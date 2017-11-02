@@ -51,4 +51,15 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * 修改个人信息
+	 * @param user 用户传入要修改信息
+	 * @return
+	 */
+	public Integer modifyPersonInfo(User user)
+	{
+	    Integer num = userDao.updatePersonInfo(user.getId(),user.getEmail(),user.getPhone(),user.getCompany(),user.getWebSiteUrl(),user.getAddress(),user.getGitHubUrl(),user.getBrief());
+	    return num;
+	}
+	
 }
