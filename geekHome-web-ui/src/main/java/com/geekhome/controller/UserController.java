@@ -168,5 +168,32 @@ public class UserController {
 			logger.error("", e);
 		}
 	}*/
-
+	
+	@RequestMapping("modifyPersonInfo")
+    @CrossOrigin
+    public ExecuteResult<User> modifyPersonInfo(HttpServletRequest request, HttpServletResponse response ,User user) 
+	{
+	    final ExecuteResult<User> result = new ExecuteResult<>();
+        try 
+        {
+           Integer num = userService.modifyPersonInfo(user);
+           if(num <= 0)
+           {
+               result.setSuccess(false);
+           }
+           else
+           {
+               result.setData(user);
+               result.setSuccess(true); 
+           }
+        } 
+        catch (final Exception e) 
+        {
+            result.setSuccess(false);
+            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+            logger.error("", e);
+        }
+        return result;
+    }
 }
