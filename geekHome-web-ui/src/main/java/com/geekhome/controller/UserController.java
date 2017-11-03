@@ -42,11 +42,10 @@ public class UserController {
 
 	@RequestMapping("userRegister")
 	@CrossOrigin
-	public ExecuteResult<Integer> userRegister(@RequestBody User user) {
-		final ExecuteResult<Integer> result = new ExecuteResult<>();
+	public ExecuteResult<User> userRegister(@RequestBody User user) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
 		try {
-			Integer flag = userService.saveUser(user);
-			result.setData(flag);
+			result.setData(userService.saveUser(user));
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
@@ -168,5 +167,20 @@ public class UserController {
 			logger.error("", e);
 		}
 	}*/
-
+	
+	@RequestMapping("modifyPersonInfo")
+	@CrossOrigin
+	public ExecuteResult<User> modifyPersonInfo(@RequestBody User user) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			result.setData(userService.saveUser(user));
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 }
