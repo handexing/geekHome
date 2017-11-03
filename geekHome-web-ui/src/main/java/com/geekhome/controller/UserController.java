@@ -42,11 +42,10 @@ public class UserController {
 
 	@RequestMapping("userRegister")
 	@CrossOrigin
-	public ExecuteResult<Integer> userRegister(@RequestBody User user) {
-		final ExecuteResult<Integer> result = new ExecuteResult<>();
+	public ExecuteResult<User> userRegister(@RequestBody User user) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
 		try {
-			Integer flag = userService.saveUser(user);
-			result.setData(flag);
+			result.setData(userService.saveUser(user));
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
@@ -170,30 +169,18 @@ public class UserController {
 	}*/
 	
 	@RequestMapping("modifyPersonInfo")
-    @CrossOrigin
-    public ExecuteResult<User> modifyPersonInfo(HttpServletRequest request, HttpServletResponse response ,User user) 
-	{
-	    final ExecuteResult<User> result = new ExecuteResult<>();
-        try 
-        {
-           Integer num = userService.modifyPersonInfo(user);
-           if(num <= 0)
-           {
-               result.setSuccess(false);
-           }
-           else
-           {
-               result.setData(user);
-               result.setSuccess(true); 
-           }
-        } 
-        catch (final Exception e) 
-        {
-            result.setSuccess(false);
-            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-            logger.error("", e);
-        }
-        return result;
-    }
+	@CrossOrigin
+	public ExecuteResult<User> modifyPersonInfo(@RequestBody User user) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			result.setData(userService.saveUser(user));
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 }
