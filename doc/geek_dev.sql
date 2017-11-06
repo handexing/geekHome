@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 01/11/2017 17:11:17
+ Date: 03/11/2017 14:44:50
 */
 
 SET NAMES utf8mb4;
@@ -59,21 +59,33 @@ INSERT INTO `admin_role` VALUES (2, 2, 2);
 INSERT INTO `admin_role` VALUES (9, 7, 2);
 
 -- ----------------------------
--- Table structure for blog_category
+-- Table structure for blog
 -- ----------------------------
-DROP TABLE IF EXISTS `blog_category`;
-CREATE TABLE `blog_category`  (
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE `blog`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `TYPE_NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `PARENT_ID` bigint(20) DEFAULT 0,
-  `SORT` int(255) DEFAULT NULL,
-  `STATUS` int(1) DEFAULT 1,
-  `TYPE` int(1) DEFAULT NULL,
-  `USER_ID` bigint(20) DEFAULT NULL,
+  `LABEL_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
+  `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
+  `SUBTITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '副标题',
+  `CONTENT` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '内容',
+  `STATUS` int(1) DEFAULT 3 COMMENT '状态',
+  `COLLECT_COUNT` int(255) DEFAULT 0 COMMENT '收藏数量',
+  `BROWSE_COUNT` int(255) DEFAULT 0 COMMENT '浏览数量',
+  `BANNER_IMG` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'banner图片',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'BLOG类别表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of blog
+-- ----------------------------
+INSERT INTO `blog` VALUES (4, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 0, NULL, '2017-11-02 09:42:53', NULL);
+INSERT INTO `blog` VALUES (5, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 0, NULL, '2017-11-02 09:43:18', NULL);
+INSERT INTO `blog` VALUES (6, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 0, NULL, '2017-11-02 09:43:38', NULL);
+INSERT INTO `blog` VALUES (7, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 0, NULL, '2017-11-02 09:49:31', NULL);
+INSERT INTO `blog` VALUES (8, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 0, NULL, '2017-11-03 11:14:23', NULL);
+INSERT INTO `blog` VALUES (9, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 0, NULL, '2017-11-03 11:18:08', NULL);
 
 -- ----------------------------
 -- Table structure for comment
@@ -278,13 +290,6 @@ CREATE TABLE `open_source_content`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of open_source_content
--- ----------------------------
-INSERT INTO `open_source_content` VALUES (1, 58, 'this is test！！！', 'this is test！！！this is test！！！this is test！！！', 'this is test！！！this is test！！！this is test！！！this is test！！！this is test！！！this is test！！！', 1, 0, 0, NULL, '2017-11-01 16:39:58', NULL);
-INSERT INTO `open_source_content` VALUES (2, 58, '似的发射点发生试试', '是否收到的方式的地方士大夫', '十分士大夫石帆胜丰', 1, 0, 0, NULL, '2017-11-01 16:42:35', NULL);
-INSERT INTO `open_source_content` VALUES (3, 58, '风格化法国看脚后跟范德萨', '破iu一头热我从v许昌许昌v下次v', '是v吁消除v浒墅关和家庭空间和外部v额', 1, 0, 0, NULL, '2017-11-01 16:42:57', NULL);
-
--- ----------------------------
 -- Table structure for question_answers
 -- ----------------------------
 DROP TABLE IF EXISTS `question_answers`;
@@ -315,19 +320,19 @@ INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expre
 INSERT INTO `question_answers` VALUES (8, 6, 8, '还记得简悦吗？ 1.0.4 版带来了可支持任意页面生成阅读模式', 'adsfads', 2, 0, 6, '2017-10-27 17:36:40', NULL);
 INSERT INTO `question_answers` VALUES (9, 7, 8, '写了一个交互式的 ssh 批量操作客户端，支持根据服务端的执行文件和路径自动补全，支持批量上传下载文件', 's', 2, 0, 4, '2017-10-27 17:36:44', NULL);
 INSERT INTO `question_answers` VALUES (10, 8, 8, '写了一个 Lemon 语言到 Objective-C 的绑定，可以用 Lemon 语言写 Mac 和 iOS 了。', 's', 2, 0, 2, '2017-10-27 17:36:48', NULL);
-INSERT INTO `question_answers` VALUES (11, 9, 8, '如果你有不愿公开的点子的话，关于这些点子你有哪些愿意公开的信息？', 's', 2, 0, 9, '2017-10-27 17:36:52', NULL);
+INSERT INTO `question_answers` VALUES (11, 9, 8, '如果你有不愿公开的点子的话，关于这些点子你有哪些愿意公开的信息？', 's', 2, 0, 10, '2017-10-27 17:36:52', NULL);
 INSERT INTO `question_answers` VALUES (12, 10, 8, '女士时装订阅类平台，寻找技术大牛一起创业', 'ss', 2, 0, 11, '2017-10-27 17:36:55', NULL);
 INSERT INTO `question_answers` VALUES (13, 11, 8, '在 Nodeclub 基础上仿花瓣的一个小项目, 有兴趣的小伙伴搞起', 's', 2, 0, 5, '2017-10-27 17:36:59', NULL);
-INSERT INTO `question_answers` VALUES (14, 5, 8, '业余项目，收集了很多优秀开发者的博客,微博...', 'this is test', 2, 0, 12, '2017-10-27 09:45:00', NULL);
+INSERT INTO `question_answers` VALUES (14, 5, 8, '业余项目，收集了很多优秀开发者的博客,微博...', 'this is test', 2, 0, 13, '2017-10-27 09:45:00', NULL);
 INSERT INTO `question_answers` VALUES (15, 5, 9, '最帅网易云音乐播放器 ieaseMusic 更新 1.0.0 正式版，增加高品质音乐，聚合 QQ 音乐，酷狗音乐解决版权问题导致的灰色死链。', 'ahahahahaha', 2, 0, 20, '2017-10-27 09:53:29', NULL);
 INSERT INTO `question_answers` VALUES (16, 5, 20, '我开发的开源 JS 地图引擎 maptalks.js, 请大家不吝赐教!', 'fadfadf', 2, 0, 1, '2017-10-27 10:44:06', NULL);
 INSERT INTO `question_answers` VALUES (17, 5, 21, '程序员程序员', '程序员程序员程序员程序员程序员程序员程序员程序员', 2, 0, 2, '2017-10-27 14:34:54', NULL);
-INSERT INTO `question_answers` VALUES (18, 5, 26, '王者农药真的那么好玩吗？', '王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？', 2, 0, 2, '2017-10-27 14:35:21', NULL);
+INSERT INTO `question_answers` VALUES (18, 5, 26, '王者农药真的那么好玩吗？', '王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？', 2, 0, 3, '2017-10-27 14:35:21', NULL);
 INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网好卡啊啊啊~~~~网好卡啊啊啊~~~~', 2, 0, 0, '2017-10-27 14:35:47', NULL);
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
 INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 0, '2017-10-27 14:36:32', NULL);
 INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 0, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 200, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 201, '2017-10-27 20:08:44', NULL);
 INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 13, '2017-10-27 22:35:16', NULL);
 INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 6, '2017-10-27 23:17:56', NULL);
 INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 4, '2017-11-01 10:25:40', NULL);
@@ -421,12 +426,12 @@ CREATE TABLE `user`  (
   `GIT_HUB_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `WEB_SITE_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', '15618243357', '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/1.png', 1, '2017-10-09 15:23:40', NULL, '腾讯', 'shagnhai', 'handexing', 'www.geekuser.cn');
+INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', '15618243357', '0d6dac1b11e346b17c19ecbf49ae6c7b', '爱生活，爱编程。', 'img/1.png', 1, '2017-10-09 15:23:40', '2017-11-03 10:42:56', '阿里巴巴', '杭州', 'handexing', 'www.geekuser.cn');
 INSERT INTO `user` VALUES (6, 'jack', 0, NULL, '908716835@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/2.png', 1, '2017-10-17 14:23:02', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (7, 'yannis', 0, NULL, 'p_y2020@163.com', NULL, 'b4fdf01936b27912da30f16367697bd0', '用户很懒，什么都没说明....', 'img/3.png', 1, '2017-10-19 17:27:26', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (8, 'toono', 0, NULL, 'p_y2020@163.com', NULL, '8e0878027cc03f151eb2039441a625c6', '用户很懒，什么都没说明....', 'img/4.png', 1, '2017-10-19 17:28:08', NULL, NULL, NULL, NULL, NULL);
@@ -444,5 +449,6 @@ INSERT INTO `user` VALUES (19, 'doodlister', 0, NULL, NULL, NULL, 'b6d884c6081d9
 INSERT INTO `user` VALUES (20, 'caoyingde', 0, NULL, NULL, NULL, 'a231d6a25af4b7fbc22c8b53efee1c90', '用户很懒，什么都没说明....', 'img/34.png', 1, '2017-10-27 23:17:02', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (21, 'yannisPengyu', 0, NULL, NULL, NULL, '7cf4570a211ff45e31d5a4a283f970b2', '用户很懒，什么都没说明....', 'img/39.png', 1, '2017-10-30 21:20:24', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (22, '123', 0, NULL, NULL, NULL, '077e9cee41219e38c684e77f02bece87', '用户很懒，什么都没说明....', 'img/41.png', 1, '2017-10-30 21:31:30', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` VALUES (23, 'mokey', 0, NULL, NULL, NULL, '7706360ae11193270a7bee131639b439', '用户很懒，什么都没说明....', 'img/43.png', 1, '2017-11-03 10:29:07', NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

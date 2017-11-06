@@ -41,12 +41,21 @@ public class Blog implements Serializable {
 	/**
 	 * 默认开启
 	 */
-	public static final Integer OPEN_SOURCE_CONTENT_STATE_DEFAULT = 1;
+	public static final Integer BLOG_STATE_DEFAULT = 1;
 	/**
 	 * 关闭
 	 */
-	public static final Integer OPEN_SOURCE_CONTENT_STATE_CLOSE = 0;
+	public static final Integer BLOG_STATE_CLOSE = 0;
 
+	/**
+	 * 草稿
+	 */
+	public static final Integer BLOG_STATE_DRAFT = 2;
+
+	/**
+	 * 发布
+	 */
+	public static final Integer BLOG_STATE_RELEASE = 3;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")

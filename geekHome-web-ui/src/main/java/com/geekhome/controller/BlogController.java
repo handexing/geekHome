@@ -17,7 +17,6 @@ import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.PageableResultJson;
 import com.geekhome.entity.Blog;
 import com.geekhome.entity.Label;
-import com.geekhome.entity.QuestionAnswers;
 import com.geekhome.entity.dao.LabelDao;
 import com.geekhome.entity.service.BlogService;
 
@@ -66,7 +65,7 @@ public class BlogController {
 	public ExecuteResult<Boolean> saveBlog(@RequestBody Blog blog) {
 		final ExecuteResult<Boolean> result = new ExecuteResult<>();
 		try {
-//			questionAnswersService.saveQuestionAnswers(questionAnswers);
+			blogService.saveBlog(blog);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
