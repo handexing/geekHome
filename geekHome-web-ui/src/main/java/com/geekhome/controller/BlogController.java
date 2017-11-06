@@ -76,4 +76,20 @@ public class BlogController {
 		return result;
 	}
 	
+	@RequestMapping("saveLabel")
+	@CrossOrigin
+	public ExecuteResult<Boolean> saveLabel(@RequestBody Label label) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			labelDao.save(label);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
 }
