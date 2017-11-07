@@ -16,9 +16,11 @@ import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.PageableResultJson;
 import com.geekhome.entity.Blog;
+import com.geekhome.entity.BlogType;
 import com.geekhome.entity.Label;
-import com.geekhome.entity.dao.LabelDao;
+import com.geekhome.entity.dao.BlogTypeDao;
 import com.geekhome.entity.service.BlogService;
+import com.geekhome.entity.service.BlogTypeService;
 
 
 @RestController
@@ -28,17 +30,19 @@ public class BlogController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	LabelDao labelDao;
-	@Autowired
 	BlogService blogService;
+	@Autowired
+	BlogTypeDao blogTypeDao;
+	@Autowired
+	BlogTypeService blogTypeService;
 	
 	@RequestMapping(value = "getBloglabelList")
 	@CrossOrigin
-	public ExecuteResult<List<Label>> getBloglabelList(Integer type,Long userId) {
-		final ExecuteResult<List<Label>> result = new ExecuteResult<>();
+	public ExecuteResult<List<BlogType>> getBloglabelList(Long userId) {
+		final ExecuteResult<List<BlogType>> result = new ExecuteResult<>();
 		try {
-			List<Label> labels = labelDao.findLabelByStatusAndTypeAndUserId(Label.LABEL_STATE_DEFAULT,type,userId);
-			result.setData(labels);
+			List<BlogType> types = blogTypeDao.findUserBlogTypeByStatusAndUserId(Label.LABEL_STATE_DEFAULT,userId);
+			result.setData(types);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);
@@ -78,10 +82,11 @@ public class BlogController {
 	
 	@RequestMapping("saveLabel")
 	@CrossOrigin
-	public ExecuteResult<Boolean> saveLabel(@RequestBody Label label) {
-		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+	public ExecuteResult<Integer> saveLabel(@RequestBody BlogType blogType) {
+		final ExecuteResult<Integer> result = new ExecuteResult<>();
 		try {
-			labelDao.save(label);
+			Integer flag = blogTypeService.save(blogType);
+			result.setData(flag);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

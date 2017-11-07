@@ -21,7 +21,8 @@ import com.geekhome.common.utils.CustomDateSerializer;
 @SqlResultSetMappings({
 
 		@SqlResultSetMapping(name = "getBlogList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
-				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "labelId", type = Long.class),
+				@ColumnResult(name = "id", type = Long.class),
+				@ColumnResult(name = "typeId", type = Long.class),
 				@ColumnResult(name = "title", type = String.class),
 				@ColumnResult(name = "subtitle", type = String.class),
 				@ColumnResult(name = "bannerImg", type = String.class),
@@ -60,8 +61,8 @@ public class Blog implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name = "LABEL_ID")
-	private Long labelId;
+	@Column(name = "TYPE_ID")
+	private Long typeId;
 	@Column(name = "TITLE")
 	private String title;
 	@Column(name = "CONTENT")
@@ -118,12 +119,13 @@ public class Blog implements Serializable {
 		this.id = id;
 	}
 
-	public Long getLabelId() {
-		return labelId;
+
+	public Long getTypeId() {
+		return typeId;
 	}
 
-	public void setLabelId(Long labelId) {
-		this.labelId = labelId;
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 
 	public String getTitle() {
@@ -184,14 +186,13 @@ public class Blog implements Serializable {
 
 	public Blog() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Blog(Long id, Long labelId, String title, String content, String subtitle, String bannerImg, Integer status,
+	public Blog(Long id, Long typeId, String title, String content, String subtitle, String bannerImg, Integer status,
 			Integer collectCount, Integer browseCount, Date createTime, Date updateTime) {
 		super();
 		this.id = id;
-		this.labelId = labelId;
+		this.typeId = typeId;
 		this.title = title;
 		this.content = content;
 		this.subtitle = subtitle;
@@ -203,11 +204,11 @@ public class Blog implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public Blog(Long id, Long labelId, String title, String subtitle, String bannerImg, Integer status,
+	public Blog(Long id, Long typeId, String title, String subtitle, String bannerImg, Integer status,
 			Integer collectCount, Integer browseCount, Date createTime, Date updateTime, Integer commentCnt) {
 		super();
 		this.id = id;
-		this.labelId = labelId;
+		this.typeId = typeId;
 		this.title = title;
 		this.subtitle = subtitle;
 		this.bannerImg = bannerImg;
@@ -221,7 +222,7 @@ public class Blog implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OpenSourceContent [id=" + id + ", labelId=" + labelId + ", title=" + title + ", content=" + content
+		return "Blog [id=" + id + ", typeId=" + typeId + ", title=" + title + ", content=" + content
 				+ ", subtitle=" + subtitle + ", bannerImg=" + bannerImg + ", status=" + status + ", collectCount="
 				+ collectCount + ", browseCount=" + browseCount + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + "]";
