@@ -84,7 +84,7 @@ public class UserController {
 			String resStr = "{}";
 
 			HashMap<String, String> map = new HashMap<>();
-			String userid = "test";
+			String userid = "geekHome";
 			map.put("user_id", userid);
 
 			// 进行验证预处理

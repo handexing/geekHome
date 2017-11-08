@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : geek_dev
+ Source Server         : geekHome
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : rm-uf6bw093xs11h6m1qo.mysql.rds.aliyuncs.com:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 07/11/2017 10:29:02
+ Date: 08/11/2017 13:59:31
 */
 
 SET NAMES utf8mb4;
@@ -75,17 +75,18 @@ CREATE TABLE `blog`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (4, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 0, NULL, '2017-11-02 09:42:53', NULL);
-INSERT INTO `blog` VALUES (5, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 0, NULL, '2017-11-02 09:43:18', NULL);
-INSERT INTO `blog` VALUES (6, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 0, NULL, '2017-11-02 09:43:38', NULL);
-INSERT INTO `blog` VALUES (7, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 0, NULL, '2017-11-02 09:49:31', NULL);
-INSERT INTO `blog` VALUES (8, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 0, NULL, '2017-11-03 11:14:23', NULL);
+INSERT INTO `blog` VALUES (4, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 2, NULL, '2017-11-02 09:42:53', NULL);
+INSERT INTO `blog` VALUES (5, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 2, NULL, '2017-11-02 09:43:18', NULL);
+INSERT INTO `blog` VALUES (6, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 1, NULL, '2017-11-02 09:43:38', NULL);
+INSERT INTO `blog` VALUES (7, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 9, NULL, '2017-11-02 09:49:31', NULL);
+INSERT INTO `blog` VALUES (8, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 1, NULL, '2017-11-03 11:14:23', NULL);
 INSERT INTO `blog` VALUES (9, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 0, NULL, '2017-11-03 11:18:08', NULL);
+INSERT INTO `blog` VALUES (10, 58, '极客屋需求文档', '极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！', '# 极客屋需求文档\n\n## 说明\n> `极客屋`是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！\n\n## 极客屋功能模块\n> 目前大致分为以下几种模块，后期如有好的idea在添加。\n\n1. 首页\n2. 开源\n3. 博客\n4. 问与答\n5. 标签节点\n\n### 1. 首页展示\n> 首页包含以下几种功能模块，后期可能扩展更多：\n\n1.1 滚动栏\n1.2 热搜标签\n1.3 热门文章\n1.4 问与答\n1.5 今日热议\n1.6 专题学习\n1.7 开源排行\n\n#### 1.1 滚动栏\n主要用于显示特别好玩得`开源项目`，`有趣得专题`,`热门文章`等。\n\n#### 1.2 热搜标签\n用于显示用户查看最多得`30`个标签，点击标签可以直接查询相关内容，如：开源项目，问与答，博客文章等。\n\n#### 1.3 热门文章\n用于显示近期被收藏/浏览/评论数量最多得`8`篇文章。【加载更多】按钮点击跳转到博客文章列表页面。根据不用分类查询文章。根据用户技术选择推荐文章。文章可被分享到其他平台。\n\n#### 1.4 问与答\n用于显示最近提问的`6`条数据。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.5 今日热议\n显示今天讨论最激烈得`10`条数据。根据浏览数量和评论数量`排名显示`。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.6 专题学习\n用于显示`12`条被收藏最多得专题栏目。点击进去可查看专题详情。\n\n#### 1.7 开源排行\n用于展示用户近期投得最有趣得`10`个开源项目。点击进入开源详情页面。\n\n### 2. 开源\n> 用于显示不同分类下的开源项目，帮助用户`推广`和`发现`更多有趣得项目。包含以下功能模块：\n\n2.1 开源类别的获取\n2.2 切换类别tab，动态数据，列表分页。\n2.3 本类推荐\n2.4 点击查看开源详情页\n2.5 评论回复，收藏，分享功能\n\n#### 2.1 开源类别的获取\n动态获取开源类别，组装tab显示。点击`更多`tab按钮，可查看更多开源分类信息。\n\n#### 2.2 切换类别tab，动态数据，列表分页。\n点击tab选项动态获取开源列表信息分页展示。\n\n#### 2.3 本类推荐\n每个开源类别下推荐`4`个开源项目。根据`收藏数量`。\n\n#### 2.4 点击查看开源详情页\n点击查看开源详情信息。\n\n#### 2.5 评论回复，收藏功能\n在开源项目详情页可以评论回复讨论，并且用户可收藏，分享该项目。\n\n\n\n\n\n\n\n', 3, 0, 12, NULL, '2017-11-08 10:37:14', NULL);
 
 -- ----------------------------
 -- Table structure for blog_type
@@ -101,7 +102,7 @@ CREATE TABLE `blog_type`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户blog类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户blog类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_type
@@ -110,6 +111,8 @@ INSERT INTO `blog_type` VALUES (58, 'spring', 0, 1, 1, 5, '2017-11-01 15:59:08',
 INSERT INTO `blog_type` VALUES (59, 'java', 0, 2, 1, 5, '2017-11-01 15:59:28', NULL);
 INSERT INTO `blog_type` VALUES (60, '前端', 0, 3, 1, 5, '2017-11-01 16:00:11', NULL);
 INSERT INTO `blog_type` VALUES (61, '数据库', 0, 4, 1, 5, '2017-11-01 16:00:41', NULL);
+INSERT INTO `blog_type` VALUES (62, 'test', 0, 0, 1, 5, '2017-11-07 10:40:48', NULL);
+INSERT INTO `blog_type` VALUES (63, 'Java', 0, 0, 1, 24, '2017-11-07 11:17:03', NULL);
 
 -- ----------------------------
 -- Table structure for comment
@@ -123,37 +126,41 @@ CREATE TABLE `comment`  (
   `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：2-开源 3-问与答 4-博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES (1, 6, 1, '哇塞这么神奇!', 3, '2017-10-17 14:25:04');
-INSERT INTO `comment` VALUES (2, 6, 23, '哇塞这么神奇!', 3, '2017-10-25 20:42:24');
-INSERT INTO `comment` VALUES (3, 7, 23, ':relieved: :kissing_closed_eyes: :heart_eyes: :smirk: :smiley:', 3, '2017-10-25 20:47:19');
-INSERT INTO `comment` VALUES (4, 8, 23, ':dizzy_face: :mask: :yum: :rage: :tired_face:', 3, '2017-10-25 20:47:22');
-INSERT INTO `comment` VALUES (5, 9, 23, ':dash: :zzz: :yellow_heart: :alien: :cry: :sob:', 3, '2017-10-25 20:47:24');
-INSERT INTO `comment` VALUES (6, 10, 23, ':pray: :shit: :poop: :sparkling_heart: :star2:', 3, '2017-10-25 20:47:26');
-INSERT INTO `comment` VALUES (7, 11, 23, ':bowtie: :smile: :laughing: :blush: :smiley: :relaxed: :smirk:', 3, '2017-10-25 20:47:30');
-INSERT INTO `comment` VALUES (8, 12, 23, ':stuck_out_tongue: :sleeping: :worried: :frowning: :anguished: :open_mouth: :grimacing: :confused: :hushed:', 3, '2017-10-25 20:47:32');
-INSERT INTO `comment` VALUES (9, 13, 23, ':tw-1f170: :tw-1f17e: :tw-1f17f: :tw-1f191: :tw-1f192: :tw-1f0cf: :tw-1f004:', 3, '2017-10-25 20:47:34');
-INSERT INTO `comment` VALUES (10, 14, 23, ':tw-1f30c: :tw-1f236: :tw-1f237: :tw-1f238: :tw-1f23a: :tw-1f250: :tw-1f300: :tw-1f302: :tw-1f305:', 3, '2017-10-25 20:47:37');
-INSERT INTO `comment` VALUES (11, 15, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 3, '2017-10-25 20:47:40');
-INSERT INTO `comment` VALUES (12, 16, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 3, '2017-10-25 20:30:15');
-INSERT INTO `comment` VALUES (13, 5, 15, ':satisfied:这是一个测试', 3, '2017-10-25 21:54:29');
-INSERT INTO `comment` VALUES (14, 5, 15, ':tw-1f435:这又是一个测试！！', 3, '2017-10-25 21:55:32');
-INSERT INTO `comment` VALUES (15, 5, 15, ':joy:这还是一个测试。。。', 3, '2017-10-25 21:57:16');
-INSERT INTO `comment` VALUES (16, 5, 7, '测试', 3, '2017-10-26 13:36:04');
-INSERT INTO `comment` VALUES (17, 5, 7, ':flushed:', 3, '2017-10-26 13:40:47');
-INSERT INTO `comment` VALUES (18, 5, 23, ':confused:', 3, '2017-10-26 13:42:13');
-INSERT INTO `comment` VALUES (19, 5, 24, ':laughing:还没开发完', 3, '2017-10-26 14:58:23');
-INSERT INTO `comment` VALUES (20, 5, 12, ':smirk:什么鬼', 3, '2017-10-26 16:52:47');
-INSERT INTO `comment` VALUES (21, 5, 16, ':laughing:', 3, '2017-10-26 17:08:03');
-INSERT INTO `comment` VALUES (22, 5, 11, ':laughing:', 3, '2017-10-26 22:07:28');
-INSERT INTO `comment` VALUES (23, 5, 11, ':sob:', 3, '2017-10-26 22:07:46');
-INSERT INTO `comment` VALUES (24, 5, 25, ':satisfied:老铁，厉害了', 3, '2017-10-30 09:39:30');
-INSERT INTO `comment` VALUES (25, 5, 1, '@Inbox fdgdgd gfdg 韩:relaxed:', 3, '2017-11-03 16:17:48');
-INSERT INTO `comment` VALUES (26, 5, 12, '@handx', 3, '2017-11-03 16:28:09');
+INSERT INTO `comment` VALUES (1, 6, 1, '哇塞这么神奇!', 2, '2017-10-17 14:25:04');
+INSERT INTO `comment` VALUES (2, 6, 23, '哇塞这么神奇!', 2, '2017-10-25 20:42:24');
+INSERT INTO `comment` VALUES (3, 7, 23, ':relieved: :kissing_closed_eyes: :heart_eyes: :smirk: :smiley:', 2, '2017-10-25 20:47:19');
+INSERT INTO `comment` VALUES (4, 8, 23, ':dizzy_face: :mask: :yum: :rage: :tired_face:', 2, '2017-10-25 20:47:22');
+INSERT INTO `comment` VALUES (5, 9, 23, ':dash: :zzz: :yellow_heart: :alien: :cry: :sob:', 2, '2017-10-25 20:47:24');
+INSERT INTO `comment` VALUES (6, 10, 23, ':pray: :shit: :poop: :sparkling_heart: :star2:', 2, '2017-10-25 20:47:26');
+INSERT INTO `comment` VALUES (7, 11, 23, ':bowtie: :smile: :laughing: :blush: :smiley: :relaxed: :smirk:', 2, '2017-10-25 20:47:30');
+INSERT INTO `comment` VALUES (8, 12, 23, ':stuck_out_tongue: :sleeping: :worried: :frowning: :anguished: :open_mouth: :grimacing: :confused: :hushed:', 2, '2017-10-25 20:47:32');
+INSERT INTO `comment` VALUES (9, 13, 23, ':tw-1f170: :tw-1f17e: :tw-1f17f: :tw-1f191: :tw-1f192: :tw-1f0cf: :tw-1f004:', 2, '2017-10-25 20:47:34');
+INSERT INTO `comment` VALUES (10, 14, 23, ':tw-1f30c: :tw-1f236: :tw-1f237: :tw-1f238: :tw-1f23a: :tw-1f250: :tw-1f300: :tw-1f302: :tw-1f305:', 2, '2017-10-25 20:47:37');
+INSERT INTO `comment` VALUES (11, 15, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 2, '2017-10-25 20:47:40');
+INSERT INTO `comment` VALUES (12, 16, 23, ':tw-1f46a: :tw-1f46b: :tw-1f46c: :tw-1f46d: :tw-1f46f: :tw-1f470: :tw-1f471: :tw-1f472: :tw-1f473: :tw-1f474: :tw-1f475: :tw-1f476: :tw-1f477: :tw-1f478:', 2, '2017-10-25 20:30:15');
+INSERT INTO `comment` VALUES (13, 5, 15, ':satisfied:这是一个测试', 2, '2017-10-25 21:54:29');
+INSERT INTO `comment` VALUES (14, 5, 15, ':tw-1f435:这又是一个测试！！', 2, '2017-10-25 21:55:32');
+INSERT INTO `comment` VALUES (15, 5, 15, ':joy:这还是一个测试。。。', 2, '2017-10-25 21:57:16');
+INSERT INTO `comment` VALUES (16, 5, 7, '测试', 2, '2017-10-26 13:36:04');
+INSERT INTO `comment` VALUES (17, 5, 7, ':flushed:', 2, '2017-10-26 13:40:47');
+INSERT INTO `comment` VALUES (18, 5, 23, ':confused:', 2, '2017-10-26 13:42:13');
+INSERT INTO `comment` VALUES (19, 5, 24, ':laughing:还没开发完', 2, '2017-10-26 14:58:23');
+INSERT INTO `comment` VALUES (20, 5, 12, ':smirk:什么鬼', 2, '2017-10-26 16:52:47');
+INSERT INTO `comment` VALUES (21, 5, 16, ':laughing:', 2, '2017-10-26 17:08:03');
+INSERT INTO `comment` VALUES (22, 5, 11, ':laughing:', 2, '2017-10-26 22:07:28');
+INSERT INTO `comment` VALUES (23, 5, 11, ':sob:', 2, '2017-10-26 22:07:46');
+INSERT INTO `comment` VALUES (24, 5, 25, ':satisfied:老铁，厉害了', 2, '2017-10-30 09:39:30');
+INSERT INTO `comment` VALUES (25, 5, 1, '@Inbox fdgdgd gfdg 韩:relaxed:', 2, '2017-11-03 16:17:48');
+INSERT INTO `comment` VALUES (26, 5, 12, '@handx', 2, '2017-11-03 16:28:09');
+INSERT INTO `comment` VALUES (27, 5, 4, '法撒旦发发达的说法', 3, '2017-11-08 13:37:02');
+INSERT INTO `comment` VALUES (28, 5, 10, 'test', 3, '2017-11-08 13:55:59');
+INSERT INTO `comment` VALUES (29, 5, 10, '啊但是发射点', 3, '2017-11-08 13:56:51');
+INSERT INTO `comment` VALUES (30, 5, 10, ':satisfied:### test', 3, '2017-11-08 13:57:43');
 
 -- ----------------------------
 -- Table structure for comment_reply
@@ -335,9 +342,9 @@ INSERT INTO `question_answers` VALUES (1, 5, 8, '手动阀手动阀', 'SDF速度
 INSERT INTO `question_answers` VALUES (2, 5, 8, '一个关于“转发旧号码未接来电、短信”的解决方案', '啊多发点大师傅士大夫', 2, 0, 1, '2017-10-27 10:44:09', NULL);
 INSERT INTO `question_answers` VALUES (3, 5, 8, '的发射点发的发多少', '啊多发点是否法撒旦发啊多发点是否', 2, 0, 0, '2017-10-27 10:47:40', NULL);
 INSERT INTO `question_answers` VALUES (4, 5, 8, '发射点发的时间和海关扣了', '立刻脚后跟范德萨OIUYTREWQ', 2, 0, 0, '2017-10-27 10:47:55', NULL);
-INSERT INTO `question_answers` VALUES (5, 5, 8, '又山寨了一个传统颜色的配色网站', '.,MNBVCXZZ\';LKJHGFDSA看脚后跟范德萨', 2, 0, 1, '2017-10-27 10:48:12', NULL);
-INSERT INTO `question_answers` VALUES (6, 5, 8, '哦iu一头热完全离开建行股份的美女不v', '会让你人沟通拜访v的撒而更广泛的v新政策执行所发生的', 2, 0, 0, '2017-10-27 10:48:42', NULL);
-INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 14, '2017-10-27 17:17:37', NULL);
+INSERT INTO `question_answers` VALUES (5, 5, 8, '又山寨了一个传统颜色的配色网站', '.,MNBVCXZZ\';LKJHGFDSA看脚后跟范德萨', 2, 0, 2, '2017-10-27 10:48:12', NULL);
+INSERT INTO `question_answers` VALUES (6, 5, 8, '哦iu一头热完全离开建行股份的美女不v', '会让你人沟通拜访v的撒而更广泛的v新政策执行所发生的', 2, 0, 1, '2017-10-27 10:48:42', NULL);
+INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 16, '2017-10-27 17:17:37', NULL);
 INSERT INTO `question_answers` VALUES (8, 6, 8, '还记得简悦吗？ 1.0.4 版带来了可支持任意页面生成阅读模式', 'adsfads', 2, 0, 6, '2017-10-27 17:36:40', NULL);
 INSERT INTO `question_answers` VALUES (9, 7, 8, '写了一个交互式的 ssh 批量操作客户端，支持根据服务端的执行文件和路径自动补全，支持批量上传下载文件', 's', 2, 0, 4, '2017-10-27 17:36:44', NULL);
 INSERT INTO `question_answers` VALUES (10, 8, 8, '写了一个 Lemon 语言到 Objective-C 的绑定，可以用 Lemon 语言写 Mac 和 iOS 了。', 's', 2, 0, 2, '2017-10-27 17:36:48', NULL);
@@ -353,7 +360,7 @@ INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
 INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 0, '2017-10-27 14:36:32', NULL);
 INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 0, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 209, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 210, '2017-10-27 20:08:44', NULL);
 INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 16, '2017-10-27 22:35:16', NULL);
 INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 8, '2017-10-27 23:17:56', NULL);
 INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 4, '2017-11-01 10:25:40', NULL);
@@ -447,7 +454,7 @@ CREATE TABLE `user`  (
   `GIT_HUB_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `WEB_SITE_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -471,5 +478,6 @@ INSERT INTO `user` VALUES (20, 'caoyingde', 0, NULL, NULL, NULL, 'a231d6a25af4b7
 INSERT INTO `user` VALUES (21, 'yannisPengyu', 0, NULL, NULL, NULL, '7cf4570a211ff45e31d5a4a283f970b2', '用户很懒，什么都没说明....', 'img/39.png', 1, '2017-10-30 21:20:24', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (22, '123', 0, NULL, NULL, NULL, '077e9cee41219e38c684e77f02bece87', '用户很懒，什么都没说明....', 'img/41.png', 1, '2017-10-30 21:31:30', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (23, 'mokey', 0, NULL, NULL, NULL, '7706360ae11193270a7bee131639b439', '用户很懒，什么都没说明....', 'img/43.png', 1, '2017-11-03 10:29:07', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` VALUES (24, 'rose', 0, NULL, NULL, NULL, '81c7a2b91ea79ebd1e18d5c94bda033f', '用户很懒，什么都没说明....', 'img/6.png', 1, '2017-11-07 10:45:45', NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

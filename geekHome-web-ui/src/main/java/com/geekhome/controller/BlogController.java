@@ -18,6 +18,7 @@ import com.geekhome.common.vo.PageableResultJson;
 import com.geekhome.entity.Blog;
 import com.geekhome.entity.BlogType;
 import com.geekhome.entity.Label;
+import com.geekhome.entity.dao.BlogDao;
 import com.geekhome.entity.dao.BlogTypeDao;
 import com.geekhome.entity.service.BlogService;
 import com.geekhome.entity.service.BlogTypeService;
@@ -31,6 +32,8 @@ public class BlogController {
 	
 	@Autowired
 	BlogService blogService;
+	@Autowired
+	BlogDao blogDao;
 	@Autowired
 	BlogTypeDao blogTypeDao;
 	@Autowired
@@ -87,6 +90,41 @@ public class BlogController {
 		try {
 			Integer flag = blogTypeService.save(blogType);
 			result.setData(flag);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("getBlogById")
+	@CrossOrigin
+	public ExecuteResult<Blog> getBlogById(Long id) {
+		final ExecuteResult<Blog> result = new ExecuteResult<>();
+		try {
+			Blog blog = blogService.getBlogById(id);
+			result.setData(blog);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("addBlogBrowseCnt")
+	@CrossOrigin
+	public ExecuteResult<Boolean> addBlogBrowseCnt(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			Blog blog = blogDao.findOne(id);
+			blog.setBrowseCount(blog.getBrowseCount()+1);
+			blogDao.save(blog);
 			result.setSuccess(true);
 		} catch (final Exception e) {
 			logger.error("", e);

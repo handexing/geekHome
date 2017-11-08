@@ -22,11 +22,8 @@ import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.MarkdownUploadImage;
 import com.geekhome.common.vo.PageableResultJson;
-import com.geekhome.entity.Comment;
 import com.geekhome.entity.QuestionAnswers;
-import com.geekhome.entity.dao.CommentDao;
 import com.geekhome.entity.dao.QuestionAnswersDao;
-import com.geekhome.entity.service.CommentService;
 import com.geekhome.entity.service.QuestionAnswersService;
 
 @RestController
@@ -42,15 +39,10 @@ public class QuestionAnswersController {
 	QuestionAnswersService questionAnswersService;
 	@Autowired
 	QuestionAnswersDao questionAnswersDao;
-	@Autowired
-	CommentService commentService;
-	@Autowired
-	CommentDao commentDao;
 
 	@RequestMapping(value = "/uploadImage")
 	@CrossOrigin
-	public MarkdownUploadImage uploadImage( @RequestParam("editormd-image-file") MultipartFile file)
-			throws IOException {
+	public MarkdownUploadImage uploadImage(@RequestParam("editormd-image-file") MultipartFile file) throws IOException {
 		try {
 			String fileName = file.getOriginalFilename();
 			String realPath = new Date().getTime() + fileName.substring(fileName.lastIndexOf("."));
@@ -65,7 +57,7 @@ public class QuestionAnswersController {
 			return new MarkdownUploadImage(0, "上传失敗!", null);
 		}
 	}
-	
+
 	@RequestMapping("saveQuestionAnswers")
 	@CrossOrigin
 	public ExecuteResult<Boolean> saveQuestionAnswers(@RequestBody QuestionAnswers questionAnswers) {
@@ -81,24 +73,7 @@ public class QuestionAnswersController {
 		}
 		return result;
 	}
-	
-	@RequestMapping("saveComment")
-	@CrossOrigin
-	public ExecuteResult<Boolean> saveComment(@RequestBody Comment comment) {
-		final ExecuteResult<Boolean> result = new ExecuteResult<>();
-		try {
-			comment.setCreateTime(new Date());
-			commentDao.save(comment);
-			result.setSuccess(true);
-		} catch (final Exception e) {
-			logger.error("", e);
-			result.setSuccess(false);
-			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-		}
-		return result;
-	}
-	
+
 	@RequestMapping("getQuestionAnswersById")
 	@CrossOrigin
 	public ExecuteResult<QuestionAnswers> getQuestionAnswersById(Long id) {
@@ -115,14 +90,14 @@ public class QuestionAnswersController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("addQuestionAnswersBrowseCnt")
 	@CrossOrigin
 	public ExecuteResult<Boolean> addQuestionAnswersBrowseCnt(Long id) {
 		final ExecuteResult<Boolean> result = new ExecuteResult<>();
 		try {
 			QuestionAnswers answers = questionAnswersDao.findOne(id);
-			answers.setBrowseCount(answers.getBrowseCount()+1);
+			answers.setBrowseCount(answers.getBrowseCount() + 1);
 			questionAnswersDao.save(answers);
 			result.setSuccess(true);
 		} catch (final Exception e) {
@@ -136,20 +111,10 @@ public class QuestionAnswersController {
 
 	@RequestMapping("questionAnswersList")
 	@CrossOrigin
-	public PageableResultJson questionAnswersList(@RequestParam(value = "page") Integer page,Integer rows, Long labelId) {
+	public PageableResultJson questionAnswersList(@RequestParam(value = "page") Integer page, Integer rows,
+			Long labelId) {
 		PageableResultJson tableJson = new PageableResultJson();
-		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersByLabelIdList(labelId, page,rows);
-		tableJson.setData(pageData.getContent());
-		tableJson.setPageSize(10);
-		tableJson.setTotalPageNumber(pageData.getTotalPages());
-		return tableJson;
-	}
-	
-	@RequestMapping("commentList")
-	@CrossOrigin
-	public PageableResultJson commentList(@RequestParam(value = "page") Integer page,Integer rows, Long id) {
-		PageableResultJson tableJson = new PageableResultJson();
-		Page<Comment> pageData = commentService.findCommentByLabelIdList(id, page,rows);
+		Page<QuestionAnswers> pageData = questionAnswersService.findQuestionAnswersByLabelIdList(labelId, page, rows);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
