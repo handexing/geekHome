@@ -33,8 +33,7 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "commentCnt", type = Integer.class) })),
 
 		@SqlResultSetMapping(name = "getBlogById", classes = @ConstructorResult(targetClass = Blog.class, columns = {
-				@ColumnResult(name = "id", type = Long.class),
-				@ColumnResult(name = "typeId", type = Long.class),
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "typeId", type = Long.class),
 				@ColumnResult(name = "title", type = String.class),
 				@ColumnResult(name = "subtitle", type = String.class),
 				@ColumnResult(name = "content", type = String.class),
@@ -78,6 +77,8 @@ public class Blog implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
+	@Column(name = "SYSTEM_TYPE_ID")
+	private Long systemTypeId;
 	@Column(name = "TYPE_ID")
 	private Long typeId;
 	@Column(name = "TITLE")
@@ -150,6 +151,14 @@ public class Blog implements Serializable {
 
 	public void setCommentCnt(Integer commentCnt) {
 		this.commentCnt = commentCnt;
+	}
+
+	public Long getSystemTypeId() {
+		return systemTypeId;
+	}
+
+	public void setSystemTypeId(Long systemTypeId) {
+		this.systemTypeId = systemTypeId;
 	}
 
 	public String getSubtitle() {
