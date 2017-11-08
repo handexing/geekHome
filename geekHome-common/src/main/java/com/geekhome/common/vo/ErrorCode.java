@@ -3,7 +3,8 @@ package com.geekhome.common.vo;
 public enum ErrorCode {
 	
 	EXCEPTION("程序异常", "00001"),
-	USER_NOT_EXIST("用户未注册", "00002");
+	USER_NOT_EXIST("用户未注册", "00002"),
+    VERIFY_CODE_WRONG("验证码错误","00003");
 
 	private String errorMsg;
 	private String errorCode;
