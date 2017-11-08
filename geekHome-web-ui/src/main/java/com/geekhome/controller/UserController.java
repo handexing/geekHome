@@ -235,12 +235,14 @@ public class UserController {
 	                Integer num = userService.modifyPersonPwd(verifyMessage.getUserName(),pwd);
 	                if(num <= 0){
 	                    result.setSuccess(false); 
+	                    result.setData(new User());
 	                }
 	                else{
 	                    result.setSuccess(true); 
 	                }
 	            }else {
 	                result.setSuccess(false);
+	                result.setData(new User());
 	                result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
 	                result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
 	            }
