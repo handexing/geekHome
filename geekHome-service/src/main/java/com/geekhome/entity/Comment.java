@@ -53,6 +53,7 @@ public class Comment implements Serializable {
 	 */
 	public static final Integer COMMENT_THEME_BLOG = 3;
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")

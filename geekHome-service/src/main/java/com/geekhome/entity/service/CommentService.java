@@ -24,13 +24,13 @@ public class CommentService {
 	EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
-	public Page<Comment> findCommentByLabelIdList(Long id, Integer page, int rows) {
+	public Page<Comment> findCommentByLabelIdList(Long id, int type, Integer page, int rows) {
 		final String sql = "SELECT c.ID id,c.USER_ID userId,c.THEME_ID themeId,c.CONTENT content,c.CREATE_TIME createTime,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl FROM comment AS c "
-				+ "LEFT JOIN USER AS u ON c.USER_ID = u.ID WHERE c.THEME_ID =:id ORDER BY c.CREATE_TIME ASC";
+				+ "LEFT JOIN USER AS u ON c.USER_ID = u.ID WHERE c.THEME_ID =:id AND c.TYPE=:type ORDER BY c.CREATE_TIME ASC";
 
 		final int firstRecord = PageUtil.calcPage(page) * rows;
 		final List<Comment> list = entityManager.createNativeQuery(sql, "getCommentList").setParameter("id", id)
-				.setFirstResult(firstRecord).setMaxResults(rows).getResultList();
+				.setParameter("type", type).setFirstResult(firstRecord).setMaxResults(rows).getResultList();
 		final int total = commentDao.getCommentByThemeIdCnt(id);
 		Pageable pageable = new PageRequest(page, rows);
 		final Page<Comment> pages = new PageImpl<>(list, pageable, total);

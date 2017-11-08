@@ -21,8 +21,7 @@ import com.geekhome.common.utils.CustomDateSerializer;
 @SqlResultSetMappings({
 
 		@SqlResultSetMapping(name = "getBlogList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
-				@ColumnResult(name = "id", type = Long.class),
-				@ColumnResult(name = "typeId", type = Long.class),
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "typeId", type = Long.class),
 				@ColumnResult(name = "title", type = String.class),
 				@ColumnResult(name = "subtitle", type = String.class),
 				@ColumnResult(name = "bannerImg", type = String.class),
@@ -31,7 +30,24 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "browseCount", type = Integer.class),
 				@ColumnResult(name = "createTime", type = Date.class),
 				@ColumnResult(name = "updateTime", type = Date.class),
-				@ColumnResult(name = "commentCnt", type = Integer.class) })) })
+				@ColumnResult(name = "commentCnt", type = Integer.class) })),
+
+		@SqlResultSetMapping(name = "getBlogById", classes = @ConstructorResult(targetClass = Blog.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "typeId", type = Long.class),
+				@ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "subtitle", type = String.class),
+				@ColumnResult(name = "content", type = String.class),
+				@ColumnResult(name = "bannerImg", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class),
+				@ColumnResult(name = "typeName", type = String.class),
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class),
+				@ColumnResult(name = "userId", type = Long.class) }))
+
+})
 
 @Entity
 @Table(name = "BLOG")
@@ -61,6 +77,8 @@ public class Blog implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
+	@Column(name = "SYSTEM_TYPE_ID")
+	private Long systemTypeId;
 	@Column(name = "TYPE_ID")
 	private Long typeId;
 	@Column(name = "TITLE")
@@ -85,7 +103,47 @@ public class Blog implements Serializable {
 	private Date updateTime;
 
 	@Transient
+	private String typeName;
+	@Transient
+	private Long userId;
+	@Transient
+	private String userName;
+	@Transient
+	private String headImgUrl;
+	@Transient
 	private Integer commentCnt;
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
 
 	public Integer getCommentCnt() {
 		return commentCnt;
@@ -93,6 +151,14 @@ public class Blog implements Serializable {
 
 	public void setCommentCnt(Integer commentCnt) {
 		this.commentCnt = commentCnt;
+	}
+
+	public Long getSystemTypeId() {
+		return systemTypeId;
+	}
+
+	public void setSystemTypeId(Long systemTypeId) {
+		this.systemTypeId = systemTypeId;
 	}
 
 	public String getSubtitle() {
@@ -118,7 +184,6 @@ public class Blog implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Long getTypeId() {
 		return typeId;
@@ -220,12 +285,31 @@ public class Blog implements Serializable {
 		this.commentCnt = commentCnt;
 	}
 
+	public Blog(Long id, Long typeId, String title, String subtitle, String content, String bannerImg,
+			Integer collectCount, Integer browseCount, Date createTime, Date updateTime, String typeName,
+			String userName, String headImgUrl, Long userId) {
+		super();
+		this.id = id;
+		this.typeId = typeId;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.content = content;
+		this.bannerImg = bannerImg;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.typeName = typeName;
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
-		return "Blog [id=" + id + ", typeId=" + typeId + ", title=" + title + ", content=" + content
-				+ ", subtitle=" + subtitle + ", bannerImg=" + bannerImg + ", status=" + status + ", collectCount="
-				+ collectCount + ", browseCount=" + browseCount + ", createTime=" + createTime + ", updateTime="
-				+ updateTime + "]";
+		return "Blog [id=" + id + ", typeId=" + typeId + ", title=" + title + ", content=" + content + ", subtitle="
+				+ subtitle + ", bannerImg=" + bannerImg + ", status=" + status + ", collectCount=" + collectCount
+				+ ", browseCount=" + browseCount + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 
 }

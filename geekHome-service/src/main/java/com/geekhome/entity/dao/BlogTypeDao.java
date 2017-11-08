@@ -10,7 +10,7 @@ import com.geekhome.entity.BlogType;
 
 public interface BlogTypeDao extends JpaRepository<BlogType, Long>{
 
-	@Query(nativeQuery = true, value = "SELECT * FROM BLOG_TYPE WHERE STATUS=:status AND USER_ID=:userId ORDER BY SORT ASC,CREATE_TIME DESC")
+	@Query(nativeQuery = true, value = "SELECT * FROM BLOG_TYPE WHERE STATUS=:status AND USER_ID=:userId ORDER BY CREATE_TIME ASC")
 	public List<BlogType> findUserBlogTypeByStatusAndUserId(@Param("status")Integer status, @Param("userId")Long userId);
 
 	public List<BlogType> findBlogTypeByUserIdAndName(Long userId, String name);
