@@ -33,10 +33,6 @@ public class BlogType implements Serializable {
 	private Long id;
 	@Column(name = "NAME")
 	private String name;
-	@Column(name = "PARENT_ID")
-	private Long parentId;
-	@Column(name = "SORT")
-	private Integer sort;
 	@Column(name = "STATUS")
 	private Integer status;
 	@Column(name = "USER_ID")
@@ -62,22 +58,6 @@ public class BlogType implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
 	}
 
 	public Integer getStatus() {
@@ -112,13 +92,11 @@ public class BlogType implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public BlogType(Long id, String name, Long parentId, Integer sort, Integer status, Long userId, Date createTime,
+	public BlogType(Long id, String name, Integer status, Long userId, Date createTime,
 			Date updateTime) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.parentId = parentId;
-		this.sort = sort;
 		this.status = status;
 		this.userId = userId;
 		this.createTime = createTime;
@@ -131,7 +109,7 @@ public class BlogType implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BlogType [id=" + id + ", name=" + name + ", parentId=" + parentId + ", sort=" + sort + ", status="
+		return "BlogType [id=" + id + ", name=" + name  + ", status="
 				+ status + ", userId=" + userId + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
 	}
 
