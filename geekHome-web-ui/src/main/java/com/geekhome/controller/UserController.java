@@ -105,70 +105,48 @@ public class UserController {
 		}
 	}
 
-	/*@RequestMapping("verifyLogin")
-	@CrossOrigin
-	public void verifyLogin(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
-					GeetestConfig.isnewfailback());
+	/*
+	 * @RequestMapping("verifyLogin")
+	 * 
+	 * @CrossOrigin public void verifyLogin(HttpServletRequest request,
+	 * HttpServletResponse response) { try { GeetestLib gtSdk = new
+	 * GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
+	 * GeetestConfig.isnewfailback());
+	 * 
+	 * String challenge = request.getParameter(GeetestLib.fn_geetest_challenge);
+	 * String validate = request.getParameter(GeetestLib.fn_geetest_validate);
+	 * String seccode = request.getParameter(GeetestLib.fn_geetest_seccode);
+	 * 
+	 * // 从session中获取gt-server状态 int gt_server_status_code = (Integer)
+	 * request.getSession().getAttribute(gtSdk.gtServerStatusSessionKey);
+	 * 
+	 * // 从session中获取userid String userid = (String)
+	 * request.getSession().getAttribute("userid");
+	 * 
+	 * HashMap<String, String> map = new HashMap<>(); map.put("user_id", userid);
+	 * 
+	 * int gtResult = 0; if (gt_server_status_code == 1) { //
+	 * gt-server正常，向gt-server进行二次验证 gtResult =
+	 * gtSdk.enhencedValidateRequest(challenge, validate, seccode, map);
+	 * System.out.println(gtResult); } else { // gt-server非正常情况下，进行failback模式验证
+	 * System.out.println("failback:use your own server captcha validate"); gtResult
+	 * = gtSdk.failbackValidateRequest(challenge, validate, seccode);
+	 * System.out.println(gtResult); }
+	 * 
+	 * Map<String, String> data = new HashMap<>();
+	 * 
+	 * if (gtResult == 1) { // 验证成功 PrintWriter out = response.getWriter();
+	 * 
+	 * // JSONObject data = new JSONObject(); try { data.put("status", "success");
+	 * data.put("version", gtSdk.getVersionInfo()); } catch (Exception e) {
+	 * e.printStackTrace(); } out.println(data); } else { // 验证失败 // JSONObject data
+	 * = new JSONObject(); try { data.put("status", "fail"); data.put("version",
+	 * gtSdk.getVersionInfo()); } catch (Exception e) { e.printStackTrace(); }
+	 * PrintWriter out = response.getWriter(); out.println(data); }
+	 * 
+	 * } catch (final Exception e) { logger.error("", e); } }
+	 */
 
-			String challenge = request.getParameter(GeetestLib.fn_geetest_challenge);
-			String validate = request.getParameter(GeetestLib.fn_geetest_validate);
-			String seccode = request.getParameter(GeetestLib.fn_geetest_seccode);
-
-			// 从session中获取gt-server状态
-			int gt_server_status_code = (Integer) request.getSession().getAttribute(gtSdk.gtServerStatusSessionKey);
-
-			// 从session中获取userid
-			String userid = (String) request.getSession().getAttribute("userid");
-
-			HashMap<String, String> map = new HashMap<>();
-			map.put("user_id", userid);
-
-			int gtResult = 0;
-			if (gt_server_status_code == 1) {
-				// gt-server正常，向gt-server进行二次验证
-				gtResult = gtSdk.enhencedValidateRequest(challenge, validate, seccode, map);
-				System.out.println(gtResult);
-			} else {
-				// gt-server非正常情况下，进行failback模式验证
-				System.out.println("failback:use your own server captcha validate");
-				gtResult = gtSdk.failbackValidateRequest(challenge, validate, seccode);
-				System.out.println(gtResult);
-			}
-			
-			Map<String, String> data = new HashMap<>();
-			
-			if (gtResult == 1) {
-				// 验证成功
-				PrintWriter out = response.getWriter();
-				
-//				JSONObject data = new JSONObject();
-				try {
-					data.put("status", "success");
-					data.put("version", gtSdk.getVersionInfo());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				out.println(data);
-			} else {
-				// 验证失败
-//				JSONObject data = new JSONObject();
-				try {
-					data.put("status", "fail");
-					data.put("version", gtSdk.getVersionInfo());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				PrintWriter out = response.getWriter();
-				out.println(data);
-			}
-
-		} catch (final Exception e) {
-			logger.error("", e);
-		}
-	}*/
-	
 	@RequestMapping("modifyPersonInfo")
 	@CrossOrigin
 	public ExecuteResult<User> modifyPersonInfo(@RequestBody User user) {
@@ -184,75 +162,111 @@ public class UserController {
 		}
 		return result;
 	}
+
+	@RequestMapping("checkUserName")
+	@CrossOrigin
+	public ExecuteResult<User> checkUserName(String userName) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			User user = userDao.findUserByUserName(userName);
+			result.setData(user);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 	
+	@RequestMapping("checkEmail")
+	@CrossOrigin
+	public ExecuteResult<User> checkEmail(String email) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			User user = userDao.findUserByEmail(email);
+			result.setData(user);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
 	/**
 	 * 发送验证邮件
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping("getEmailCode")
-    @CrossOrigin
-    public ExecuteResult<User> getEmailCode(@RequestBody User user , HttpServletRequest request) {
-        final ExecuteResult<User> result = new ExecuteResult<>();
-        try {
-            User u = userService.verifyByNameAndEmail(user);
-            if(u.getId()!=null){
-                String code = EmailUtils.sendEmail(u.getEmail()); //发送邮件验证
-                result.setData(userService.verifyByNameAndEmail(user));
-                result.setSuccess(true);
-                //将验证码放于session中保存，存放之前先清除
-                if(request.getSession().getAttribute("verifyCode") != null)
-                {
-                    request.getSession().removeAttribute("verifyCode"); 
-                }
-                request.getSession().setAttribute("verifyCode", code);
-            }else {
-                result.setData(new User());
-                result.setSuccess(false);
-            }
-        } catch (final Exception e) {
-            logger.error("", e);
-            result.setSuccess(false);
-            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-        }
-        return result;
-    }
-	
+	@CrossOrigin
+	public ExecuteResult<User> getEmailCode(@RequestBody User user, HttpServletRequest request) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			User u = userService.verifyByNameAndEmail(user);
+			if (u.getId() != null) {
+				String code = EmailUtils.sendEmail(u.getEmail()); // 发送邮件验证
+				result.setData(userService.verifyByNameAndEmail(user));
+				result.setSuccess(true);
+				// 将验证码放于session中保存，存放之前先清除
+				if (request.getSession().getAttribute("verifyCode") != null) {
+					request.getSession().removeAttribute("verifyCode");
+				}
+				request.getSession().setAttribute("verifyCode", code);
+			} else {
+				result.setData(new User());
+				result.setSuccess(false);
+			}
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+
 	/**
 	 * 修改密码
+	 * 
 	 * @return
 	 */
 	@RequestMapping("modifyPersonPwd")
-    @CrossOrigin
-	public ExecuteResult<User> modifyPersonPwd(@RequestBody VerifyMessage verifyMessage, HttpServletRequest request){
-	    final ExecuteResult<User> result = new ExecuteResult<>();
-	    try{
-	        if ( StringUtils.isNotBlank( verifyMessage.getEmailCode() ) && StringUtils.isNotBlank( verifyMessage.getPassword() ) ){
-	            String code = (String)request.getSession().getAttribute("verifyCode"); 
-	            if(verifyMessage.getEmailCode().equals(code)){
-	                String pwd = PasswordUtil.createCustomPwd(verifyMessage.getPassword(), verifyMessage.getUserName() + User.SALT);
-	                Integer num = userService.modifyPersonPwd(verifyMessage.getUserName(),pwd);
-	                if(num <= 0){
-	                    result.setSuccess(false); 
-	                    result.setData(new User());
-	                }
-	                else{
-	                    result.setSuccess(true); 
-	                }
-	            }else {
-	                result.setSuccess(false);
-	                result.setData(new User());
-	                result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
-	                result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
-	            }
-	        }
-	    }catch (final Exception e) {
-            logger.error("", e);
-            result.setSuccess(false);
-            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-        }
-	    return result;
+	@CrossOrigin
+	public ExecuteResult<User> modifyPersonPwd(@RequestBody VerifyMessage verifyMessage, HttpServletRequest request) {
+		final ExecuteResult<User> result = new ExecuteResult<>();
+		try {
+			if (StringUtils.isNotBlank(verifyMessage.getEmailCode())
+					&& StringUtils.isNotBlank(verifyMessage.getPassword())) {
+				String code = (String) request.getSession().getAttribute("verifyCode");
+				if (verifyMessage.getEmailCode().equals(code)) {
+					String pwd = PasswordUtil.createCustomPwd(verifyMessage.getPassword(),
+							verifyMessage.getUserName() + User.SALT);
+					Integer num = userService.modifyPersonPwd(verifyMessage.getUserName(), pwd);
+					if (num <= 0) {
+						result.setSuccess(false);
+						result.setData(new User());
+					} else {
+						result.setSuccess(true);
+					}
+				} else {
+					result.setSuccess(false);
+					result.setData(new User());
+					result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
+					result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
+				}
+			}
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
 	}
 }
