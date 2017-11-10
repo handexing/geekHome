@@ -52,5 +52,27 @@ public class UserService {
 			}
 		}
 	}
-
+	
+	/**
+	 * 通过用户名和邮箱验证用户是否存在
+	 * @param user 传入的用户名和邮箱
+	 * @return
+	 */
+	public User verifyByNameAndEmail(User user){
+	    User us = userDao.findUserByUserNameAndEmail(user.getUserName(), user.getEmail());
+	    if(us != null) {
+	        return us;
+	    }else {
+	       return new User(); 
+	    }
+	}
+	
+	/**
+	 * 修改用户密码
+	 * @return
+	 */
+	public Integer modifyPersonPwd(String userName , String pwd ) {
+	    Integer num = userDao.modifyPersonPwd(userName, pwd);
+	    return num;
+	}
 }

@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 08/11/2017 16:26:55
+ Date: 09/11/2017 13:49:44
 */
 
 SET NAMES utf8mb4;
@@ -81,13 +81,13 @@ CREATE TABLE `blog`  (
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (4, NULL, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 2, NULL, '2017-11-02 09:42:53', NULL);
-INSERT INTO `blog` VALUES (5, NULL, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 2, NULL, '2017-11-02 09:43:18', NULL);
-INSERT INTO `blog` VALUES (6, NULL, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 1, NULL, '2017-11-02 09:43:38', NULL);
-INSERT INTO `blog` VALUES (7, NULL, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 9, NULL, '2017-11-02 09:49:31', NULL);
-INSERT INTO `blog` VALUES (8, NULL, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 1, NULL, '2017-11-03 11:14:23', NULL);
-INSERT INTO `blog` VALUES (9, NULL, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 0, NULL, '2017-11-03 11:18:08', NULL);
-INSERT INTO `blog` VALUES (10, NULL, 58, '极客屋需求文档', '极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！', '# 极客屋需求文档\n\n## 说明\n> `极客屋`是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！\n\n## 极客屋功能模块\n> 目前大致分为以下几种模块，后期如有好的idea在添加。\n\n1. 首页\n2. 开源\n3. 博客\n4. 问与答\n5. 标签节点\n\n### 1. 首页展示\n> 首页包含以下几种功能模块，后期可能扩展更多：\n\n1.1 滚动栏\n1.2 热搜标签\n1.3 热门文章\n1.4 问与答\n1.5 今日热议\n1.6 专题学习\n1.7 开源排行\n\n#### 1.1 滚动栏\n主要用于显示特别好玩得`开源项目`，`有趣得专题`,`热门文章`等。\n\n#### 1.2 热搜标签\n用于显示用户查看最多得`30`个标签，点击标签可以直接查询相关内容，如：开源项目，问与答，博客文章等。\n\n#### 1.3 热门文章\n用于显示近期被收藏/浏览/评论数量最多得`8`篇文章。【加载更多】按钮点击跳转到博客文章列表页面。根据不用分类查询文章。根据用户技术选择推荐文章。文章可被分享到其他平台。\n\n#### 1.4 问与答\n用于显示最近提问的`6`条数据。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.5 今日热议\n显示今天讨论最激烈得`10`条数据。根据浏览数量和评论数量`排名显示`。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.6 专题学习\n用于显示`12`条被收藏最多得专题栏目。点击进去可查看专题详情。\n\n#### 1.7 开源排行\n用于展示用户近期投得最有趣得`10`个开源项目。点击进入开源详情页面。\n\n### 2. 开源\n> 用于显示不同分类下的开源项目，帮助用户`推广`和`发现`更多有趣得项目。包含以下功能模块：\n\n2.1 开源类别的获取\n2.2 切换类别tab，动态数据，列表分页。\n2.3 本类推荐\n2.4 点击查看开源详情页\n2.5 评论回复，收藏，分享功能\n\n#### 2.1 开源类别的获取\n动态获取开源类别，组装tab显示。点击`更多`tab按钮，可查看更多开源分类信息。\n\n#### 2.2 切换类别tab，动态数据，列表分页。\n点击tab选项动态获取开源列表信息分页展示。\n\n#### 2.3 本类推荐\n每个开源类别下推荐`4`个开源项目。根据`收藏数量`。\n\n#### 2.4 点击查看开源详情页\n点击查看开源详情信息。\n\n#### 2.5 评论回复，收藏功能\n在开源项目详情页可以评论回复讨论，并且用户可收藏，分享该项目。\n\n\n\n\n\n\n\n', 3, 0, 12, NULL, '2017-11-08 10:37:14', NULL);
+INSERT INTO `blog` VALUES (4, 65, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 2, NULL, '2017-11-02 09:42:53', NULL);
+INSERT INTO `blog` VALUES (5, 66, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 2, NULL, '2017-11-02 09:43:18', NULL);
+INSERT INTO `blog` VALUES (6, 67, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 1, NULL, '2017-11-02 09:43:38', NULL);
+INSERT INTO `blog` VALUES (7, 68, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 9, NULL, '2017-11-02 09:49:31', NULL);
+INSERT INTO `blog` VALUES (8, 69, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 1, NULL, '2017-11-03 11:14:23', NULL);
+INSERT INTO `blog` VALUES (9, 71, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 0, NULL, '2017-11-03 11:18:08', NULL);
+INSERT INTO `blog` VALUES (10, 70, 58, '极客屋需求文档', '极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！', '# 极客屋需求文档\n\n## 说明\n> `极客屋`是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！\n\n## 极客屋功能模块\n> 目前大致分为以下几种模块，后期如有好的idea在添加。\n\n1. 首页\n2. 开源\n3. 博客\n4. 问与答\n5. 标签节点\n\n### 1. 首页展示\n> 首页包含以下几种功能模块，后期可能扩展更多：\n\n1.1 滚动栏\n1.2 热搜标签\n1.3 热门文章\n1.4 问与答\n1.5 今日热议\n1.6 专题学习\n1.7 开源排行\n\n#### 1.1 滚动栏\n主要用于显示特别好玩得`开源项目`，`有趣得专题`,`热门文章`等。\n\n#### 1.2 热搜标签\n用于显示用户查看最多得`30`个标签，点击标签可以直接查询相关内容，如：开源项目，问与答，博客文章等。\n\n#### 1.3 热门文章\n用于显示近期被收藏/浏览/评论数量最多得`8`篇文章。【加载更多】按钮点击跳转到博客文章列表页面。根据不用分类查询文章。根据用户技术选择推荐文章。文章可被分享到其他平台。\n\n#### 1.4 问与答\n用于显示最近提问的`6`条数据。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.5 今日热议\n显示今天讨论最激烈得`10`条数据。根据浏览数量和评论数量`排名显示`。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.6 专题学习\n用于显示`12`条被收藏最多得专题栏目。点击进去可查看专题详情。\n\n#### 1.7 开源排行\n用于展示用户近期投得最有趣得`10`个开源项目。点击进入开源详情页面。\n\n### 2. 开源\n> 用于显示不同分类下的开源项目，帮助用户`推广`和`发现`更多有趣得项目。包含以下功能模块：\n\n2.1 开源类别的获取\n2.2 切换类别tab，动态数据，列表分页。\n2.3 本类推荐\n2.4 点击查看开源详情页\n2.5 评论回复，收藏，分享功能\n\n#### 2.1 开源类别的获取\n动态获取开源类别，组装tab显示。点击`更多`tab按钮，可查看更多开源分类信息。\n\n#### 2.2 切换类别tab，动态数据，列表分页。\n点击tab选项动态获取开源列表信息分页展示。\n\n#### 2.3 本类推荐\n每个开源类别下推荐`4`个开源项目。根据`收藏数量`。\n\n#### 2.4 点击查看开源详情页\n点击查看开源详情信息。\n\n#### 2.5 评论回复，收藏功能\n在开源项目详情页可以评论回复讨论，并且用户可收藏，分享该项目。\n\n\n\n\n\n\n\n', 3, 0, 13, NULL, '2017-11-08 10:37:14', NULL);
 INSERT INTO `blog` VALUES (11, 64, 59, 'android四大组件详细介绍', 'Android从入门到放弃！！！', ':flushed:android四大组件详细介绍', 3, 0, 1, NULL, '2017-11-08 14:50:03', NULL);
 INSERT INTO `blog` VALUES (12, 64, 59, 'Android webview详解', 'Android webview详解', 'Android webview详解', 3, 0, 1, NULL, '2017-11-08 14:53:48', NULL);
 
@@ -98,34 +98,33 @@ DROP TABLE IF EXISTS `blog_type`;
 CREATE TABLE `blog_type`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `PARENT_ID` bigint(20) DEFAULT 0,
-  `SORT` int(255) DEFAULT NULL,
   `STATUS` int(1) DEFAULT 1,
   `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户ID，主要用于博客类别',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户blog类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户blog类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_type
 -- ----------------------------
-INSERT INTO `blog_type` VALUES (58, 'spring', 0, 1, 1, 5, '2017-11-01 15:59:08', NULL);
-INSERT INTO `blog_type` VALUES (59, 'java', 0, 2, 1, 5, '2017-11-01 15:59:28', NULL);
-INSERT INTO `blog_type` VALUES (60, '前端', 0, 3, 1, 5, '2017-11-01 16:00:11', NULL);
-INSERT INTO `blog_type` VALUES (61, '数据库', 0, 4, 1, 5, '2017-11-01 16:00:41', NULL);
-INSERT INTO `blog_type` VALUES (62, 'test', 0, 0, 1, 5, '2017-11-07 10:40:48', NULL);
-INSERT INTO `blog_type` VALUES (63, 'Java', 0, 0, 1, 24, '2017-11-07 11:17:03', NULL);
-INSERT INTO `blog_type` VALUES (64, '移动开发', 0, 1, 1, 0, '2017-11-08 14:35:50', NULL);
-INSERT INTO `blog_type` VALUES (65, '架构', 0, 2, 1, 0, '2017-11-08 14:35:52', NULL);
-INSERT INTO `blog_type` VALUES (66, '云计算/大数据', 0, 3, 1, 0, '2017-11-08 14:35:54', NULL);
-INSERT INTO `blog_type` VALUES (67, '互联网', 0, 4, 1, 0, '2017-11-08 14:35:57', NULL);
-INSERT INTO `blog_type` VALUES (68, '运维', 0, 5, 1, 0, '2017-11-08 14:35:59', NULL);
-INSERT INTO `blog_type` VALUES (69, '数据库', 0, 6, 1, 0, '2017-11-08 14:36:02', NULL);
-INSERT INTO `blog_type` VALUES (70, '前端', 0, 7, 1, 0, '2017-11-08 14:36:04', NULL);
-INSERT INTO `blog_type` VALUES (71, '编程语言', 0, 8, 1, 0, '2017-11-08 14:36:07', NULL);
-INSERT INTO `blog_type` VALUES (72, '研发管理', 0, 9, 1, 0, '2017-11-08 14:36:09', NULL);
-INSERT INTO `blog_type` VALUES (73, '综合', 0, 10, 1, 0, '2017-11-08 14:36:12', NULL);
+INSERT INTO `blog_type` VALUES (58, 'spring', 1, 5, '2017-11-01 15:59:08', NULL);
+INSERT INTO `blog_type` VALUES (59, 'java', 1, 5, '2017-11-01 15:59:28', NULL);
+INSERT INTO `blog_type` VALUES (60, '前端', 1, 5, '2017-11-01 16:00:11', NULL);
+INSERT INTO `blog_type` VALUES (61, '数据库', 1, 5, '2017-11-01 16:00:41', NULL);
+INSERT INTO `blog_type` VALUES (62, 'test', 1, 5, '2017-11-07 10:40:48', NULL);
+INSERT INTO `blog_type` VALUES (63, 'Java', 1, 24, '2017-11-07 11:17:03', NULL);
+INSERT INTO `blog_type` VALUES (64, '移动开发', 1, 0, '2017-11-08 14:35:50', NULL);
+INSERT INTO `blog_type` VALUES (65, '架构', 1, 0, '2017-11-08 14:35:52', NULL);
+INSERT INTO `blog_type` VALUES (66, '云计算/大数据', 1, 0, '2017-11-08 14:35:54', NULL);
+INSERT INTO `blog_type` VALUES (67, '互联网', 1, 0, '2017-11-08 14:35:57', NULL);
+INSERT INTO `blog_type` VALUES (68, '运维', 1, 0, '2017-11-08 14:35:59', NULL);
+INSERT INTO `blog_type` VALUES (69, '数据库', 1, 0, '2017-11-08 14:36:02', NULL);
+INSERT INTO `blog_type` VALUES (70, '前端', 1, 0, '2017-11-08 14:36:04', NULL);
+INSERT INTO `blog_type` VALUES (71, '编程语言', 1, 0, '2017-11-08 14:36:07', NULL);
+INSERT INTO `blog_type` VALUES (72, '研发管理', 1, 0, '2017-11-08 14:36:09', NULL);
+INSERT INTO `blog_type` VALUES (73, '综合', 1, 0, '2017-11-08 14:36:12', NULL);
+INSERT INTO `blog_type` VALUES (74, '哈哈', 1, 5, '2017-11-09 10:23:51', NULL);
 
 -- ----------------------------
 -- Table structure for comment
@@ -213,17 +212,17 @@ CREATE TABLE `label`  (
 -- ----------------------------
 -- Records of label
 -- ----------------------------
-INSERT INTO `label` VALUES (8, '创意', 0, 0, 1, 3, '2017-10-11 10:39:16', NULL);
+INSERT INTO `label` VALUES (8, '创意', 0, 1, 1, 3, '2017-10-11 10:39:16', NULL);
 INSERT INTO `label` VALUES (9, '分享创造', 8, 1, 1, 3, '2017-10-11 10:39:49', NULL);
 INSERT INTO `label` VALUES (10, '设计', 8, 1, 1, 3, '2017-10-11 10:40:19', NULL);
 INSERT INTO `label` VALUES (11, '奇思妙想', 8, 1, 1, 3, '2017-10-11 10:40:23', NULL);
-INSERT INTO `label` VALUES (12, '问与答', 0, 0, 1, 3, '2017-10-11 10:43:15', NULL);
-INSERT INTO `label` VALUES (13, '技术', 0, 0, 1, 3, '2017-10-11 10:43:18', NULL);
-INSERT INTO `label` VALUES (14, '好玩', 0, 0, 1, 3, '2017-10-11 10:43:21', NULL);
-INSERT INTO `label` VALUES (15, '吐槽', 0, 0, 1, 3, '2017-10-11 10:43:23', NULL);
-INSERT INTO `label` VALUES (16, '酷工作', 0, 0, 1, 3, '2017-10-11 10:43:25', NULL);
-INSERT INTO `label` VALUES (17, '城市', 0, 0, 1, 3, '2017-10-11 10:43:28', NULL);
-INSERT INTO `label` VALUES (18, '交易', 0, 0, 1, 3, '2017-10-11 10:43:30', NULL);
+INSERT INTO `label` VALUES (12, '问与答', 0, 2, 1, 3, '2017-10-11 10:43:15', NULL);
+INSERT INTO `label` VALUES (13, '技术', 0, 3, 1, 3, '2017-10-11 10:43:18', NULL);
+INSERT INTO `label` VALUES (14, '好玩', 0, 4, 1, 3, '2017-10-11 10:43:21', NULL);
+INSERT INTO `label` VALUES (15, '吐槽', 0, 5, 1, 3, '2017-10-11 10:43:23', NULL);
+INSERT INTO `label` VALUES (16, '酷工作', 0, 6, 1, 3, '2017-10-11 10:43:25', NULL);
+INSERT INTO `label` VALUES (17, '城市', 0, 7, 1, 3, '2017-10-11 10:43:28', NULL);
+INSERT INTO `label` VALUES (18, '交易', 0, 8, 1, 3, '2017-10-11 10:43:30', NULL);
 INSERT INTO `label` VALUES (20, '问与答', 12, 1, 1, 3, '2017-10-11 10:49:52', NULL);
 INSERT INTO `label` VALUES (21, '程序员', 13, 1, 1, 3, '2017-10-11 10:49:54', NULL);
 INSERT INTO `label` VALUES (22, 'python', 13, 2, 1, 3, '2017-10-11 10:49:59', NULL);
@@ -247,18 +246,18 @@ INSERT INTO `label` VALUES (39, '二手交易', 18, 1, 1, 3, '2017-10-11 10:51:0
 INSERT INTO `label` VALUES (40, '物换物', 18, 2, 1, 3, '2017-10-11 10:51:06', NULL);
 INSERT INTO `label` VALUES (41, '免费赠送', 18, 3, 1, 3, '2017-10-11 10:51:09', NULL);
 INSERT INTO `label` VALUES (42, '团购', 18, 4, 1, 3, '2017-10-11 10:51:12', NULL);
-INSERT INTO `label` VALUES (46, 'Java', 0, 0, 1, 1, '2017-11-01 13:28:44', '2017-11-01 13:29:51');
-INSERT INTO `label` VALUES (47, '线程', 46, 0, 1, 1, '2017-11-01 13:42:21', NULL);
-INSERT INTO `label` VALUES (48, 'java', 0, 0, 1, 2, '2017-11-01 15:03:43', NULL);
-INSERT INTO `label` VALUES (49, 'python', 0, 0, 1, 2, '2017-11-01 15:03:51', NULL);
-INSERT INTO `label` VALUES (50, 'javascript', 0, 0, 1, 2, '2017-11-01 15:04:01', NULL);
-INSERT INTO `label` VALUES (51, 'C#', 0, 0, 1, 2, '2017-11-01 15:04:08', NULL);
-INSERT INTO `label` VALUES (52, 'ruby', 0, 0, 1, 2, '2017-11-01 15:04:15', NULL);
-INSERT INTO `label` VALUES (53, 'go', 0, 0, 1, 2, '2017-11-01 15:04:20', NULL);
-INSERT INTO `label` VALUES (54, 'php', 0, 0, 1, 2, '2017-11-01 15:04:26', NULL);
-INSERT INTO `label` VALUES (55, 'node-js', 0, 0, 1, 2, '2017-11-01 15:04:35', '2017-11-01 15:04:44');
-INSERT INTO `label` VALUES (56, 'angular', 0, 0, 1, 2, '2017-11-01 15:04:56', NULL);
-INSERT INTO `label` VALUES (57, 'shell', 0, 0, 1, 2, '2017-11-01 15:05:01', NULL);
+INSERT INTO `label` VALUES (46, 'Java', 0, 1, 1, 1, '2017-11-01 13:28:44', '2017-11-01 13:29:51');
+INSERT INTO `label` VALUES (47, '线程', 46, 1, 1, 1, '2017-11-01 13:42:21', NULL);
+INSERT INTO `label` VALUES (48, 'java', 0, 1, 1, 2, '2017-11-01 15:03:43', NULL);
+INSERT INTO `label` VALUES (49, 'python', 0, 2, 1, 2, '2017-11-01 15:03:51', NULL);
+INSERT INTO `label` VALUES (50, 'javascript', 0, 3, 1, 2, '2017-11-01 15:04:01', NULL);
+INSERT INTO `label` VALUES (51, 'C#', 0, 4, 1, 2, '2017-11-01 15:04:08', NULL);
+INSERT INTO `label` VALUES (52, 'ruby', 0, 5, 1, 2, '2017-11-01 15:04:15', NULL);
+INSERT INTO `label` VALUES (53, 'go', 0, 6, 1, 2, '2017-11-01 15:04:20', NULL);
+INSERT INTO `label` VALUES (54, 'php', 0, 7, 1, 2, '2017-11-01 15:04:26', NULL);
+INSERT INTO `label` VALUES (55, 'node-js', 0, 8, 1, 2, '2017-11-01 15:04:35', '2017-11-01 15:04:44');
+INSERT INTO `label` VALUES (56, 'angular', 0, 9, 1, 2, '2017-11-01 15:04:56', NULL);
+INSERT INTO `label` VALUES (57, 'shell', 0, 10, 1, 2, '2017-11-01 15:05:01', NULL);
 
 -- ----------------------------
 -- Table structure for menu
@@ -357,7 +356,7 @@ INSERT INTO `question_answers` VALUES (3, 5, 8, '的发射点发的发多少', '
 INSERT INTO `question_answers` VALUES (4, 5, 8, '发射点发的时间和海关扣了', '立刻脚后跟范德萨OIUYTREWQ', 2, 0, 0, '2017-10-27 10:47:55', NULL);
 INSERT INTO `question_answers` VALUES (5, 5, 8, '又山寨了一个传统颜色的配色网站', '.,MNBVCXZZ\';LKJHGFDSA看脚后跟范德萨', 2, 0, 2, '2017-10-27 10:48:12', NULL);
 INSERT INTO `question_answers` VALUES (6, 5, 8, '哦iu一头热完全离开建行股份的美女不v', '会让你人沟通拜访v的撒而更广泛的v新政策执行所发生的', 2, 0, 1, '2017-10-27 10:48:42', NULL);
-INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 16, '2017-10-27 17:17:37', NULL);
+INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 17, '2017-10-27 17:17:37', NULL);
 INSERT INTO `question_answers` VALUES (8, 6, 8, '还记得简悦吗？ 1.0.4 版带来了可支持任意页面生成阅读模式', 'adsfads', 2, 0, 6, '2017-10-27 17:36:40', NULL);
 INSERT INTO `question_answers` VALUES (9, 7, 8, '写了一个交互式的 ssh 批量操作客户端，支持根据服务端的执行文件和路径自动补全，支持批量上传下载文件', 's', 2, 0, 4, '2017-10-27 17:36:44', NULL);
 INSERT INTO `question_answers` VALUES (10, 8, 8, '写了一个 Lemon 语言到 Objective-C 的绑定，可以用 Lemon 语言写 Mac 和 iOS 了。', 's', 2, 0, 2, '2017-10-27 17:36:48', NULL);
@@ -371,9 +370,9 @@ INSERT INTO `question_answers` VALUES (17, 5, 21, '程序员程序员', '程序�
 INSERT INTO `question_answers` VALUES (18, 5, 26, '王者农药真的那么好玩吗？', '王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？', 2, 0, 3, '2017-10-27 14:35:21', NULL);
 INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网好卡啊啊啊~~~~网好卡啊啊啊~~~~', 2, 0, 0, '2017-10-27 14:35:47', NULL);
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
-INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 0, '2017-10-27 14:36:32', NULL);
+INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 2, '2017-10-27 14:36:32', NULL);
 INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 0, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 211, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 212, '2017-10-27 20:08:44', NULL);
 INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 16, '2017-10-27 22:35:16', NULL);
 INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 8, '2017-10-27 23:17:56', NULL);
 INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 4, '2017-11-01 10:25:40', NULL);
