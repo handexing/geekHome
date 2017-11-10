@@ -40,6 +40,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private EmailUtils emailUtils;
 
 	@RequestMapping("userRegister")
 	@CrossOrigin
@@ -197,7 +199,8 @@ public class UserController {
         try {
             User u = userService.verifyByNameAndEmail(user);
             if(u.getId()!=null){
-                String code = EmailUtils.sendEmail(u.getEmail()); //发送邮件验证
+                String code = EmailUtils.getCode(); 
+                emailUtils.doTask(u.getEmail() , code); //异步发送
                 result.setData(userService.verifyByNameAndEmail(user));
                 result.setSuccess(true);
                 //将验证码放于session中保存，存放之前先清除
@@ -236,15 +239,18 @@ public class UserController {
 	                if(num <= 0){
 	                    result.setSuccess(false); 
 	                    result.setData(new User());
+	                    return result;
 	                }
 	                else{
 	                    result.setSuccess(true); 
+	                    return result;
 	                }
 	            }else {
 	                result.setSuccess(false);
 	                result.setData(new User());
 	                result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
 	                result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
+	                return result;
 	            }
 	        }
 	    }catch (final Exception e) {

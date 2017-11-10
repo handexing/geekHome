@@ -93,7 +93,17 @@
 		    <version>1.4.6</version>
 		</dependency>
 		
-
+		<!-- 提供redis -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-redis</artifactId>
+		    <version>1.4.6.RELEASE</version>
+		</dependency>
+ 
+		<dependency>  
+		        <groupId>org.springframework.session</groupId>  
+		        <artifactId>spring-session-data-redis</artifactId>  
+		</dependency> 
 
 	</dependencies>
 
@@ -102,6 +112,7 @@
 		<module>geekHome-common</module>
 		<module>geekHome-service</module>
 		<module>geekHome-backend</module>
+		<module>geekHome-redis</module>
 	</modules>
 
 </project>
