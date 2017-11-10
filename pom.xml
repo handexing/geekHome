@@ -112,7 +112,6 @@
 		<module>geekHome-common</module>
 		<module>geekHome-service</module>
 		<module>geekHome-backend</module>
-		<module>geekHome-redis</module>
 	</modules>
 
 </project>
