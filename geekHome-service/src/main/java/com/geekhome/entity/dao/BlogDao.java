@@ -11,4 +11,7 @@ public interface BlogDao extends JpaRepository<Blog, Long>{
 	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG WHERE TYPE_ID IN(SELECT ID FROM BLOG_TYPE WHERE USER_ID=:userId)")
 	int getBlogByUserIdCnt(@Param("userId") Long userId);
 
+	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG")
+	int getBoleCnt();
+
 }

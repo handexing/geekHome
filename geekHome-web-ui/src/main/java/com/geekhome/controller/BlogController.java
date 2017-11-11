@@ -134,5 +134,15 @@ public class BlogController {
 		}
 		return result;
 	}
+	@RequestMapping("getAllBlogList")
+	@CrossOrigin
+	public PageableResultJson getAllBlogList(@RequestParam(value = "page") Integer page, Integer rows) {
+		PageableResultJson tableJson = new PageableResultJson();
+		Page<Blog> pageData = blogService.getBlogList(page, rows);
+		tableJson.setData(pageData.getContent());
+		tableJson.setPageSize(10);
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
+		return tableJson;
+	}
 	
 }

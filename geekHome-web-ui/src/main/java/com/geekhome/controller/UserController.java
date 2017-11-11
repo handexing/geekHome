@@ -40,6 +40,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private EmailUtils emailUtils;
 
 	@RequestMapping("userRegister")
 	@CrossOrigin
@@ -204,69 +206,73 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("getEmailCode")
-	@CrossOrigin
-	public ExecuteResult<User> getEmailCode(@RequestBody User user, HttpServletRequest request) {
-		final ExecuteResult<User> result = new ExecuteResult<>();
-		try {
-			User u = userService.verifyByNameAndEmail(user);
-			if (u.getId() != null) {
-				String code = EmailUtils.sendEmail(u.getEmail()); // 发送邮件验证
-				result.setData(userService.verifyByNameAndEmail(user));
-				result.setSuccess(true);
-				// 将验证码放于session中保存，存放之前先清除
-				if (request.getSession().getAttribute("verifyCode") != null) {
-					request.getSession().removeAttribute("verifyCode");
-				}
-				request.getSession().setAttribute("verifyCode", code);
-			} else {
-				result.setData(new User());
-				result.setSuccess(false);
-			}
-		} catch (final Exception e) {
-			logger.error("", e);
-			result.setSuccess(false);
-			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-		}
-		return result;
-	}
-
+    @CrossOrigin
+    public ExecuteResult<User> getEmailCode(@RequestBody User user , HttpServletRequest request) {
+        final ExecuteResult<User> result = new ExecuteResult<>();
+        try {
+            User u = userService.verifyByNameAndEmail(user);
+            if(u.getId()!=null){
+                String code = EmailUtils.getCode(); 
+                emailUtils.doTask(u.getEmail() , code); //异步发送
+                result.setData(userService.verifyByNameAndEmail(user));
+                result.setSuccess(true);
+                //将验证码放于session中保存，存放之前先清除
+                if(request.getSession().getAttribute("verifyCode") != null)
+                {
+                    request.getSession().removeAttribute("verifyCode"); 
+                }
+                request.getSession().setAttribute("verifyCode", code);
+            }else {
+                result.setData(new User());
+                result.setSuccess(false);
+            }
+        } catch (final Exception e) {
+            logger.error("", e);
+            result.setSuccess(false);
+            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+        }
+        return result;
+    }
+	
 	/**
 	 * 修改密码
 	 * 
 	 * @return
 	 */
 	@RequestMapping("modifyPersonPwd")
-	@CrossOrigin
-	public ExecuteResult<User> modifyPersonPwd(@RequestBody VerifyMessage verifyMessage, HttpServletRequest request) {
-		final ExecuteResult<User> result = new ExecuteResult<>();
-		try {
-			if (StringUtils.isNotBlank(verifyMessage.getEmailCode())
-					&& StringUtils.isNotBlank(verifyMessage.getPassword())) {
-				String code = (String) request.getSession().getAttribute("verifyCode");
-				if (verifyMessage.getEmailCode().equals(code)) {
-					String pwd = PasswordUtil.createCustomPwd(verifyMessage.getPassword(),
-							verifyMessage.getUserName() + User.SALT);
-					Integer num = userService.modifyPersonPwd(verifyMessage.getUserName(), pwd);
-					if (num <= 0) {
-						result.setSuccess(false);
-						result.setData(new User());
-					} else {
-						result.setSuccess(true);
-					}
-				} else {
-					result.setSuccess(false);
-					result.setData(new User());
-					result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
-					result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
-				}
-			}
-		} catch (final Exception e) {
-			logger.error("", e);
-			result.setSuccess(false);
-			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
-			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
-		}
-		return result;
+  @CrossOrigin
+	public ExecuteResult<User> modifyPersonPwd(@RequestBody VerifyMessage verifyMessage, HttpServletRequest request){
+	    final ExecuteResult<User> result = new ExecuteResult<>();
+	    try{
+	        if ( StringUtils.isNotBlank( verifyMessage.getEmailCode() ) && StringUtils.isNotBlank( verifyMessage.getPassword() ) ){
+	            String code = (String)request.getSession().getAttribute("verifyCode"); 
+	            if(verifyMessage.getEmailCode().equals(code)){
+	                String pwd = PasswordUtil.createCustomPwd(verifyMessage.getPassword(), verifyMessage.getUserName() + User.SALT);
+	                Integer num = userService.modifyPersonPwd(verifyMessage.getUserName(),pwd);
+	                if(num <= 0){
+	                    result.setSuccess(false); 
+	                    result.setData(new User());
+	                    return result;
+	                }
+	                else{
+	                    result.setSuccess(true); 
+	                    return result;
+	                }
+	            }else {
+	                result.setSuccess(false);
+	                result.setData(new User());
+	                result.setErrorCode(ErrorCode.VERIFY_CODE_WRONG.getErrorCode());
+	                result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
+	                return result;
+	            }
+	        }
+	    }catch (final Exception e) {
+            logger.error("", e);
+            result.setSuccess(false);
+            result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+            result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+        }
+	    return result;
 	}
 }
