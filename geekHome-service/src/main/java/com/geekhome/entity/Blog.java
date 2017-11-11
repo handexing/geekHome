@@ -20,8 +20,9 @@ import com.geekhome.common.utils.CustomDateSerializer;
 
 @SqlResultSetMappings({
 
-		@SqlResultSetMapping(name = "getBlogList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
-				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "typeId", type = Long.class),
+		@SqlResultSetMapping(name = "getBlogByUserIdList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
+				@ColumnResult(name = "id", type = Long.class),
+				@ColumnResult(name = "typeId", type = Long.class),
 				@ColumnResult(name = "title", type = String.class),
 				@ColumnResult(name = "subtitle", type = String.class),
 				@ColumnResult(name = "bannerImg", type = String.class),
@@ -43,6 +44,24 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "createTime", type = Date.class),
 				@ColumnResult(name = "updateTime", type = Date.class),
 				@ColumnResult(name = "typeName", type = String.class),
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class),
+				@ColumnResult(name = "userId", type = Long.class) })),
+
+		@SqlResultSetMapping(name = "getAllBlogList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
+				@ColumnResult(name = "id", type = Long.class),
+				@ColumnResult(name = "typeId", type = Long.class),
+				@ColumnResult(name = "typeName", type = String.class),
+				@ColumnResult(name = "systemTypeName", type = String.class),
+				@ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "subtitle", type = String.class),
+				@ColumnResult(name = "content", type = String.class),
+				@ColumnResult(name = "bannerImg", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class),
+				@ColumnResult(name = "commentCnt", type = Integer.class),
 				@ColumnResult(name = "userName", type = String.class),
 				@ColumnResult(name = "headImgUrl", type = String.class),
 				@ColumnResult(name = "userId", type = Long.class) }))
@@ -104,6 +123,8 @@ public class Blog implements Serializable {
 
 	@Transient
 	private String typeName;
+	@Transient
+	private String systemTypeName;
 	@Transient
 	private Long userId;
 	@Transient
@@ -283,6 +304,28 @@ public class Blog implements Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.commentCnt = commentCnt;
+	}
+
+	public Blog(Long id, Long typeId, String typeName, String systemTypeName, String title, String subtitle,
+			String content, String bannerImg, Integer collectCount, Integer browseCount, Date createTime,
+			Date updateTime, Integer commentCnt, String userName, String headImgUrl, Long userId) {
+		super();
+		this.id = id;
+		this.typeId = typeId;
+		this.typeName = typeName;
+		this.systemTypeName = systemTypeName;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.content = content;
+		this.bannerImg = bannerImg;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.commentCnt = commentCnt;
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+		this.userId = userId;
 	}
 
 	public Blog(Long id, Long typeId, String title, String subtitle, String content, String bannerImg,
