@@ -64,7 +64,7 @@ public class BlogService {
 	@SuppressWarnings("unchecked")
 	public Page<Blog> getBlogList(Integer page, Integer rows) {
 		int firstRecord = PageUtil.calcPage(page) * rows;
-		String sql = "SELECT o.ID id,l.ID typeId,l.`NAME` typeName,l.`NAME` systemTypeName,o.TITLE title,o.SUBTITLE subtitle,o.CONTENT content,o.BANNER_IMG bannerImg,o.`STATUS` status,o.COLLECT_COUNT collectCount,o.BROWSE_COUNT browseCount,o.CREATE_TIME createTime,"
+		String sql = "SELECT o.ID id,l.ID typeId,t.ID systemTypeId,l.`NAME` typeName,l.`NAME` systemTypeName,o.TITLE title,o.SUBTITLE subtitle,o.CONTENT content,o.BANNER_IMG bannerImg,o.`STATUS` status,o.COLLECT_COUNT collectCount,o.BROWSE_COUNT browseCount,o.CREATE_TIME createTime,"
 				+ "o.UPDATE_TIME updateTime,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = o.ID AND TYPE=3) as commentCnt,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,l.USER_ID userId"
 				+ " FROM blog AS o LEFT JOIN BLOG_TYPE AS l ON o.TYPE_ID = l.ID LEFT JOIN BLOG_TYPE AS t ON o.SYSTEM_TYPE_ID = t.ID LEFT JOIN user AS u ON u.ID = l.USER_ID ORDER BY o.CREATE_TIME DESC";
 		List<Blog> list = entityManager.createNativeQuery(sql, "getAllBlogList").setFirstResult(firstRecord)
