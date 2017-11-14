@@ -29,8 +29,8 @@ public class CommentReply implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name = "REPLY_IDS")
-	private String replyIds;
+	@Column(name = "REPLY_USER_ID")
+	private Long replyUserId;
 	@Column(name = "USER_ID")
 	private Long userId;
 	@Column(name = "CONTENT")
@@ -38,6 +38,8 @@ public class CommentReply implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
+	@Column(name = "TYPE")
+	private Integer type;
 
 	public Long getId() {
 		return id;
@@ -45,14 +47,6 @@ public class CommentReply implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getReplyIds() {
-		return replyIds;
-	}
-
-	public void setReplyIds(String replyIds) {
-		this.replyIds = replyIds;
 	}
 
 	public Long getUserId() {
@@ -83,19 +77,36 @@ public class CommentReply implements Serializable {
 		super();
 	}
 
-	public CommentReply(Long id, String replyIds, Long userId, String content, Date createTime) {
-		super();
-		this.id = id;
-		this.replyIds = replyIds;
-		this.userId = userId;
-		this.content = content;
-		this.createTime = createTime;
+	public Long getReplyUserId() {
+		return replyUserId;
+	}
+
+	public void setReplyUserId(Long replyUserId) {
+		this.replyUserId = replyUserId;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
-		return "CommentReply [id=" + id + ", replyIds=" + replyIds + ", userId=" + userId + ", content=" + content
-				+ ", createTime=" + createTime + "]";
+		return "CommentReply [id=" + id + ", replyUserId=" + replyUserId + ", userId=" + userId + ", content=" + content
+				+ ", createTime=" + createTime + ", type=" + type + "]";
+	}
+
+	public CommentReply(Long id, Long replyUserId, Long userId, String content, Date createTime, Integer type) {
+		super();
+		this.id = id;
+		this.replyUserId = replyUserId;
+		this.userId = userId;
+		this.content = content;
+		this.createTime = createTime;
+		this.type = type;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.geekhome.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,9 @@ import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.PageableResultJson;
 import com.geekhome.entity.Comment;
+import com.geekhome.entity.User;
 import com.geekhome.entity.dao.CommentDao;
+import com.geekhome.entity.dao.UserDao;
 import com.geekhome.entity.service.CommentService;
 
 @RestController
@@ -29,6 +32,8 @@ public class CommentController {
 	CommentService commentService;
 	@Autowired
 	CommentDao commentDao;
+	@Autowired
+	UserDao userDao;
 
 	@RequestMapping("saveComment")
 	@CrossOrigin
@@ -57,5 +62,23 @@ public class CommentController {
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
+	
+	@RequestMapping("getCommentUserList")
+	@CrossOrigin
+	public ExecuteResult<List<User>> getCommentUserList(Long themeId,Integer type) {
+		final ExecuteResult<List<User>> result = new ExecuteResult<>();
+		try {
+			List<User> list = userDao.getCommentUserByThemeIdAndType(themeId,type);
+			result.setData(list);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
 
 }

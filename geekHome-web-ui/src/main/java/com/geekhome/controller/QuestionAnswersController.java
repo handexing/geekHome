@@ -39,6 +39,7 @@ public class QuestionAnswersController {
 	QuestionAnswersService questionAnswersService;
 	@Autowired
 	QuestionAnswersDao questionAnswersDao;
+	
 
 	@RequestMapping(value = "/uploadImage")
 	@CrossOrigin
@@ -121,4 +122,5 @@ public class QuestionAnswersController {
 		return tableJson;
 	}
 
+	
 }
