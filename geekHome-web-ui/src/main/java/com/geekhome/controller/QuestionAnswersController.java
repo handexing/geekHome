@@ -1,23 +1,20 @@
 package com.geekhome.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.geekhome.common.utils.FileUtil;
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
 import com.geekhome.common.vo.MarkdownUploadImage;
@@ -47,10 +44,7 @@ public class QuestionAnswersController {
 			String fileName = file.getOriginalFilename();
 			String realPath = new Date().getTime() + fileName.substring(fileName.lastIndexOf("."));
 			File tempFile = new File(upload_dir + realPath);
-			if (!tempFile.getParentFile().exists()) {
-				tempFile.mkdirs();
-			}
-			FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(tempFile));
+			FileUtil.uploadImage(tempFile, file);
 			return new MarkdownUploadImage(1, "上传成功！", realPath);
 		} catch (final Exception e) {
 			logger.error("", e);
