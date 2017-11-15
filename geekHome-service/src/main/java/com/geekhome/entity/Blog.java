@@ -51,6 +51,7 @@ import com.geekhome.common.utils.CustomDateSerializer;
 		@SqlResultSetMapping(name = "getAllBlogList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
 				@ColumnResult(name = "id", type = Long.class),
 				@ColumnResult(name = "typeId", type = Long.class),
+				@ColumnResult(name = "systemTypeId", type = Long.class),
 				@ColumnResult(name = "typeName", type = String.class),
 				@ColumnResult(name = "systemTypeName", type = String.class),
 				@ColumnResult(name = "title", type = String.class),
@@ -270,6 +271,14 @@ public class Blog implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	public String getSystemTypeName() {
+		return systemTypeName;
+	}
+
+	public void setSystemTypeName(String systemTypeName) {
+		this.systemTypeName = systemTypeName;
+	}
+
 	public Blog() {
 		super();
 	}
@@ -306,12 +315,13 @@ public class Blog implements Serializable {
 		this.commentCnt = commentCnt;
 	}
 
-	public Blog(Long id, Long typeId, String typeName, String systemTypeName, String title, String subtitle,
+	public Blog(Long id, Long typeId,Long systemTypeId, String typeName, String systemTypeName, String title, String subtitle,
 			String content, String bannerImg, Integer collectCount, Integer browseCount, Date createTime,
 			Date updateTime, Integer commentCnt, String userName, String headImgUrl, Long userId) {
 		super();
 		this.id = id;
 		this.typeId = typeId;
+		this.systemTypeId = systemTypeId;
 		this.typeName = typeName;
 		this.systemTypeName = systemTypeName;
 		this.title = title;

@@ -38,30 +38,32 @@ public class QuestionAnswersService {
 	@SuppressWarnings("unchecked")
 	public Page<QuestionAnswers> findQuestionAnswersByLabelIdList(Long labelId, Integer page, int rows) {
 
-		String sql = "";
+		StringBuilder sql = new StringBuilder();
 		int total = 0;
 		List<QuestionAnswers> list = null;
 		int firstRecord = PageUtil.calcPage(page) * rows;
-		//WHERE DATE_FORMAT(q.CREATE_TIME,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
-		if (labelId == 0) {//最热
-			sql = "SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,"
-					+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID AND TYPE=2) as commentCnt"
-					+ " FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID"
-					+ " LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID ORDER BY commentCnt DESC";
-			list = entityManager.createNativeQuery(sql, "getQuestionAnswersList")
-					.setFirstResult(firstRecord).setMaxResults(rows).getResultList();
+		// WHERE DATE_FORMAT(q.CREATE_TIME,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+		if (labelId == 0) {// 最热
+			sql.append(
+					"SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,")
+					.append("q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID AND TYPE=2) as commentCnt")
+					.append(" FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID")
+					.append(" LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID ORDER BY commentCnt DESC");
+			list = entityManager.createNativeQuery(sql.toString(), "getQuestionAnswersList").setFirstResult(firstRecord)
+					.setMaxResults(rows).getResultList();
 			total = questionAnswersDao.getQuestionAnswersByToDayCnt();
-		} else {//正常
-			sql = "SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,"
-					+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID AND TYPE=2) as commentCnt"
-					+ " FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID"
-					+ " LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE LABEL_ID IN(SELECT ID FROM LABEL WHERE PARENT_ID=:labelId UNION SELECT "
-					+ labelId + ") ORDER BY q.CREATE_TIME DESC";
-			list = entityManager.createNativeQuery(sql, "getQuestionAnswersList")
+		} else {// 正常
+			sql.append(
+					"SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,")
+					.append("q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = q.ID AND TYPE=2) as commentCnt")
+					.append(" FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID")
+					.append(" LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE LABEL_ID IN(SELECT ID FROM LABEL WHERE PARENT_ID=:labelId UNION SELECT "
+							+ labelId + ") ORDER BY q.CREATE_TIME DESC");
+			list = entityManager.createNativeQuery(sql.toString(), "getQuestionAnswersList")
 					.setParameter("labelId", labelId).setFirstResult(firstRecord).setMaxResults(rows).getResultList();
 			total = questionAnswersDao.getQuestionAnswersByLabelIdCnt(labelId);
 		}
-		
+
 		Pageable pageable = new PageRequest(page, rows);
 		Page<QuestionAnswers> pages = new PageImpl<>(list, pageable, total);
 
@@ -70,11 +72,13 @@ public class QuestionAnswersService {
 
 	@SuppressWarnings("unchecked")
 	public QuestionAnswers getQuestionAnswersById(Long id) {
-		final String sql = "SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.CONTENT content,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,"
-				+ "q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl"
-				+ " FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID"
-				+ " LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE q.ID=:id";
-		final List<QuestionAnswers> list = entityManager.createNativeQuery(sql, "getQuestionAnswersById")
+		StringBuilder sql = new StringBuilder();
+		sql.append(
+				"SELECT q.ID id,q.USER_ID userId,q.LABEL_ID labelId,q.TITLE title,q.CONTENT content,q.COLLECT_COUNT collectCount,q.BROWSE_COUNT browseCount,q.CREATE_TIME createTime,")
+				.append("q.UPDATE_TIME updateTime,l.LABLE_NAME labelName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl")
+				.append(" FROM QUESTION_ANSWERS AS q LEFT JOIN USER AS u ON q.USER_ID = u.ID")
+				.append(" LEFT JOIN LABEL AS l ON q.LABEL_ID = l.ID WHERE q.ID=:id");
+		final List<QuestionAnswers> list = entityManager.createNativeQuery(sql.toString(), "getQuestionAnswersById")
 				.setParameter("id", id).getResultList();
 		return list.get(0);
 	}
