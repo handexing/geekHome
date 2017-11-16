@@ -2,16 +2,22 @@ package com.geekhome.common.utils;
 
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-
 import javax.imageio.ImageIO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Pinky Lam 908716835@qq.com
  * @date 2017年7月19日 下午3:53:16
  */
 public class FileUtil {
+    
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * @Title: getUplodFilePath
@@ -49,4 +55,18 @@ public class FileUtil {
 			return false;
 		}
 	}
+	
+	public static void uploadImage(File tempFile , MultipartFile file) {
+	    try {
+    	    if (!tempFile.getParentFile().exists()) {
+                tempFile.mkdirs();
+            }
+            FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(tempFile));
+	    }catch(Exception e)
+	    {
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
 }

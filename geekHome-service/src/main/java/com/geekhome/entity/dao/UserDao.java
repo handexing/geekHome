@@ -29,5 +29,10 @@ public interface UserDao extends JpaRepository<User, Long>{
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM USER WHERE ID IN(SELECT USER_ID FROM COMMENT WHERE THEME_ID=:themeId AND TYPE=:type UNION ALL SELECT USER_ID FROM COMMENT_REPLY WHERE THEME_ID=:themeId AND TYPE=:type) GROUP BY ID")
 	List<User> getCommentUserByThemeIdAndType(@Param("themeId")Long themeId, @Param("type")Integer type);
+	
+	@Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(nativeQuery = true, value = "UPDATE USER SET HEAD_IMG_URL=:url WHERE USER_NAME =:userName")
+    int modifyAvatar(@Param("url") String url, @Param("userName") String userName);
 
 }
