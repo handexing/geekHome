@@ -79,7 +79,7 @@ public class MenuTreeUtil {
 			}
 		}
 		stateMap.put("disabled", false);
-		stateMap.put("expanded", false);
+		stateMap.put("expanded", true);
 		stateMap.put("selected", false);
 		map.put("id", childNode.getId());
 		map.put("text", childNode.getName());
