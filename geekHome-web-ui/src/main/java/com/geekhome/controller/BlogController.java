@@ -145,4 +145,15 @@ public class BlogController {
 		return tableJson;
 	}
 	
+	
+	@RequestMapping("getHotBlogList")
+	@CrossOrigin
+	public PageableResultJson getHotBlogList(@RequestParam(value = "page") Integer page, Integer rows) {
+		PageableResultJson tableJson = new PageableResultJson();
+		Page<Blog> pageData = blogService.getHotBlogList(page, rows);
+		tableJson.setData(pageData.getContent());
+		tableJson.setPageSize(10);
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
+		return tableJson;
+	}
 }

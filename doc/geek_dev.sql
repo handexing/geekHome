@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 09/11/2017 13:49:44
+ Date: 18/11/2017 14:39:39
 */
 
 SET NAMES utf8mb4;
@@ -76,20 +76,27 @@ CREATE TABLE `blog`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (4, 65, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 2, NULL, '2017-11-02 09:42:53', NULL);
+INSERT INTO `blog` VALUES (4, 65, 58, '士大夫士大夫石帆胜丰沙发上都很经济法规', '是公司公司的给我人头问题问题让微软提供v不DVD发v地方v的v', '的vDVD v发的vDVD沟通即可', 3, 0, 3, NULL, '2017-11-02 09:42:53', NULL);
 INSERT INTO `blog` VALUES (5, 66, 58, '的事发生的事故发生的发生发射点发生发生', '十分士大夫士大夫士大夫大师傅士大夫十分', '发射点发顺丰发顺丰的似的发射点发生发放发', 3, 0, 2, NULL, '2017-11-02 09:43:18', NULL);
-INSERT INTO `blog` VALUES (6, 67, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 1, NULL, '2017-11-02 09:43:38', NULL);
+INSERT INTO `blog` VALUES (6, 67, 58, '撒旦似的发到公司发噶色发射点发是的发放', '阿斯顿发射点发大水发射点发顺丰大苏打', '啊打发发射点范德萨打发法色发射点发', 3, 0, 2, NULL, '2017-11-02 09:43:38', NULL);
 INSERT INTO `blog` VALUES (7, 68, 58, 'sdfsfsfdsfsd', 'sdfsdfsdfsd', 'fsdfsdgffdgsdfgsdfg', 3, 0, 9, NULL, '2017-11-02 09:49:31', NULL);
 INSERT INTO `blog` VALUES (8, 69, 59, 'this is test！！', '个手动阀手动阀手动阀', ':relaxed: :smirk: :kissing_heart: :flushed: :pensive: :yum: :grimacing: :frowning: :joy:\n\n### 前言\n> 这是一个测试blog！！', 3, 0, 1, NULL, '2017-11-03 11:14:23', NULL);
-INSERT INTO `blog` VALUES (9, 71, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 0, NULL, '2017-11-03 11:18:08', NULL);
-INSERT INTO `blog` VALUES (10, 70, 58, '极客屋需求文档', '极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！', '# 极客屋需求文档\n\n## 说明\n> `极客屋`是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！\n\n## 极客屋功能模块\n> 目前大致分为以下几种模块，后期如有好的idea在添加。\n\n1. 首页\n2. 开源\n3. 博客\n4. 问与答\n5. 标签节点\n\n### 1. 首页展示\n> 首页包含以下几种功能模块，后期可能扩展更多：\n\n1.1 滚动栏\n1.2 热搜标签\n1.3 热门文章\n1.4 问与答\n1.5 今日热议\n1.6 专题学习\n1.7 开源排行\n\n#### 1.1 滚动栏\n主要用于显示特别好玩得`开源项目`，`有趣得专题`,`热门文章`等。\n\n#### 1.2 热搜标签\n用于显示用户查看最多得`30`个标签，点击标签可以直接查询相关内容，如：开源项目，问与答，博客文章等。\n\n#### 1.3 热门文章\n用于显示近期被收藏/浏览/评论数量最多得`8`篇文章。【加载更多】按钮点击跳转到博客文章列表页面。根据不用分类查询文章。根据用户技术选择推荐文章。文章可被分享到其他平台。\n\n#### 1.4 问与答\n用于显示最近提问的`6`条数据。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.5 今日热议\n显示今天讨论最激烈得`10`条数据。根据浏览数量和评论数量`排名显示`。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.6 专题学习\n用于显示`12`条被收藏最多得专题栏目。点击进去可查看专题详情。\n\n#### 1.7 开源排行\n用于展示用户近期投得最有趣得`10`个开源项目。点击进入开源详情页面。\n\n### 2. 开源\n> 用于显示不同分类下的开源项目，帮助用户`推广`和`发现`更多有趣得项目。包含以下功能模块：\n\n2.1 开源类别的获取\n2.2 切换类别tab，动态数据，列表分页。\n2.3 本类推荐\n2.4 点击查看开源详情页\n2.5 评论回复，收藏，分享功能\n\n#### 2.1 开源类别的获取\n动态获取开源类别，组装tab显示。点击`更多`tab按钮，可查看更多开源分类信息。\n\n#### 2.2 切换类别tab，动态数据，列表分页。\n点击tab选项动态获取开源列表信息分页展示。\n\n#### 2.3 本类推荐\n每个开源类别下推荐`4`个开源项目。根据`收藏数量`。\n\n#### 2.4 点击查看开源详情页\n点击查看开源详情信息。\n\n#### 2.5 评论回复，收藏功能\n在开源项目详情页可以评论回复讨论，并且用户可收藏，分享该项目。\n\n\n\n\n\n\n\n', 3, 0, 13, NULL, '2017-11-08 10:37:14', NULL);
-INSERT INTO `blog` VALUES (11, 64, 59, 'android四大组件详细介绍', 'Android从入门到放弃！！！', ':flushed:android四大组件详细介绍', 3, 0, 1, NULL, '2017-11-08 14:50:03', NULL);
-INSERT INTO `blog` VALUES (12, 64, 59, 'Android webview详解', 'Android webview详解', 'Android webview详解', 3, 0, 1, NULL, '2017-11-08 14:53:48', NULL);
+INSERT INTO `blog` VALUES (9, 71, 60, '前端呀前端', '前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端前端呀前端', ':grin: :kissing_closed_eyes: :relaxed:\n\n### 前端\n> 这是前端', 3, 0, 2, NULL, '2017-11-03 11:18:08', NULL);
+INSERT INTO `blog` VALUES (10, 70, 58, '极客屋需求文档', '极客屋是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！', '# 极客屋需求文档\n\n## 说明\n> `极客屋`是极客们的社区。在这里大家能够多多分享自己正在做的有趣事物、最近的学习、交流想法，在这里找到朋友认识更多有趣的人。极客屋致力于打造一流开源技术社区！\n\n## 极客屋功能模块\n> 目前大致分为以下几种模块，后期如有好的idea在添加。\n\n1. 首页\n2. 开源\n3. 博客\n4. 问与答\n5. 标签节点\n\n### 1. 首页展示\n> 首页包含以下几种功能模块，后期可能扩展更多：\n\n1.1 滚动栏\n1.2 热搜标签\n1.3 热门文章\n1.4 问与答\n1.5 今日热议\n1.6 专题学习\n1.7 开源排行\n\n#### 1.1 滚动栏\n主要用于显示特别好玩得`开源项目`，`有趣得专题`,`热门文章`等。\n\n#### 1.2 热搜标签\n用于显示用户查看最多得`30`个标签，点击标签可以直接查询相关内容，如：开源项目，问与答，博客文章等。\n\n#### 1.3 热门文章\n用于显示近期被收藏/浏览/评论数量最多得`8`篇文章。【加载更多】按钮点击跳转到博客文章列表页面。根据不用分类查询文章。根据用户技术选择推荐文章。文章可被分享到其他平台。\n\n#### 1.4 问与答\n用于显示最近提问的`6`条数据。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.5 今日热议\n显示今天讨论最激烈得`10`条数据。根据浏览数量和评论数量`排名显示`。点击条目可进入问题描述详情页。用户讨论信息带分页效果。\n\n#### 1.6 专题学习\n用于显示`12`条被收藏最多得专题栏目。点击进去可查看专题详情。\n\n#### 1.7 开源排行\n用于展示用户近期投得最有趣得`10`个开源项目。点击进入开源详情页面。\n\n### 2. 开源\n> 用于显示不同分类下的开源项目，帮助用户`推广`和`发现`更多有趣得项目。包含以下功能模块：\n\n2.1 开源类别的获取\n2.2 切换类别tab，动态数据，列表分页。\n2.3 本类推荐\n2.4 点击查看开源详情页\n2.5 评论回复，收藏，分享功能\n\n#### 2.1 开源类别的获取\n动态获取开源类别，组装tab显示。点击`更多`tab按钮，可查看更多开源分类信息。\n\n#### 2.2 切换类别tab，动态数据，列表分页。\n点击tab选项动态获取开源列表信息分页展示。\n\n#### 2.3 本类推荐\n每个开源类别下推荐`4`个开源项目。根据`收藏数量`。\n\n#### 2.4 点击查看开源详情页\n点击查看开源详情信息。\n\n#### 2.5 评论回复，收藏功能\n在开源项目详情页可以评论回复讨论，并且用户可收藏，分享该项目。\n\n\n\n\n\n\n\n', 3, 0, 14, NULL, '2017-11-08 10:37:14', NULL);
+INSERT INTO `blog` VALUES (11, 64, 59, 'android四大组件详细介绍', 'Android从入门到放弃！！！', ':flushed:android四大组件详细介绍', 3, 0, 3, NULL, '2017-11-08 14:50:03', NULL);
+INSERT INTO `blog` VALUES (12, 64, 59, 'Android webview详解', 'Android webview详解', 'Android webview详解', 3, 0, 4, NULL, '2017-11-08 14:53:48', NULL);
+INSERT INTO `blog` VALUES (13, 68, 61, '啊打发撒旦', 'a\'d\'s\'fa\'s\'fa', ' 啊多发点发达省份', 3, 0, 1, NULL, '2017-11-13 13:37:04', NULL);
+INSERT INTO `blog` VALUES (14, 68, 62, '啊地方撒撒旦', '啊打发士大夫', '啊打发阿斯顿', 3, 0, 2, NULL, '2017-11-13 13:37:12', NULL);
+INSERT INTO `blog` VALUES (15, 67, 74, '了空间环境官方都是', '；林肯郡海关法的', '将用户提供范德萨', 3, 0, 1, NULL, '2017-11-13 13:37:22', NULL);
+INSERT INTO `blog` VALUES (16, 65, 60, '发计划是否过大', '啊是v多个温柔我给微软', '啊v范德萨给发嘎嘎', 3, 0, 1, NULL, '2017-11-13 13:37:33', NULL);
+INSERT INTO `blog` VALUES (17, 67, 60, '还是广东分公司', '撒旦发个顺丰的', '师傅给施工方的', 3, 0, 2, NULL, '2017-11-13 13:37:43', NULL);
+INSERT INTO `blog` VALUES (18, 67, 60, '啊打发手动阀撒旦', '啊手动阀实打实', '啊大苏打发', 3, 0, 4, NULL, '2017-11-13 13:37:53', NULL);
+INSERT INTO `blog` VALUES (19, 66, 60, '去日期额外人去', '服务器热舞', '日为其人情味vv', 3, 0, 5, NULL, '2017-11-13 13:38:20', NULL);
 
 -- ----------------------------
 -- Table structure for blog_type
@@ -135,10 +142,10 @@ CREATE TABLE `comment`  (
   `USER_ID` bigint(20) DEFAULT NULL,
   `THEME_ID` bigint(20) DEFAULT NULL COMMENT '主题ID，问与答，开源，博客',
   `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：2-开源 3-问与答 4-博客',
+  `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：1-开源 2-问与答 3-博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment
@@ -173,6 +180,8 @@ INSERT INTO `comment` VALUES (27, 5, 4, '法撒旦发发达的说法', 3, '2017-
 INSERT INTO `comment` VALUES (28, 5, 10, 'test', 3, '2017-11-08 13:55:59');
 INSERT INTO `comment` VALUES (29, 5, 10, '啊但是发射点', 3, '2017-11-08 13:56:51');
 INSERT INTO `comment` VALUES (30, 5, 10, ':satisfied:### test', 3, '2017-11-08 13:57:43');
+INSERT INTO `comment` VALUES (31, 5, 15, '@sdfs @sdfs @sdfs ', 2, '2017-11-13 17:26:06');
+INSERT INTO `comment` VALUES (32, 5, 18, '啊手动阀手动阀', 3, '2017-11-16 14:49:49');
 
 -- ----------------------------
 -- Table structure for comment_reply
@@ -181,17 +190,19 @@ DROP TABLE IF EXISTS `comment_reply`;
 CREATE TABLE `comment_reply`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `THEME_ID` bigint(20) DEFAULT NULL,
-  `REPLY_IDS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '@回复得人们',
-  `USER_ID` bigint(255) DEFAULT NULL COMMENT '用户id',
+  `REPLY_USER_ID` bigint(20) DEFAULT NULL COMMENT '@回复得人id',
+  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户id',
   `CONTENT` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：1-开源 2-问与答 3-博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '回复表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment_reply
 -- ----------------------------
-INSERT INTO `comment_reply` VALUES (1, 1, '6', 5, '是啊，就是这么神奇！', '2017-10-17 14:27:13');
+INSERT INTO `comment_reply` VALUES (1, 23, 6, 5, '是啊，就是这么神奇！', 2, '2017-10-17 14:27:13');
+INSERT INTO `comment_reply` VALUES (2, 23, 8, 5, 'gdgsdfgs', 2, '2017-11-14 10:07:49');
 
 -- ----------------------------
 -- Table structure for label
@@ -350,32 +361,32 @@ CREATE TABLE `question_answers`  (
 -- ----------------------------
 -- Records of question_answers
 -- ----------------------------
-INSERT INTO `question_answers` VALUES (1, 5, 8, '手动阀手动阀', 'SDF速度SAD撒旦:relaxed: :sweat_smile: :pensive: :confounded:2017-10-16 10:41:49 星期一', 2, 0, 11, '2017-10-27 10:41:52', NULL);
-INSERT INTO `question_answers` VALUES (2, 5, 8, '一个关于“转发旧号码未接来电、短信”的解决方案', '啊多发点大师傅士大夫', 2, 0, 1, '2017-10-27 10:44:09', NULL);
+INSERT INTO `question_answers` VALUES (1, 5, 8, '手动阀手动阀', 'SDF速度SAD撒旦:relaxed: :sweat_smile: :pensive: :confounded:2017-10-16 10:41:49 星期一', 2, 0, 20, '2017-10-27 10:41:52', NULL);
+INSERT INTO `question_answers` VALUES (2, 5, 8, '一个关于“转发旧号码未接来电、短信”的解决方案', '啊多发点大师傅士大夫', 2, 0, 2, '2017-10-27 10:44:09', NULL);
 INSERT INTO `question_answers` VALUES (3, 5, 8, '的发射点发的发多少', '啊多发点是否法撒旦发啊多发点是否', 2, 0, 0, '2017-10-27 10:47:40', NULL);
 INSERT INTO `question_answers` VALUES (4, 5, 8, '发射点发的时间和海关扣了', '立刻脚后跟范德萨OIUYTREWQ', 2, 0, 0, '2017-10-27 10:47:55', NULL);
 INSERT INTO `question_answers` VALUES (5, 5, 8, '又山寨了一个传统颜色的配色网站', '.,MNBVCXZZ\';LKJHGFDSA看脚后跟范德萨', 2, 0, 2, '2017-10-27 10:48:12', NULL);
 INSERT INTO `question_answers` VALUES (6, 5, 8, '哦iu一头热完全离开建行股份的美女不v', '会让你人沟通拜访v的撒而更广泛的v新政策执行所发生的', 2, 0, 1, '2017-10-27 10:48:42', NULL);
-INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 17, '2017-10-27 17:17:37', NULL);
+INSERT INTO `question_answers` VALUES (7, 5, 8, '实打实大师大的', ':expressionless: :expressionless: :expressionless:', 2, 0, 27, '2017-10-27 17:17:37', NULL);
 INSERT INTO `question_answers` VALUES (8, 6, 8, '还记得简悦吗？ 1.0.4 版带来了可支持任意页面生成阅读模式', 'adsfads', 2, 0, 6, '2017-10-27 17:36:40', NULL);
 INSERT INTO `question_answers` VALUES (9, 7, 8, '写了一个交互式的 ssh 批量操作客户端，支持根据服务端的执行文件和路径自动补全，支持批量上传下载文件', 's', 2, 0, 4, '2017-10-27 17:36:44', NULL);
 INSERT INTO `question_answers` VALUES (10, 8, 8, '写了一个 Lemon 语言到 Objective-C 的绑定，可以用 Lemon 语言写 Mac 和 iOS 了。', 's', 2, 0, 2, '2017-10-27 17:36:48', NULL);
-INSERT INTO `question_answers` VALUES (11, 9, 8, '如果你有不愿公开的点子的话，关于这些点子你有哪些愿意公开的信息？', 's', 2, 0, 14, '2017-10-27 17:36:52', NULL);
-INSERT INTO `question_answers` VALUES (12, 10, 8, '女士时装订阅类平台，寻找技术大牛一起创业', 'ss', 2, 0, 14, '2017-10-27 17:36:55', NULL);
+INSERT INTO `question_answers` VALUES (11, 9, 8, '如果你有不愿公开的点子的话，关于这些点子你有哪些愿意公开的信息？', 's', 2, 0, 19, '2017-10-27 17:36:52', NULL);
+INSERT INTO `question_answers` VALUES (12, 10, 8, '女士时装订阅类平台，寻找技术大牛一起创业', 'ss', 2, 0, 26, '2017-10-27 17:36:55', NULL);
 INSERT INTO `question_answers` VALUES (13, 11, 8, '在 Nodeclub 基础上仿花瓣的一个小项目, 有兴趣的小伙伴搞起', 's', 2, 0, 5, '2017-10-27 17:36:59', NULL);
 INSERT INTO `question_answers` VALUES (14, 5, 8, '业余项目，收集了很多优秀开发者的博客,微博...', 'this is test', 2, 0, 13, '2017-10-27 09:45:00', NULL);
-INSERT INTO `question_answers` VALUES (15, 5, 9, '最帅网易云音乐播放器 ieaseMusic 更新 1.0.0 正式版，增加高品质音乐，聚合 QQ 音乐，酷狗音乐解决版权问题导致的灰色死链。', 'ahahahahaha', 2, 0, 23, '2017-10-27 09:53:29', NULL);
-INSERT INTO `question_answers` VALUES (16, 5, 20, '我开发的开源 JS 地图引擎 maptalks.js, 请大家不吝赐教!', 'fadfadf', 2, 0, 2, '2017-10-27 10:44:06', NULL);
+INSERT INTO `question_answers` VALUES (15, 5, 9, '最帅网易云音乐播放器 ieaseMusic 更新 1.0.0 正式版，增加高品质音乐，聚合 QQ 音乐，酷狗音乐解决版权问题导致的灰色死链。', 'ahahahahaha', 2, 0, 55, '2017-10-27 09:53:29', NULL);
+INSERT INTO `question_answers` VALUES (16, 5, 20, '我开发的开源 JS 地图引擎 maptalks.js, 请大家不吝赐教!', 'fadfadf', 2, 0, 3, '2017-10-27 10:44:06', NULL);
 INSERT INTO `question_answers` VALUES (17, 5, 21, '程序员程序员', '程序员程序员程序员程序员程序员程序员程序员程序员', 2, 0, 2, '2017-10-27 14:34:54', NULL);
 INSERT INTO `question_answers` VALUES (18, 5, 26, '王者农药真的那么好玩吗？', '王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？王者农药真的那么好玩吗？', 2, 0, 3, '2017-10-27 14:35:21', NULL);
 INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网好卡啊啊啊~~~~网好卡啊啊啊~~~~', 2, 0, 0, '2017-10-27 14:35:47', NULL);
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
-INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 2, '2017-10-27 14:36:32', NULL);
-INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 0, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 212, '2017-10-27 20:08:44', NULL);
-INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 16, '2017-10-27 22:35:16', NULL);
-INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 8, '2017-10-27 23:17:56', NULL);
-INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 4, '2017-11-01 10:25:40', NULL);
+INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 5, '2017-10-27 14:36:32', NULL);
+INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 1, '2017-10-27 14:37:08', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 243, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 22, '2017-10-27 22:35:16', NULL);
+INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 10, '2017-10-27 23:17:56', NULL);
+INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 5, '2017-11-01 10:25:40', NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -472,7 +483,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', '15618243357', '0d6dac1b11e346b17c19ecbf49ae6c7b', '爱生活，爱编程。', 'img/1.png', 1, '2017-10-09 15:23:40', '2017-11-03 14:56:07', '阿里巴巴', '上海', 'handexing', 'www.geekuser.cn');
-INSERT INTO `user` VALUES (6, 'jack', 0, NULL, '908716835@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/2.png', 1, '2017-10-17 14:23:02', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` VALUES (6, 'jack', 0, NULL, '908716836@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/2.png', 1, '2017-10-17 14:23:02', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (7, 'yannis', 0, NULL, 'p_y2020@163.com', '17626972358', 'b4fdf01936b27912da30f16367697bd0', '大家都没错。', 'img/3.png', 1, '2017-10-19 17:27:26', '2017-11-05 19:27:39', '华为南京研究所', '江苏省南京市', 'git', 'www.google.com');
 INSERT INTO `user` VALUES (8, 'toono', 0, NULL, 'p_y2020@163.com', NULL, '8e0878027cc03f151eb2039441a625c6', '用户很懒，什么都没说明....', 'img/4.png', 1, '2017-10-19 17:28:08', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (9, 'Omooo', 0, NULL, '869759698@qq.com', NULL, '900a44073e14f0cf721821dbfc5a3a5e', '用户很懒，什么都没说明....', 'img/4.png', 1, '2017-10-19 23:07:50', NULL, NULL, NULL, NULL, NULL);
