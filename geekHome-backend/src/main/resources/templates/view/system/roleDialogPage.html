@@ -45,7 +45,7 @@
 	    	
 	    	$("#addRoleMenuBtn").on('click', function () {
 	    		
-	            var checkNodes = $('ul.list-group>li.node-checked').map(function () {
+	            var checkNodes = $('li.node-checked').map(function () {
 	                return $('#menuTree').treeview('getNode',[$(this).data('nodeid')]).id;
 	            }).get().join(",");
 	            
