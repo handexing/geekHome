@@ -65,7 +65,13 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "commentCnt", type = Integer.class),
 				@ColumnResult(name = "userName", type = String.class),
 				@ColumnResult(name = "headImgUrl", type = String.class),
-				@ColumnResult(name = "userId", type = Long.class) }))
+				@ColumnResult(name = "userId", type = Long.class) })),
+		
+		@SqlResultSetMapping(name = "getHotBlogUserList", classes = @ConstructorResult(targetClass = Blog.class, columns = {
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class),
+				@ColumnResult(name = "userId", type = Long.class),
+				@ColumnResult(name = "commentCnt", type = Integer.class) }))
 
 })
 
@@ -97,6 +103,8 @@ public class Blog implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
+	@Column(name = "USER_ID")
+	private Long userId;
 	@Column(name = "SYSTEM_TYPE_ID")
 	private Long systemTypeId;
 	@Column(name = "TYPE_ID")
@@ -126,8 +134,8 @@ public class Blog implements Serializable {
 	private String typeName;
 	@Transient
 	private String systemTypeName;
-	@Transient
-	private Long userId;
+//	@Transient
+//	private Long userId;
 	@Transient
 	private String userName;
 	@Transient
@@ -356,6 +364,14 @@ public class Blog implements Serializable {
 		this.userName = userName;
 		this.headImgUrl = headImgUrl;
 		this.userId = userId;
+	}
+
+	public Blog(String userName, String headImgUrl, Long userId, Integer commentCnt) {
+		super();
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+		this.userId = userId;
+		this.commentCnt = commentCnt;
 	}
 
 	@Override
