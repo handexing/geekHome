@@ -1,24 +1,29 @@
 package com.geekhome.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import com.geekhome.common.utils.EmailUtils;
+import com.geekhome.common.utils.FileUtil;
 import com.geekhome.common.utils.GeetestConfig;
 import com.geekhome.common.utils.GeetestLib;
 import com.geekhome.common.utils.PasswordUtil;
 import com.geekhome.common.vo.ErrorCode;
 import com.geekhome.common.vo.ExecuteResult;
+import com.geekhome.common.vo.MarkdownUploadImage;
 import com.geekhome.entity.User;
 import com.geekhome.entity.VerifyMessage;
 import com.geekhome.entity.dao.UserDao;
@@ -35,6 +40,9 @@ import com.geekhome.entity.service.UserService;
 public class UserController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Value("${upload.path}")
+    String upload_dir;//上传地址
 
 	@Autowired
 	private UserService userService;
@@ -43,6 +51,10 @@ public class UserController {
 	@Autowired
 	private EmailUtils emailUtils;
 
+	/**
+	 * 用户注册
+	 * @return
+	 */
 	@RequestMapping("userRegister")
 	@CrossOrigin
 	public ExecuteResult<User> userRegister(@RequestBody User user) {
@@ -59,6 +71,12 @@ public class UserController {
 		return result;
 	}
 
+	/**
+	 * 用户登录 
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
 	@RequestMapping("userLogin")
 	@CrossOrigin
 	public ExecuteResult<User> userLogin(String userName, String password) {
@@ -66,8 +84,15 @@ public class UserController {
 		try {
 			String pwd = PasswordUtil.createCustomPwd(password, userName + User.SALT);
 			User user = userDao.findUserByUserNameAndPassword(userName, pwd);
-			result.setData(user);
-			result.setSuccess(true);
+			if(user == null)
+            {
+                result.setSuccess(false);
+                result.setErrorCode(ErrorCode.USERNAME_PASSWORD_WRONG.getErrorCode());
+                result.setErrorMsg(ErrorCode.USERNAME_PASSWORD_WRONG.getErrorMsg());
+            }else {
+                result.setSuccess(true);
+                result.setData(user);
+            }
 		} catch (final Exception e) {
 			logger.error("", e);
 			result.setSuccess(false);
@@ -241,11 +266,12 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("modifyPersonPwd")
-  @CrossOrigin
+	@CrossOrigin
 	public ExecuteResult<User> modifyPersonPwd(@RequestBody VerifyMessage verifyMessage, HttpServletRequest request){
 	    final ExecuteResult<User> result = new ExecuteResult<>();
 	    try{
-	        if ( StringUtils.isNotBlank( verifyMessage.getEmailCode() ) && StringUtils.isNotBlank( verifyMessage.getPassword() ) ){
+	        //邮箱修改
+	        if ( StringUtils.isNotBlank( verifyMessage.getEmailCode() ) && StringUtils.isNotBlank( verifyMessage.getPassword()) && verifyMessage.getFlag() == 1 ){
 	            String code = (String)request.getSession().getAttribute("verifyCode"); 
 	            if(verifyMessage.getEmailCode().equals(code)){
 	                String pwd = PasswordUtil.createCustomPwd(verifyMessage.getPassword(), verifyMessage.getUserName() + User.SALT);
@@ -266,7 +292,23 @@ public class UserController {
 	                result.setErrorMsg(ErrorCode.VERIFY_CODE_WRONG.getErrorMsg());
 	                return result;
 	            }
+	        }else
+	        {
+	            //直接修改
+	            String oldPassword = PasswordUtil.createCustomPwd(verifyMessage.getPassword(), verifyMessage.getUserName() + User.SALT);
+	            String newPassword = PasswordUtil.createCustomPwd(verifyMessage.getNewPassword(), verifyMessage.getUserName() + User.SALT);
+	            User user = userDao.findUserByUserNameAndPassword(verifyMessage.getUserName(), oldPassword);
+	            if(user == null)
+	            {
+	                result.setSuccess(false);
+	                result.setErrorCode(ErrorCode.OLD_PWD_WRONG.getErrorCode());
+	                result.setErrorMsg(ErrorCode.OLD_PWD_WRONG.getErrorMsg());
+	            }else {
+	                userService.modifyPersonPwd(verifyMessage.getUserName(),newPassword);
+	                result.setSuccess(true); 
+	            }
 	        }
+	        
 	    }catch (final Exception e) {
             logger.error("", e);
             result.setSuccess(false);
@@ -274,5 +316,29 @@ public class UserController {
             result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
         }
 	    return result;
+	}
+	
+	@RequestMapping("modifyAvatar")
+	@CrossOrigin
+	public MarkdownUploadImage modifyAvatar(@RequestParam(value = "userName", required = false)String userName,
+	    @RequestParam(value = "imageName", required = false)String imageName,@RequestParam(value = "croppedImage", required = false)MultipartFile croppedImage, HttpServletRequest request)
+	{
+	    try {
+	        if(FileUtil.isImage(croppedImage.getInputStream())) {
+	            String  realPath = upload_dir + File.separator + imageName;
+	            File tempFile = new File(realPath);
+	            FileUtil.uploadImage(tempFile, croppedImage);
+	            //改变头像路径
+	            String url = "img/" + imageName;
+	            userDao.modifyAvatar(url,userName);
+	            return new MarkdownUploadImage(1, "上传成功！", url);
+	        } 
+	        else{
+	            return new MarkdownUploadImage(0, "上传失败!", null); 
+	        }
+	    }catch(Exception e) {
+	        logger.error("", e);
+            return new MarkdownUploadImage(0, "上传失败!", null);
+	    }
 	}
 }
