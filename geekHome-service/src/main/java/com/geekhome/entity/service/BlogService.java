@@ -36,7 +36,7 @@ public class BlogService {
 		List<Blog> list = entityManager.createNativeQuery(sql.toString(), "getBlogByUserIdList")
 				.setParameter("typeId", typeId).setParameter("userId", userId).setFirstResult(firstRecord)
 				.setMaxResults(rows).getResultList();
-		int total = blogDao.getBlogByUserIdCnt(userId);
+		int total = blogDao.getBlogByUserIdCnt(typeId);
 		Pageable pageable = new PageRequest(page, rows);
 		Page<Blog> pages = new PageImpl<>(list, pageable, total);
 		return pages;
