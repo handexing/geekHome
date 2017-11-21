@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : geek_dev
+ Source Server         : geekHome
  Source Server Type    : MySQL
  Source Server Version : 50718
  Source Host           : rm-uf6bw093xs11h6m1qo.mysql.rds.aliyuncs.com:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 21/11/2017 15:25:39
+ Date: 20/11/2017 16:16:12
 */
 
 SET NAMES utf8mb4;
@@ -97,7 +97,7 @@ INSERT INTO `blog` VALUES (15, 5, 67, 74, '了空间环境官方都是', '；林
 INSERT INTO `blog` VALUES (16, 5, 65, 60, '发计划是否过大', '啊是v多个温柔我给微软', '啊v范德萨给发嘎嘎', 3, 0, 2, NULL, '2017-11-13 13:37:33', NULL);
 INSERT INTO `blog` VALUES (17, 5, 67, 60, '还是广东分公司', '撒旦发个顺丰的', '师傅给施工方的', 3, 0, 2, NULL, '2017-11-13 13:37:43', NULL);
 INSERT INTO `blog` VALUES (18, 5, 67, 60, '啊打发手动阀撒旦', '啊手动阀实打实', '啊大苏打发', 3, 0, 4, NULL, '2017-11-13 13:37:53', NULL);
-INSERT INTO `blog` VALUES (19, 5, 66, 60, '去日期额外人去', '服务器热舞', '日为其人情味vv', 3, 0, 7, NULL, '2017-11-13 13:38:20', NULL);
+INSERT INTO `blog` VALUES (19, 5, 66, 60, '去日期额外人去', '服务器热舞', '日为其人情味vv', 3, 0, 6, NULL, '2017-11-13 13:38:20', NULL);
 
 -- ----------------------------
 -- Table structure for blog_type
@@ -215,7 +215,7 @@ CREATE TABLE `label`  (
   `PARENT_ID` bigint(20) DEFAULT 0,
   `SORT` int(255) DEFAULT NULL,
   `STATUS` int(1) DEFAULT 1,
-  `TYPE` int(1) DEFAULT NULL COMMENT '1：标签 2：开源 3：问与答',
+  `TYPE` int(1) DEFAULT NULL COMMENT '1：标签 2：开源 3：问与答 4：博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
@@ -339,12 +339,7 @@ CREATE TABLE `open_source_content`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of open_source_content
--- ----------------------------
-INSERT INTO `open_source_content` VALUES (4, 48, 'this is test', 'this is testthis is test', 'this is testthis is testthis is test', 3, 0, 0, NULL, '2017-11-21 11:17:00', NULL);
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for question_answers
@@ -460,39 +455,6 @@ INSERT INTO `role_menu` VALUES (68, 1, 44);
 INSERT INTO `role_menu` VALUES (69, 1, 45);
 INSERT INTO `role_menu` VALUES (70, 1, 46);
 INSERT INTO `role_menu` VALUES (71, 1, 47);
-
--- ----------------------------
--- Table structure for special
--- ----------------------------
-DROP TABLE IF EXISTS `special`;
-CREATE TABLE `special`  (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `USER_ID` bigint(20) DEFAULT NULL,
-  `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `SUBTITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `IMG_PATH` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `SORT` int(255) DEFAULT NULL,
-  `CREATE_TIME` datetime(0) DEFAULT NULL,
-  `UPDATE_TIME` datetime(0) DEFAULT NULL,
-  PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '专题学习表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of special
--- ----------------------------
-INSERT INTO `special` VALUES (1, 5, '移动开发', '纸上得来终觉浅，绝知此事要躬行。', NULL, 1, '2017-11-21 14:32:42', NULL);
-INSERT INTO `special` VALUES (2, 5, '框架', '纸上得来终觉浅，绝知此事要躬行。', NULL, 2, '2017-11-21 14:40:06', NULL);
-INSERT INTO `special` VALUES (3, 5, '云计算/大数据', '纸上得来终觉浅，绝知此事要躬行。', NULL, 3, '2017-11-21 14:40:08', NULL);
-INSERT INTO `special` VALUES (4, 5, '互联网', '纸上得来终觉浅，绝知此事要躬行。', NULL, 4, '2017-11-21 14:40:11', NULL);
-INSERT INTO `special` VALUES (5, 5, '运维', '纸上得来终觉浅，绝知此事要躬行。', NULL, 5, '2017-11-21 14:40:14', NULL);
-INSERT INTO `special` VALUES (6, 5, '数据库', '纸上得来终觉浅，绝知此事要躬行。', NULL, 6, '2017-11-21 14:40:16', NULL);
-INSERT INTO `special` VALUES (7, 5, '前端', '纸上得来终觉浅，绝知此事要躬行。', NULL, 7, '2017-11-21 14:40:19', NULL);
-INSERT INTO `special` VALUES (8, 5, '编程语言', '纸上得来终觉浅，绝知此事要躬行。', NULL, 8, '2017-11-21 14:40:28', NULL);
-INSERT INTO `special` VALUES (9, 5, '研发管理', '纸上得来终觉浅，绝知此事要躬行。', NULL, 9, '2017-11-21 14:40:31', NULL);
-INSERT INTO `special` VALUES (10, 5, '综合', '纸上得来终觉浅，绝知此事要躬行。', NULL, 10, '2017-11-21 14:40:34', NULL);
-INSERT INTO `special` VALUES (11, 5, '阿里云', '纸上得来终觉浅，绝知此事要躬行。', NULL, 11, '2017-11-21 14:44:58', NULL);
-INSERT INTO `special` VALUES (12, 5, '极客屋', '纸上得来终觉浅，绝知此事要躬行。', NULL, 12, '2017-11-21 14:45:01', NULL);
-INSERT INTO `special` VALUES (13, 5, 'this is test', '纸上得来终觉浅，绝知此事要躬行。', NULL, 13, '2017-11-21 14:45:04', NULL);
 
 -- ----------------------------
 -- Table structure for user

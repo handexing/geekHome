@@ -23,13 +23,12 @@ import com.geekhome.entity.dao.BlogTypeDao;
 import com.geekhome.entity.service.BlogService;
 import com.geekhome.entity.service.BlogTypeService;
 
-
 @RestController
 @RequestMapping("blog")
 public class BlogController {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	BlogService blogService;
 	@Autowired
@@ -38,13 +37,13 @@ public class BlogController {
 	BlogTypeDao blogTypeDao;
 	@Autowired
 	BlogTypeService blogTypeService;
-	
+
 	@RequestMapping(value = "getBloglabelList")
 	@CrossOrigin
 	public ExecuteResult<List<BlogType>> getBloglabelList(Long userId) {
 		final ExecuteResult<List<BlogType>> result = new ExecuteResult<>();
 		try {
-			List<BlogType> types = blogTypeDao.findUserBlogTypeByStatusAndUserId(Label.LABEL_STATE_DEFAULT,userId);
+			List<BlogType> types = blogTypeDao.findUserBlogTypeByStatusAndUserId(Label.LABEL_STATE_DEFAULT, userId);
 			result.setData(types);
 			result.setSuccess(true);
 		} catch (final Exception e) {
@@ -55,18 +54,19 @@ public class BlogController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("getBlogList")
 	@CrossOrigin
-	public PageableResultJson getBlogList(@RequestParam(value = "page") Integer page,Integer rows, Long labelId,Long userId) {
+	public PageableResultJson getBlogList(@RequestParam(value = "page") Integer page, Integer rows, Long labelId,
+			Long userId) {
 		PageableResultJson tableJson = new PageableResultJson();
-		Page<Blog> pageData = blogService.findBlogByUserIdAndLabelIdList(userId,labelId, page,rows);
+		Page<Blog> pageData = blogService.findBlogByUserIdAndLabelIdList(userId, labelId, page, rows);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
-	
+
 	@RequestMapping("saveBlog")
 	@CrossOrigin
 	public ExecuteResult<Boolean> saveBlog(@RequestBody Blog blog) {
@@ -82,7 +82,7 @@ public class BlogController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("saveLabel")
 	@CrossOrigin
 	public ExecuteResult<Integer> saveLabel(@RequestBody BlogType blogType) {
@@ -99,7 +99,7 @@ public class BlogController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("getBlogById")
 	@CrossOrigin
 	public ExecuteResult<Blog> getBlogById(Long id) {
@@ -116,14 +116,14 @@ public class BlogController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("addBlogBrowseCnt")
 	@CrossOrigin
 	public ExecuteResult<Boolean> addBlogBrowseCnt(Long id) {
 		final ExecuteResult<Boolean> result = new ExecuteResult<>();
 		try {
 			Blog blog = blogDao.findOne(id);
-			blog.setBrowseCount(blog.getBrowseCount()+1);
+			blog.setBrowseCount(blog.getBrowseCount() + 1);
 			blogDao.save(blog);
 			result.setSuccess(true);
 		} catch (final Exception e) {
@@ -134,23 +134,35 @@ public class BlogController {
 		}
 		return result;
 	}
+
 	@RequestMapping("getAllBlogList")
 	@CrossOrigin
-	public PageableResultJson getAllBlogList(@RequestParam(value = "page") Integer page, Integer rows) {
+	public PageableResultJson getAllBlogList(@RequestParam(value = "page") Integer page, Integer rows,
+			Long systemTypeId) {
 		PageableResultJson tableJson = new PageableResultJson();
-		Page<Blog> pageData = blogService.getBlogList(page, rows);
+		Page<Blog> pageData = blogService.getBlogList(page, rows, systemTypeId);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
-	
-	
+
 	@RequestMapping("getHotBlogList")
 	@CrossOrigin
 	public PageableResultJson getHotBlogList(@RequestParam(value = "page") Integer page, Integer rows) {
 		PageableResultJson tableJson = new PageableResultJson();
 		Page<Blog> pageData = blogService.getHotBlogList(page, rows);
+		tableJson.setData(pageData.getContent());
+		tableJson.setPageSize(10);
+		tableJson.setTotalPageNumber(pageData.getTotalPages());
+		return tableJson;
+	}
+
+	@RequestMapping("getHotBlogUserList")
+	@CrossOrigin
+	public PageableResultJson getHotBlogUserList(@RequestParam(value = "page") Integer page, Integer rows) {
+		PageableResultJson tableJson = new PageableResultJson();
+		Page<Blog> pageData = blogService.getHotBlogUserList(page, rows);
 		tableJson.setData(pageData.getContent());
 		tableJson.setPageSize(10);
 		tableJson.setTotalPageNumber(pageData.getTotalPages());

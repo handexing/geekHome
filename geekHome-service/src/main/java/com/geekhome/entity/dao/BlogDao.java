@@ -8,10 +8,13 @@ import com.geekhome.entity.Blog;
 
 public interface BlogDao extends JpaRepository<Blog, Long>{
 
-	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG WHERE TYPE_ID IN(SELECT ID FROM BLOG_TYPE WHERE USER_ID=:userId)")
-	int getBlogByUserIdCnt(@Param("userId") Long userId);
+	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG WHERE TYPE_ID =:typeId")
+	int getBlogByUserIdCnt(@Param("typeId") Long typeId);
 
 	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG")
 	int getBoleCnt();
+	
+	@Query(nativeQuery = true, value = "SELECT COUNT(1) FROM BLOG WHERE SYSTEM_TYPE_ID=:systemTypeId")
+	int getBoleBySystemTypeIdCnt(@Param("systemTypeId") Long systemTypeId);
 
 }
