@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : 65001
 
- Date: 20/11/2017 16:16:12
+ Date: 24/11/2017 20:33:05
 */
 
 SET NAMES utf8mb4;
@@ -77,7 +77,7 @@ CREATE TABLE `blog`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'blog表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog
@@ -92,12 +92,13 @@ INSERT INTO `blog` VALUES (10, 5, 70, 58, '极客屋需求文档', '极客屋是
 INSERT INTO `blog` VALUES (11, 5, 64, 59, 'android四大组件详细介绍', 'Android从入门到放弃！！！', ':flushed:android四大组件详细介绍', 3, 0, 3, NULL, '2017-11-08 14:50:03', NULL);
 INSERT INTO `blog` VALUES (12, 5, 64, 59, 'Android webview详解', 'Android webview详解', 'Android webview详解', 3, 0, 4, NULL, '2017-11-08 14:53:48', NULL);
 INSERT INTO `blog` VALUES (13, 5, 68, 61, '啊打发撒旦', 'a\'d\'s\'fa\'s\'fa', ' 啊多发点发达省份', 3, 0, 1, NULL, '2017-11-13 13:37:04', NULL);
-INSERT INTO `blog` VALUES (14, 5, 68, 62, '啊地方撒撒旦', '啊打发士大夫', '啊打发阿斯顿', 3, 0, 2, NULL, '2017-11-13 13:37:12', NULL);
+INSERT INTO `blog` VALUES (14, 5, 68, 62, '啊地方撒撒旦', '啊打发士大夫', '啊打发阿斯顿', 3, 0, 3, NULL, '2017-11-13 13:37:12', NULL);
 INSERT INTO `blog` VALUES (15, 5, 67, 74, '了空间环境官方都是', '；林肯郡海关法的', '将用户提供范德萨', 3, 0, 1, NULL, '2017-11-13 13:37:22', NULL);
 INSERT INTO `blog` VALUES (16, 5, 65, 60, '发计划是否过大', '啊是v多个温柔我给微软', '啊v范德萨给发嘎嘎', 3, 0, 2, NULL, '2017-11-13 13:37:33', NULL);
-INSERT INTO `blog` VALUES (17, 5, 67, 60, '还是广东分公司', '撒旦发个顺丰的', '师傅给施工方的', 3, 0, 2, NULL, '2017-11-13 13:37:43', NULL);
-INSERT INTO `blog` VALUES (18, 5, 67, 60, '啊打发手动阀撒旦', '啊手动阀实打实', '啊大苏打发', 3, 0, 4, NULL, '2017-11-13 13:37:53', NULL);
-INSERT INTO `blog` VALUES (19, 5, 66, 60, '去日期额外人去', '服务器热舞', '日为其人情味vv', 3, 0, 6, NULL, '2017-11-13 13:38:20', NULL);
+INSERT INTO `blog` VALUES (17, 5, 67, 60, '还是广东分公司', '撒旦发个顺丰的', '师傅给施工方的', 3, 0, 3, NULL, '2017-11-13 13:37:43', NULL);
+INSERT INTO `blog` VALUES (18, 5, 67, 60, '啊打发手动阀撒旦', '啊手动阀实打实', '啊大苏打发', 3, 0, 8, NULL, '2017-11-13 13:37:53', NULL);
+INSERT INTO `blog` VALUES (19, 5, 66, 60, '去日期额外人去', '服务器热舞', '日为其人情味vv', 3, 0, 15, NULL, '2017-11-13 13:38:20', NULL);
+INSERT INTO `blog` VALUES (20, 5, 65, 59, '发士大夫士大夫', '色发射点发', '色发射点发', 3, 0, 0, NULL, '2017-11-24 15:26:41', NULL);
 
 -- ----------------------------
 -- Table structure for blog_type
@@ -146,7 +147,7 @@ CREATE TABLE `comment`  (
   `TYPE` int(1) DEFAULT NULL COMMENT '评论类型：1-开源 2-问与答 3-博客',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of comment
@@ -183,6 +184,10 @@ INSERT INTO `comment` VALUES (29, 5, 10, '啊但是发射点', 3, '2017-11-08 13
 INSERT INTO `comment` VALUES (30, 5, 10, ':satisfied:### test', 3, '2017-11-08 13:57:43');
 INSERT INTO `comment` VALUES (31, 5, 15, '@sdfs @sdfs @sdfs ', 2, '2017-11-13 17:26:06');
 INSERT INTO `comment` VALUES (32, 5, 18, '啊手动阀手动阀', 3, '2017-11-16 14:49:49');
+INSERT INTO `comment` VALUES (33, 7, 23, '111', 2, '2017-11-22 15:52:02');
+INSERT INTO `comment` VALUES (34, 7, 23, ':laughing:', 2, '2017-11-22 15:52:26');
+INSERT INTO `comment` VALUES (35, 7, 19, '蛤蛤', 3, '2017-11-22 15:53:41');
+INSERT INTO `comment` VALUES (36, 7, 19, '哦?:monkey_face:', 3, '2017-11-23 11:07:22');
 
 -- ----------------------------
 -- Table structure for comment_reply
@@ -215,7 +220,7 @@ CREATE TABLE `label`  (
   `PARENT_ID` bigint(20) DEFAULT 0,
   `SORT` int(255) DEFAULT NULL,
   `STATUS` int(1) DEFAULT 1,
-  `TYPE` int(1) DEFAULT NULL COMMENT '1：标签 2：开源 3：问与答 4：博客',
+  `TYPE` int(1) DEFAULT NULL COMMENT '1：标签 2：开源 3：问与答',
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
@@ -328,6 +333,7 @@ INSERT INTO `menu` VALUES (47, '用户列表页', 'menu', '/user/userPage', 'use
 DROP TABLE IF EXISTS `open_source_content`;
 CREATE TABLE `open_source_content`  (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) DEFAULT NULL,
   `LABEL_ID` bigint(20) DEFAULT NULL COMMENT '标签id',
   `TITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '标题',
   `SUBTITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '副标题',
@@ -339,7 +345,22 @@ CREATE TABLE `open_source_content`  (
   `CREATE_TIME` datetime(0) DEFAULT NULL,
   `UPDATE_TIME` datetime(0) DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开源内容表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of open_source_content
+-- ----------------------------
+INSERT INTO `open_source_content` VALUES (4, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (5, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (6, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (7, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (8, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (9, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (10, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (11, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (12, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (13, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
+INSERT INTO `open_source_content` VALUES (14, 5, 48, '分布式调度解决方案 Elastic-Job', '以SpringBoot 为中心，模块化开发系统，用户可以随意删减除权限框架外 任意的系统模块。复用，组装性强。2种打包方式，传统可运行的tomcat目录 以及直接jar 方式运行。主要应用技术：...', 'sdfsdfdsfsfsdf', 3, 0, 0, NULL, '2017-11-24 16:22:18', NULL);
 
 -- ----------------------------
 -- Table structure for question_answers
@@ -384,9 +405,9 @@ INSERT INTO `question_answers` VALUES (19, 5, 29, '网好卡啊啊啊~~~~', '网
 INSERT INTO `question_answers` VALUES (20, 5, 31, '实习求职', '实习求职实习求职实习求职', 2, 0, 0, '2017-10-27 14:36:17', NULL);
 INSERT INTO `question_answers` VALUES (21, 5, 34, '有毒有毒', '有毒有毒', 2, 0, 5, '2017-10-27 14:36:32', NULL);
 INSERT INTO `question_answers` VALUES (22, 5, 39, '自行车', '自行车自行车自行车', 2, 0, 1, '2017-10-27 14:37:08', NULL);
-INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 244, '2017-10-27 20:08:44', NULL);
-INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 22, '2017-10-27 22:35:16', NULL);
-INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 10, '2017-10-27 23:17:56', NULL);
+INSERT INTO `question_answers` VALUES (23, 5, 11, '如果空气算是一种慢性毒药，杀死人需要75/100年....', '#### 如果空气算是一种慢性毒药，杀死人需要75/100年....\n:satisfied: :satisfied:什么鬼\n2017-10-24 17:07:58 星期二\n\n------------\n\n#### 极客屋上线了\n哈哈哈哈哈~:relaxed: :relaxed: :relaxed:', 2, 0, 249, '2017-10-27 20:08:44', NULL);
+INSERT INTO `question_answers` VALUES (24, 17, 20, '还不能改个人设置？', '默认头像真的好丑  \n\n注册完账号第一件事就是想去改资料', 2, 0, 23, '2017-10-27 22:35:16', NULL);
+INSERT INTO `question_answers` VALUES (25, 20, 25, '发现落事网社区', '落事网www.luosh.com', 3, 0, 11, '2017-10-27 23:17:56', NULL);
 INSERT INTO `question_answers` VALUES (26, 5, 9, '极客屋问与答支持图片上传预览了~', '![](http://39.106.56.107/images/1509503090634.jpg)\n\n', 3, 0, 5, '2017-11-01 10:25:40', NULL);
 
 -- ----------------------------
@@ -457,6 +478,39 @@ INSERT INTO `role_menu` VALUES (70, 1, 46);
 INSERT INTO `role_menu` VALUES (71, 1, 47);
 
 -- ----------------------------
+-- Table structure for special
+-- ----------------------------
+DROP TABLE IF EXISTS `special`;
+CREATE TABLE `special`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `USER_ID` bigint(20) DEFAULT NULL,
+  `NAME` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `SUBTITLE` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `IMG_PATH` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `SORT` int(255) DEFAULT NULL,
+  `CREATE_TIME` datetime(0) DEFAULT NULL,
+  `UPDATE_TIME` datetime(0) DEFAULT NULL,
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '专题学习表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of special
+-- ----------------------------
+INSERT INTO `special` VALUES (1, 5, '移动开发', '纸上得来终觉浅，绝知此事要躬行。', NULL, 1, '2017-11-21 14:32:42', NULL);
+INSERT INTO `special` VALUES (2, 5, '框架', '纸上得来终觉浅，绝知此事要躬行。', NULL, 2, '2017-11-21 14:40:06', NULL);
+INSERT INTO `special` VALUES (3, 5, '云计算/大数据', '纸上得来终觉浅，绝知此事要躬行。', NULL, 3, '2017-11-21 14:40:08', NULL);
+INSERT INTO `special` VALUES (4, 5, '互联网', '纸上得来终觉浅，绝知此事要躬行。', NULL, 4, '2017-11-21 14:40:11', NULL);
+INSERT INTO `special` VALUES (5, 5, '运维', '纸上得来终觉浅，绝知此事要躬行。', NULL, 5, '2017-11-21 14:40:14', NULL);
+INSERT INTO `special` VALUES (6, 5, '数据库', '纸上得来终觉浅，绝知此事要躬行。', NULL, 6, '2017-11-21 14:40:16', NULL);
+INSERT INTO `special` VALUES (7, 5, '前端', '纸上得来终觉浅，绝知此事要躬行。', NULL, 7, '2017-11-21 14:40:19', NULL);
+INSERT INTO `special` VALUES (8, 5, '编程语言', '纸上得来终觉浅，绝知此事要躬行。', NULL, 8, '2017-11-21 14:40:28', NULL);
+INSERT INTO `special` VALUES (9, 5, '研发管理', '纸上得来终觉浅，绝知此事要躬行。', NULL, 9, '2017-11-21 14:40:31', NULL);
+INSERT INTO `special` VALUES (10, 5, '综合', '纸上得来终觉浅，绝知此事要躬行。', NULL, 10, '2017-11-21 14:40:34', NULL);
+INSERT INTO `special` VALUES (11, 5, '阿里云', '纸上得来终觉浅，绝知此事要躬行。', NULL, 11, '2017-11-21 14:44:58', NULL);
+INSERT INTO `special` VALUES (12, 5, '极客屋', '纸上得来终觉浅，绝知此事要躬行。', NULL, 12, '2017-11-21 14:45:01', NULL);
+INSERT INTO `special` VALUES (13, 5, 'this is test', '纸上得来终觉浅，绝知此事要躬行。', NULL, 13, '2017-11-21 14:45:04', NULL);
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -485,7 +539,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 INSERT INTO `user` VALUES (5, 'handx', 0, NULL, '908716835@qq.com', '15618243357', '0d6dac1b11e346b17c19ecbf49ae6c7b', '爱生活，爱编程。', 'img/1.png', 1, '2017-10-09 15:23:40', '2017-11-03 14:56:07', '阿里巴巴', '上海', 'handexing', 'www.geekuser.cn');
 INSERT INTO `user` VALUES (6, 'jack', 0, NULL, '908716836@qq.com', NULL, '0d6dac1b11e346b17c19ecbf49ae6c7b', '用户很懒，什么都没说明....', 'img/2.png', 1, '2017-10-17 14:23:02', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `user` VALUES (7, 'yannis', 0, NULL, 'p_y2020@163.com', '17626972358', 'b4fdf01936b27912da30f16367697bd0', '大家都没错。', 'img/3.png', 1, '2017-10-19 17:27:26', '2017-11-20 11:28:29', '华为南京研究所', '江苏省南京市', 'git', 'www.google.com');
+INSERT INTO `user` VALUES (7, 'yannis', 0, NULL, 'p_y2020@163.com', '17626972358', 'fe2a48eaee06dd6d35f273abeecf0981', '大家都没错。', 'img/1.png', 1, '2017-10-19 17:27:26', '2017-11-20 11:28:29', '华为南京研究所', '江苏省南京市', 'git', 'www.google.com');
 INSERT INTO `user` VALUES (8, 'toono', 0, NULL, 'p_y2020@163.com', NULL, '8e0878027cc03f151eb2039441a625c6', '用户很懒，什么都没说明....', 'img/4.png', 1, '2017-10-19 17:28:08', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (9, 'Omooo', 0, NULL, '869759698@qq.com', NULL, '900a44073e14f0cf721821dbfc5a3a5e', '用户很懒，什么都没说明....', 'img/4.png', 1, '2017-10-19 23:07:50', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (10, 'pinklay', 0, NULL, NULL, NULL, '1c8ec6fcaedbee45fa59a06b786fae6a', '用户很懒，什么都没说明....', 'img/5.png', 1, '2017-10-20 16:33:09', NULL, NULL, NULL, NULL, NULL);
