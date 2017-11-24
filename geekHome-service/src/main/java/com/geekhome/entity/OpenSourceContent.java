@@ -4,15 +4,34 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geekhome.common.utils.CustomDateSerializer;
 
+@SqlResultSetMappings({
+
+		@SqlResultSetMapping(name = "getOpenSourceListByLabelId", classes = @ConstructorResult(targetClass = OpenSourceContent.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), 
+				@ColumnResult(name = "labelId", type = Long.class),
+				@ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "subtitle", type = String.class),
+				@ColumnResult(name = "content", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "commentCnt", type = Integer.class),
+				@ColumnResult(name = "bannerImg", type = String.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class) })) })
 @Entity
 @Table(name = "OPEN_SOURCE_CONTENT")
 public class OpenSourceContent implements Serializable {
@@ -32,6 +51,8 @@ public class OpenSourceContent implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
+	@Column(name = "USER_ID")
+	private Long userId;
 	@Column(name = "LABEL_ID")
 	private Long labelId;
 	@Column(name = "TITLE")
@@ -54,6 +75,25 @@ public class OpenSourceContent implements Serializable {
 	@JsonSerialize(using = CustomDateSerializer.class)
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
+
+	@Transient
+	private Integer commentCnt;
+
+	public Integer getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(Integer commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getSubtitle() {
 		return subtitle;
@@ -164,6 +204,22 @@ public class OpenSourceContent implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	public OpenSourceContent(Long id, Long labelId, String title, String subtitle, String content, Integer collectCount,
+			Integer browseCount, Integer commentCnt, String bannerImg, Date createTime, Date updateTime) {
+		super();
+		this.id = id;
+		this.labelId = labelId;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.content = content;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.commentCnt = commentCnt;
+		this.bannerImg = bannerImg;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
+
 	@Override
 	public String toString() {
 		return "OpenSourceContent [id=" + id + ", labelId=" + labelId + ", title=" + title + ", content=" + content
@@ -171,7 +227,5 @@ public class OpenSourceContent implements Serializable {
 				+ collectCount + ", browseCount=" + browseCount + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + "]";
 	}
-
-	
 
 }
