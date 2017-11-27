@@ -57,4 +57,21 @@ public class OpenSourceService {
 		return pages;
 	}
 
+	@SuppressWarnings("unchecked")
+	public OpenSourceContent getOpenSourceDetailById(Long id) {
+
+		StringBuilder sql = new StringBuilder();
+		sql.append(
+				"SELECT o.ID id,o.LABEL_ID labelId,o.TITLE title,o.SUBTITLE subtitle,o.CONTENT content,o.COLLECT_COUNT collectCount,o.BROWSE_COUNT browseCount,")
+				.append("(SELECT COUNT(1) FROM COMMENT WHERE THEME_ID = o.ID AND TYPE=1) as commentCnt,o.BANNER_IMG bannerImg,o.CREATE_TIME createTime,o.UPDATE_TIME updateTime,")
+				.append("l.LABLE_NAME lableName,u.USER_NAME userName,u.HEAD_IMG_URL headImgUrl,u.ID userId")
+				.append(" FROM OPEN_SOURCE_CONTENT AS o LEFT JOIN USER AS u ON o.USER_ID = u.ID")
+				.append(" LEFT JOIN LABEL AS l ON o.LABEL_ID = l.ID WHERE o.ID =:id");
+
+		final List<OpenSourceContent> list = entityManager.createNativeQuery(sql.toString(), "getOpenSourceDetailById").setParameter("id", id)
+				.getResultList();
+		return list.get(0);
+
+	}
+
 }
