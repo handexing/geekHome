@@ -77,4 +77,39 @@ public class OpenSourceController {
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
+	
+	@RequestMapping("getOpenSourceDetailById")
+	@CrossOrigin
+	public ExecuteResult<OpenSourceContent> getOpenSourceDetailById(Long id) {
+		final ExecuteResult<OpenSourceContent> result = new ExecuteResult<>();
+		try {
+			OpenSourceContent sourceContent = openSourceService.getOpenSourceDetailById(id);
+			result.setData(sourceContent);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("addBrowseCnt")
+	@CrossOrigin
+	public ExecuteResult<Boolean> addBrowseCnt(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			OpenSourceContent content = openSourceContentDao.findOne(id);
+			content.setBrowseCount(content.getBrowseCount() + 1);
+			openSourceContentDao.save(content);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 }

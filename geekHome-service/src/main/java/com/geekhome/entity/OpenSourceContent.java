@@ -21,8 +21,7 @@ import com.geekhome.common.utils.CustomDateSerializer;
 @SqlResultSetMappings({
 
 		@SqlResultSetMapping(name = "getOpenSourceListByLabelId", classes = @ConstructorResult(targetClass = OpenSourceContent.class, columns = {
-				@ColumnResult(name = "id", type = Long.class), 
-				@ColumnResult(name = "labelId", type = Long.class),
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "labelId", type = Long.class),
 				@ColumnResult(name = "title", type = String.class),
 				@ColumnResult(name = "subtitle", type = String.class),
 				@ColumnResult(name = "content", type = String.class),
@@ -31,7 +30,23 @@ import com.geekhome.common.utils.CustomDateSerializer;
 				@ColumnResult(name = "commentCnt", type = Integer.class),
 				@ColumnResult(name = "bannerImg", type = String.class),
 				@ColumnResult(name = "createTime", type = Date.class),
-				@ColumnResult(name = "updateTime", type = Date.class) })) })
+				@ColumnResult(name = "updateTime", type = Date.class) })),
+
+		@SqlResultSetMapping(name = "getOpenSourceDetailById", classes = @ConstructorResult(targetClass = OpenSourceContent.class, columns = {
+				@ColumnResult(name = "id", type = Long.class), @ColumnResult(name = "labelId", type = Long.class),
+				@ColumnResult(name = "title", type = String.class),
+				@ColumnResult(name = "subtitle", type = String.class),
+				@ColumnResult(name = "content", type = String.class),
+				@ColumnResult(name = "collectCount", type = Integer.class),
+				@ColumnResult(name = "browseCount", type = Integer.class),
+				@ColumnResult(name = "commentCnt", type = Integer.class),
+				@ColumnResult(name = "bannerImg", type = String.class),
+				@ColumnResult(name = "createTime", type = Date.class),
+				@ColumnResult(name = "updateTime", type = Date.class),
+				@ColumnResult(name = "lableName", type = String.class),
+				@ColumnResult(name = "userName", type = String.class),
+				@ColumnResult(name = "headImgUrl", type = String.class),
+				@ColumnResult(name = "userId", type = Long.class) })) })
 @Entity
 @Table(name = "OPEN_SOURCE_CONTENT")
 public class OpenSourceContent implements Serializable {
@@ -78,6 +93,36 @@ public class OpenSourceContent implements Serializable {
 
 	@Transient
 	private Integer commentCnt;
+	@Transient
+	private String lableName;
+	@Transient
+	private String userName;
+	@Transient
+	private String headImgUrl;
+
+	public String getLableName() {
+		return lableName;
+	}
+
+	public void setLableName(String lableName) {
+		this.lableName = lableName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
 
 	public Integer getCommentCnt() {
 		return commentCnt;
@@ -218,6 +263,27 @@ public class OpenSourceContent implements Serializable {
 		this.bannerImg = bannerImg;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+	}
+
+	public OpenSourceContent(Long id, Long labelId, String title, String subtitle, String content, Integer collectCount,
+			Integer browseCount, Integer commentCnt, String bannerImg, Date createTime, Date updateTime,
+			String lableName, String userName, String headImgUrl, Long userId) {
+		super();
+		this.id = id;
+		this.labelId = labelId;
+		this.title = title;
+		this.subtitle = subtitle;
+		this.content = content;
+		this.collectCount = collectCount;
+		this.browseCount = browseCount;
+		this.commentCnt = commentCnt;
+		this.bannerImg = bannerImg;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.lableName = lableName;
+		this.userName = userName;
+		this.headImgUrl = headImgUrl;
+		this.userId = userId;
 	}
 
 	@Override
