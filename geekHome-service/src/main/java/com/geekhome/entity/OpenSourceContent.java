@@ -61,6 +61,21 @@ public class OpenSourceContent implements Serializable {
 	 * 关闭
 	 */
 	public static final Integer OPEN_SOURCE_CONTENT_STATE_CLOSE = 0;
+	
+	/**
+	 * 草稿
+	 */
+	public static final Integer OPEN_SOURCE_CONTENT_STATE_DRAFT = 2;
+	
+	/**
+	 * 发布
+	 */
+	public static final Integer OPEN_SOURCE_CONTENT_STATE_RELEASE = 3;
+	
+	/**
+	 * 推荐
+	 */
+	public static final Integer OPEN_SOURCE_CONTENT_STATE_RECOMMEND = 4;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
