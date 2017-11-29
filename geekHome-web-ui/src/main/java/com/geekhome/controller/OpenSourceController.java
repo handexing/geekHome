@@ -112,4 +112,21 @@ public class OpenSourceController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value = "/getRecommendList")
+	@CrossOrigin
+	public ExecuteResult<List<OpenSourceContent>> getRecommendList(Long labelId) {
+		final ExecuteResult<List<OpenSourceContent>> result = new ExecuteResult<>();
+		try {
+			List<OpenSourceContent> datas = openSourceContentDao.findOpenSourceContentByStatusAndLabelId(OpenSourceContent.OPEN_SOURCE_CONTENT_STATE_RECOMMEND, labelId);
+			result.setData(datas);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 }
