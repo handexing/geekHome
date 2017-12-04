@@ -77,4 +77,56 @@ public class OpenSourceController {
 		tableJson.setTotalPageNumber(pageData.getTotalPages());
 		return tableJson;
 	}
+	
+	@RequestMapping("getOpenSourceDetailById")
+	@CrossOrigin
+	public ExecuteResult<OpenSourceContent> getOpenSourceDetailById(Long id) {
+		final ExecuteResult<OpenSourceContent> result = new ExecuteResult<>();
+		try {
+			OpenSourceContent sourceContent = openSourceService.getOpenSourceDetailById(id);
+			result.setData(sourceContent);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping("addBrowseCnt")
+	@CrossOrigin
+	public ExecuteResult<Boolean> addBrowseCnt(Long id) {
+		final ExecuteResult<Boolean> result = new ExecuteResult<>();
+		try {
+			OpenSourceContent content = openSourceContentDao.findOne(id);
+			content.setBrowseCount(content.getBrowseCount() + 1);
+			openSourceContentDao.save(content);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/getRecommendList")
+	@CrossOrigin
+	public ExecuteResult<List<OpenSourceContent>> getRecommendList(Long labelId) {
+		final ExecuteResult<List<OpenSourceContent>> result = new ExecuteResult<>();
+		try {
+			List<OpenSourceContent> datas = openSourceContentDao.findOpenSourceContentByStatusAndLabelId(OpenSourceContent.OPEN_SOURCE_CONTENT_STATE_RECOMMEND, labelId);
+			result.setData(datas);
+			result.setSuccess(true);
+		} catch (final Exception e) {
+			logger.error("", e);
+			result.setSuccess(false);
+			result.setErrorCode(ErrorCode.EXCEPTION.getErrorCode());
+			result.setErrorMsg(ErrorCode.EXCEPTION.getErrorMsg());
+		}
+		return result;
+	}
 }

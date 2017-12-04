@@ -41,7 +41,7 @@ public class UserService {
 				user.setCreateTime(new Date());
 				Random random = new Random();
 				int result = random.nextInt(44);
-				user.setHeadImgUrl("img/" + result + ".png");
+				user.setHeadImgUrl(result + ".png");
 				user.setState(User.USER_STATE_DEFAULT);
 				user.setBrief("用户很懒，什么都没说明....");
 				user.setSex(User.USER_SEX_DEFAULT);
