@@ -318,6 +318,12 @@ public class UserController {
 	    return result;
 	}
 	
+	/**
+	 * 修改头像
+	 * @param croppedImage 裁剪后的图片
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("modifyAvatar")
 	@CrossOrigin
 	public MarkdownUploadImage modifyAvatar(@RequestParam(value = "userName", required = false)String userName,
@@ -329,7 +335,7 @@ public class UserController {
 	            File tempFile = new File(realPath);
 	            FileUtil.uploadImage(tempFile, croppedImage);
 	            //改变头像路径
-	            String url = "img/" + imageName;
+	            String url = imageName;
 	            userDao.modifyAvatar(url,userName);
 	            return new MarkdownUploadImage(1, "上传成功！", url);
 	        } 
