@@ -91,6 +91,7 @@ public class UserController {
                 result.setErrorMsg(ErrorCode.USERNAME_PASSWORD_WRONG.getErrorMsg());
             }else {
                 result.setSuccess(true);
+                user.setPassword(null);
                 result.setData(user);
             }
 		} catch (final Exception e) {
