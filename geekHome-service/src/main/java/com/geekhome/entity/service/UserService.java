@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+    EntityManager entityManager;
 
 	public User saveUser(User user) {
 
@@ -75,4 +79,22 @@ public class UserService {
 	    Integer num = userDao.modifyPersonPwd(userName, pwd);
 	    return num;
 	}
+	
+	/**
+	 * 通过用户名密码登录
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+    public User findUserByUserNameAndPassword(String userName, String password) {
+	    StringBuilder strb = new StringBuilder();
+	    strb.append("SELECT U.ID id , U.USER_NAME userName , U.SEX sex , U.BIRTHDAY birthday , U.EMAIL email , U.PHONE phone")
+	    .append(", U.PASSWORD password , U.BRIEF brief , U.HEAD_IMG_URL headImgUrl , U.STATE state , U.CREATE_TIME createTime , U.UPDATE_TIME updateTime")
+	    .append(", U.COMPANY company , U.ADDRESS address , U.GIT_HUB_URL gitHubUrl , U.WEB_SITE_URL webSiteUrl , U.INTEGRAL_ID integralId , I.INTEGRAL integral")
+	    .append(",I.STATE signUpState FROM USER U LEFT JOIN INTEGRAL I ON U.ID = I.USER_ID WHERE U.USER_NAME=:userName AND U.PASSWORD=:password");
+	    System.out.println(strb.toString());
+	    List<User> users = entityManager.createNativeQuery(strb.toString() , "findUserByUserNameAndPassword").setParameter("userName", userName)
+	        .setParameter("password", password).getResultList();
+	    return users.get(0);
+	}
+	
 }

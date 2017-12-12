@@ -83,7 +83,7 @@ public class UserController {
 		final ExecuteResult<User> result = new ExecuteResult<>();
 		try {
 			String pwd = PasswordUtil.createCustomPwd(password, userName + User.SALT);
-			User user = userDao.findUserByUserNameAndPassword(userName, pwd);
+			User user = userService.findUserByUserNameAndPassword(userName, pwd);
 			if(user == null)
             {
                 result.setSuccess(false);
@@ -348,4 +348,6 @@ public class UserController {
             return new MarkdownUploadImage(0, "上传失败!", null);
 	    }
 	}
+	
+	
 }
