@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.geekhome.common.utils.CustomDateSerializer;
@@ -19,6 +23,28 @@ import com.geekhome.common.utils.CustomDateSerializer;
  * @date 2017年10月9日 上午10:16:18
  * @version V1.0
  */
+@SqlResultSetMapping(name = "findUserByUserNameAndPassword", classes = @ConstructorResult(targetClass = User.class, columns = {
+    @ColumnResult(name = "id", type = Long.class), 
+    @ColumnResult(name = "userName", type = String.class),
+    @ColumnResult(name = "sex", type = Integer.class),
+    @ColumnResult(name = "birthday", type = Date.class),
+    @ColumnResult(name = "email", type = String.class),
+    @ColumnResult(name = "phone", type = String.class),
+    @ColumnResult(name = "password", type = String.class),
+    @ColumnResult(name = "brief", type = String.class),
+    @ColumnResult(name = "headImgUrl", type = String.class),
+    @ColumnResult(name = "state", type = Integer.class),
+    @ColumnResult(name = "createTime", type = Date.class),
+    @ColumnResult(name = "updateTime", type = Date.class),
+    @ColumnResult(name = "company", type = String.class),
+    @ColumnResult(name = "address", type = String.class),
+    @ColumnResult(name = "gitHubUrl", type = String.class),
+    @ColumnResult(name = "webSiteUrl", type = String.class),
+    @ColumnResult(name = "integralId", type = Long.class),
+    @ColumnResult(name = "integral", type = Integer.class),
+    @ColumnResult(name = "signUpState", type = Integer.class)
+}))
+
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
@@ -87,6 +113,13 @@ public class User implements Serializable {
 	private String gitHubUrl;
 	@Column(name = "WEB_SITE_URL")
 	private String webSiteUrl;
+	@Column(name = "INTEGRAL_ID")
+	private Long integralId; //积分对应id
+
+	@Transient
+	private Integer integral;//积分
+	@Transient
+	private Integer signUpState;//签到状态
 
 	public String getCompany() {
 		return company;
@@ -219,10 +252,39 @@ public class User implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+	
+    public Long getIntegralId()
+    {
+        return integralId;
+    }
 
-	public User() {
+    public void setIntegralId(Long integralId)
+    {
+        this.integralId = integralId;
+    }
+    
+    public Integer getIntegral()
+    {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral)
+    {
+        this.integral = integral;
+    }
+
+    public Integer getSignUpState()
+    {
+        return signUpState;
+    }
+
+    public void setSignUpState(Integer signUpState)
+    {
+        this.signUpState = signUpState;
+    }
+
+    public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public User(Long id, String userName, Integer sex, Date birthday, String email, String phone, String password,
@@ -241,12 +303,42 @@ public class User implements Serializable {
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", sex=" + sex + ", birthday=" + birthday + ", email="
-				+ email + ", phone=" + phone + ", password=" + password + ", brief=" + brief + ", headImgUrl="
-				+ headImgUrl + ", state=" + state + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
-	}
+    public User(Long id, String userName, Integer sex, Date birthday, String email, String phone, String password,
+        String brief, String headImgUrl, Integer state, Date createTime, Date updateTime, String company,
+        String address, String gitHubUrl, String webSiteUrl, Long integralId, Integer integral, Integer signUpState)
+    {
+        super();
+        this.id = id;
+        this.userName = userName;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.brief = brief;
+        this.headImgUrl = headImgUrl;
+        this.state = state;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.company = company;
+        this.address = address;
+        this.gitHubUrl = gitHubUrl;
+        this.webSiteUrl = webSiteUrl;
+        this.integralId = integralId;
+        this.integral = integral;
+        this.signUpState = signUpState;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "User [id=" + id + ", userName=" + userName + ", sex=" + sex + ", birthday=" + birthday + ", email="
+            + email + ", phone=" + phone + ", password=" + password + ", brief=" + brief + ", headImgUrl=" + headImgUrl
+            + ", state=" + state + ", createTime=" + createTime + ", updateTime=" + updateTime + ", company=" + company
+            + ", address=" + address + ", gitHubUrl=" + gitHubUrl + ", webSiteUrl=" + webSiteUrl + ", integralId="
+            + integralId + ", integral=" + integral + ", signUpState=" + signUpState + "]";
+    }
 
 }

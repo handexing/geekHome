@@ -300,6 +300,8 @@ public class OpenSourceContent implements Serializable {
 		this.headImgUrl = headImgUrl;
 		this.userId = userId;
 	}
+	
+	
 
 	@Override
 	public String toString() {
