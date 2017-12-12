@@ -532,6 +532,7 @@ CREATE TABLE `user`  (
   `ADDRESS` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `GIT_HUB_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `WEB_SITE_URL` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `INTEGRAL_ID` bigint(20) COMMENT '用户对应积分ID',
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
@@ -558,5 +559,20 @@ INSERT INTO `user` VALUES (21, 'yannisPengyu', 0, NULL, NULL, NULL, '7cf4570a211
 INSERT INTO `user` VALUES (22, '123', 0, NULL, NULL, NULL, '077e9cee41219e38c684e77f02bece87', '用户很懒，什么都没说明....', '41.png', 1, '2017-10-30 21:31:30', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (23, 'mokey', 0, NULL, NULL, NULL, '7706360ae11193270a7bee131639b439', '用户很懒，什么都没说明....', '43.png', 1, '2017-11-03 10:29:07', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user` VALUES (24, 'rose', 0, NULL, NULL, NULL, '81c7a2b91ea79ebd1e18d5c94bda033f', '用户很懒，什么都没说明....', '6.png', 1, '2017-11-07 10:45:45', NULL, NULL, NULL, NULL, NULL);
+
+/*Table structure for table `integral` */
+
+DROP TABLE IF EXISTS `integral`;
+
+CREATE TABLE `integral` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主id',
+  `USER_ID` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `USER_NAME` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `INTEGRAL` bigint(20) DEFAULT NULL COMMENT '个人积分',
+  `FIRST_SIGN_TIME` date DEFAULT NULL COMMENT '第一次签到时间',
+  `SIGN_COUNT` bigint(20) DEFAULT NULL COMMENT '签到次数',
+  `STATE` int(1) DEFAULT NULL COMMENT '0-未签到，1-已签到',
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

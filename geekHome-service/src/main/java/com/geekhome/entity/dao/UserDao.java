@@ -13,10 +13,10 @@ import com.geekhome.entity.User;
 public interface UserDao extends JpaRepository<User, Long>{
 
 	User findUserByUserName(String userName);
-
-	List<User> findUserByIdNotAndUserName(Long id, String userName);
-
-	User findUserByUserNameAndPassword(String userName, String pwd);
+	
+	List<User> findUserByIdNotAndUserName(@Param("id")Long id, @Param("userName") String userName);
+	
+	User findUserByUserNameAndPassword(String userName,String pwd);
 	
 	User findUserByUserNameAndEmail(String userName, String email);
 	

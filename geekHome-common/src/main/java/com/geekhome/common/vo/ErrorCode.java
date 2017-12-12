@@ -6,7 +6,8 @@ public enum ErrorCode {
 	USER_NOT_EXIST("用户未注册", "00002"),
     VERIFY_CODE_WRONG("验证码错误","00003"),
     OLD_PWD_WRONG("旧密码错误","00004"),
-    USERNAME_PASSWORD_WRONG("用户名或密码错误","00005");
+    USERNAME_PASSWORD_WRONG("用户名或密码错误","00005"),
+    TODAY_HAVE_SIGN("今日已签到","00006");
 
 	private String errorMsg;
 	private String errorCode;

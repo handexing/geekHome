@@ -83,7 +83,7 @@ public class UserController {
 		final ExecuteResult<User> result = new ExecuteResult<>();
 		try {
 			String pwd = PasswordUtil.createCustomPwd(password, userName + User.SALT);
-			User user = userDao.findUserByUserNameAndPassword(userName, pwd);
+			User user = userService.findUserByUserNameAndPassword(userName, pwd);
 			if(user == null)
             {
                 result.setSuccess(false);
@@ -91,6 +91,7 @@ public class UserController {
                 result.setErrorMsg(ErrorCode.USERNAME_PASSWORD_WRONG.getErrorMsg());
             }else {
                 result.setSuccess(true);
+                user.setPassword(null);
                 result.setData(user);
             }
 		} catch (final Exception e) {
@@ -318,6 +319,12 @@ public class UserController {
 	    return result;
 	}
 	
+	/**
+	 * 修改头像
+	 * @param croppedImage 裁剪后的图片
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("modifyAvatar")
 	@CrossOrigin
 	public MarkdownUploadImage modifyAvatar(@RequestParam(value = "userName", required = false)String userName,
@@ -329,7 +336,7 @@ public class UserController {
 	            File tempFile = new File(realPath);
 	            FileUtil.uploadImage(tempFile, croppedImage);
 	            //改变头像路径
-	            String url = "img/" + imageName;
+	            String url = imageName;
 	            userDao.modifyAvatar(url,userName);
 	            return new MarkdownUploadImage(1, "上传成功！", url);
 	        } 
@@ -341,4 +348,6 @@ public class UserController {
             return new MarkdownUploadImage(0, "上传失败!", null);
 	    }
 	}
+	
+	
 }
