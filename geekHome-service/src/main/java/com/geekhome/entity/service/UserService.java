@@ -32,6 +32,9 @@ public class UserService {
 				user.setSex(m_user.getSex());
 				user.setPassword(m_user.getPassword());
 				user.setUpdateTime(new Date());
+				user.setIntegralId(user.getIntegralId());
+				user.setIntegral(user.getIntegral());
+				user.setSignUpState(user.getSignUpState());
 				userDao.save(user);
 				return user;
 			} else {
