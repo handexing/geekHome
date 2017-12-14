@@ -174,7 +174,12 @@ public class UserController {
 	 * 
 	 * } catch (final Exception e) { logger.error("", e); } }
 	 */
-
+	
+	/**
+	 * 修改个人信息
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping("modifyPersonInfo")
 	@CrossOrigin
 	public ExecuteResult<User> modifyPersonInfo(@RequestBody User user) {
